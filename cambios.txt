@@ -1,0 +1,6 @@
+CoordiNext PRO AA v9.2
+
+- Sistema de actualización por GitHub.
+- Descarga de nueva versión desde repositorio público.
+- Configuración de usuario, repositorio y rama desde la app.
+- Mejoras de seguridad y control operativo.
