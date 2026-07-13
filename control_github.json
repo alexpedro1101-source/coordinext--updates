@@ -1,0 +1,18 @@
+{
+    "sistema_activo": true,
+    "mensaje_global": "El sistema está temporalmente bloqueado por el propietario.",
+    "modo_autorizacion": "lista",
+    "intervalo_minutos": 2,
+    "tolerancia_sin_internet_minutos": 0,
+    "version_minima": "9.7",
+    "equipos_autorizados": [
+        {
+            "id": "CN-COLO-QUEA-QUIE-LID",
+            "nombre": "PC PRINCIPAL",
+            "activo": true,
+            "vence": "",
+            "mensaje": "PC autorizada por el propietario"
+        }
+    ],
+    "equipos_bloqueados": []
+}
