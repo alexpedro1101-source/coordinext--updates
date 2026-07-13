@@ -7,7 +7,7 @@
     "version_minima": "9.7",
     "equipos_autorizados": [
         {
-            "id": "CN-COLO-QUEA-QUIE-LID",
+            "id": "CN-B0DC-E161-EA52-BD82",
             "nombre": "PC PRINCIPAL",
             "activo": true,
             "vence": "",
