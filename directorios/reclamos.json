@@ -1,0 +1,1274 @@
+{
+  "data": {
+    "COMERCIAL": {
+      "AYACUCHO": {
+        "CANGALLO": {
+          "CLIENTES_MAYORES_VENTAS": [],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "joriundos@distriluz.com.pe",
+            "facunaa@distriluz.com.pe",
+            "jroquef@distriluz.com.pe",
+            "wvegah@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "joriundos@distriluz.com.pe",
+            "facunaa@distriluz.com.pe",
+            "jroquef@distriluz.com.pe",
+            "wvegah@distriluz.com.pe"
+          ],
+          "PARA": [],
+          "RECONEXIONES": [
+            "joriundos@distriluz.com.pe",
+            "facunaa@distriluz.com.pe",
+            "coord.general.comercial@consorcioae.com",
+            "cristianhuamanmatos@gmail.com"
+          ]
+        },
+        "CHURCAMPA": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "facunaa@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "facunaa@distriluz.com.pe",
+            "rilopez@distriluz.com.pe",
+            "amaldonadop@distriluz.com.pe",
+            "wvegah@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "mcarhuamacap@distriluz.com.pe",
+            "facunaa@distriluz.com.pe",
+            "amaldonadop@distriluz.com.pe",
+            "wvegah@distriluz.com.pe"
+          ],
+          "PARA": [],
+          "RECONEXIONES": [
+            "mcarhuamacap@distriluz.com.pe",
+            "facunaa@distriluz.com.pe",
+            "coord.general.comercial@consorcioae.com",
+            "cristianhuamanmatos@gmail.com"
+          ]
+        },
+        "HUAMANGA": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "facunaa@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "facunaa@distriluz.com.pe",
+            "wvegah@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "facunaa@distriluz.com.pe",
+            "wvegah@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorrecatclab@grupodlaborum.com",
+            "supervisorayaatclab1@grupodlaborum.com"
+          ],
+          "RECONEXIONES": [
+            "facunaa@distriluz.com.pe",
+            "coord.general.comercial@consorcioae.com",
+            "cristianhuamanmatos@gmail.com"
+          ]
+        },
+        "HUANTA RURAL": {
+          "CLIENTES_MAYORES_VENTAS": [],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "aherrerag@distriluz.com.pe",
+            "jalaricom@distriluz.com.pe",
+            "wvegah@distriluz.com.pe",
+            "facunaa@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "aherrerag@distriluz.com.pe",
+            "aaronio@distriluz.com.pe",
+            "wvegah@distriluz.com.pe",
+            "facunaa@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorayaatclab2@grupodlaborum.com"
+          ],
+          "RECONEXIONES": [
+            "aherrerag@distriluz.com.pe",
+            "coord.general.comercial@consorcioae.com",
+            "facunaa@distriluz.com.pe",
+            "cristianhuamanmatos@gmail.com"
+          ]
+        },
+        "SAN FRANCISCO": {
+          "CLIENTES_MAYORES_VENTAS": [],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "rbranezc@distriluz.com.pe",
+            "wvegah@distriluz.com.pe",
+            "facunaa@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "cramosm@distriluz.com.pe",
+            "rbranezc@distriluz.com.pe",
+            "facunaa@distriluz.com.pe",
+            "wvegah@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorayaatclab3@grupodlaborum.com"
+          ],
+          "RECONEXIONES": [
+            "cramosm@distriluz.com.pe",
+            "coord.general.comercial@consorcioae.com",
+            "facunaa@distriluz.com.pe",
+            "cristianhuamanmatos@gmail.com"
+          ]
+        }
+      },
+      "HUANCAVELICA": {
+        "ACOBAMBA": {
+          "CLIENTES_MAYORES_VENTAS": [],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "wmendozag@distriluz.com.pe",
+            "rvilchezg@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "wmendozag@distriluz.com.pe",
+            "rvilchezg@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorrecatclab@grupodlaborum.com"
+          ],
+          "RECONEXIONES": [
+            "wmendozag@distriluz.com.pe",
+            "rvilchezg@distriluz.com.pe"
+          ]
+        },
+        "COLCABAMBA": {
+          "CLIENTES_MAYORES_VENTAS": [],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "mdelgadop@distriluz.com.pe",
+            "jcahuanaq@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "mdelgadop@distriluz.com.pe",
+            "jcahuanaq@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ],
+          "PARA": [],
+          "RECONEXIONES": [
+            "mdelgadop@distriluz.com.pe",
+            "jcahuanaq@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ]
+        },
+        "HUANCAVELICA": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "rilopez@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "ntintayas@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "ntintayas@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorhvcaatclab@grupodlaborum.com"
+          ],
+          "RECONEXIONES": [
+            "ntintayas@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ]
+        },
+        "LIRCAY": {
+          "CLIENTES_MAYORES_VENTAS": [],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "rvilchezg@distriluz.com.pe",
+            "lingarocac@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "rvilchezg@distriluz.com.pe",
+            "lingarocac@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ],
+          "PARA": [],
+          "RECONEXIONES": [
+            "rvilchezg@distriluz.com.pe",
+            "lingarocac@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ]
+        },
+        "PAMPAS": {
+          "CLIENTES_MAYORES_VENTAS": [],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "cyachip@distriluz.com.pe",
+            "fcorasmar@distriluz.com.pe",
+            "aromerom@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "cyachip@distriluz.com.pe",
+            "fcorasmar@distriluz.com.pe",
+            "aromerom@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ],
+          "PARA": [
+            "backhuancayo.grupolaborum@gmail.com"
+          ],
+          "RECONEXIONES": [
+            "cyachip@distriluz.com.pe",
+            "fcorasmar@distriluz.com.pe",
+            "aromerom@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ]
+        },
+        "TABLACHACA": {
+          "CLIENTES_MAYORES_VENTAS": [],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "jromerov@distriluz.com.pe",
+            "vherrerac@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "jromerov@distriluz.com.pe",
+            "vherrerac@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ],
+          "PARA": [
+            "mantarovalle34@gmail.com"
+          ],
+          "RECONEXIONES": [
+            "jromerov@distriluz.com.pe",
+            "vherrerac@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe"
+          ]
+        }
+      },
+      "HUANCAYO": {
+        "HUANCAYO": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "nortizh@distriluz.com.pe",
+            "squispec@distriluz.com.pe",
+            "jrodriguezco@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "eportilloa@distriluz.com.pe",
+            "jbernaolac@distriluz.com.pe",
+            "jchoquehuancac@distriluz.com.pe",
+            "jrodriguezco@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "eportilloa@distriluz.com.pe",
+            "jbernaolac@distriluz.com.pe",
+            "jchoquehuancac@distriluz.com.pe",
+            "jrodriguezco@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorhyoatclab1@grupodlaborum.com",
+            "supervisorhyoatclab2@grupodlaborum.com",
+            "backhuancayo.grupolaborum@gmail.com",
+            "supervisorrecatclab@grupodlaborum.com"
+          ],
+          "RECONEXIONES": [
+            "dmunivel@distriluz.com.pe",
+            "fpomam@distriluz.com.pe",
+            "wmendozag@distriluz.com.pe",
+            "jrodriguezco@distriluz.com.pe"
+          ]
+        }
+      },
+      "HUÁNUCO": {
+        "HUANUCO": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "achuquirachim@distriluz.com.pe",
+            "mmanriquev@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "mmanriquev@distriluz.com.pe",
+            "jchinchayr@distriluz.com.pe",
+            "achuquirachim@distriluz.com.pe",
+            "jchavezm@distriluz.com.pe",
+            "kmunozc@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "mmanriquev@distriluz.com.pe",
+            "jchinchayr@distriluz.com.pe",
+            "achuquirachim@distriluz.com.pe",
+            "jchavezm@distriluz.com.pe",
+            "kmunozc@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorhcoatclab@grupodlaborum.com",
+            "supervisorrecatclab@grupodlaborum.com",
+            "backofficehuanuco.laborum@gmail.com"
+          ],
+          "RECONEXIONES": [
+            "mmanriquev@distriluz.com.pe",
+            "jchavezm@distriluz.com.pe"
+          ]
+        }
+      },
+      "PASCO": {
+        "CERRO DE PASCO": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "arejasg@distriluz.com.pe",
+            "kzunigac@distriluz.com.pe",
+            "ayrton.camarena@inmel.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "arejasg@distriluz.com.pe",
+            "avarillasr@distriluz.com.pe",
+            "jim.vera@globalmicha.com"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "arejasg@distriluz.com.pe",
+            "avarillasr@distriluz.com.pe",
+            "jim.vera@globalmicha.com"
+          ],
+          "PARA": [
+            "supervisorpasatclab@grupodlaborum.com",
+            "backoffice4.grupolaborum@gmail.com",
+            "supervisorrecatclab@grupodlaborum.com"
+          ],
+          "RECONEXIONES": [
+            "arejasg@distriluz.com.pe",
+            "kzunigac@distriluz.com.pe",
+            "ayrton.camarena@inmel.pe"
+          ]
+        }
+      },
+      "SELVA CENTRAL": {
+        "CHANCHAMAYO": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "ctorress@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "ctorress@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "javilae@orientesac.com",
+            "dmendezm@orientesac.com",
+            "denis.acuna@cglobalenergy.com"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "ctorress@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "javilae@orientesac.com",
+            "dmendezm@orientesac.com",
+            "denis.acuna@cglobalenergy.com"
+          ],
+          "PARA": [
+            "backoffice.selva@gmail.com"
+          ],
+          "RECONEXIONES": [
+            "jhuamany@elcimesac.com"
+          ]
+        },
+        "OXAPAMPA": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "ctorress@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "projasm@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "dterrelv@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "projasm@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "dterrelv@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorsctlatclab2@grupodlaborum.com"
+          ],
+          "RECONEXIONES": [
+            "projasm@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "dterrelv@distriluz.com.pe"
+          ]
+        },
+        "PALCAZU PUERTO INCA PUERTO BERMUDEZ": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "ctorress@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "paguirreo@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "jperezm@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "paguirreo@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "jperezm@distriluz.com.pe"
+          ],
+          "PARA": [],
+          "RECONEXIONES": [
+            "paguirreo@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "jperezm@distriluz.com.pe"
+          ]
+        },
+        "PICHANAKI": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "ctorress@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "jrobladillot@distriluz.com.pe",
+            "asalomer@distriluz.com.pe",
+            "aperezj@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "jrobladillot@distriluz.com.pe",
+            "asalomer@distriluz.com.pe",
+            "aperezj@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorsctlatclab1@grupodlaborum.com"
+          ],
+          "RECONEXIONES": [
+            "jrobladillot@distriluz.com.pe",
+            "asalomer@distriluz.com.pe",
+            "aperezj@distriluz.com.pe"
+          ]
+        },
+        "POZUZO": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "ctorress@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "eandress@orientesac.com",
+            "paguirreo@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "eandress@orientesac.com",
+            "paguirreo@distriluz.com.pe"
+          ],
+          "PARA": [],
+          "RECONEXIONES": [
+            "eandress@orientesac.com",
+            "paguirreo@distriluz.com.pe"
+          ]
+        },
+        "SATIPO": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "ctorress@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "cnavarrom@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "asantivanezs@orientesac.com",
+            "lcalerop@distriluz.com.pe",
+            "jponcev@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "cnavarrom@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "asantivanezs@orientesac.com",
+            "lcalerop@distriluz.com.pe",
+            "jponcev@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorrecatclab@grupodlaborum.com"
+          ],
+          "RECONEXIONES": [
+            "cnavarrom@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "asantivanezs@orientesac.com",
+            "lcalerop@distriluz.com.pe",
+            "jponcev@distriluz.com.pe"
+          ]
+        },
+        "VILLA RICA": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "ctorress@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "mvalerol@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "ucuevac@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "mvalerol@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "ucuevac@distriluz.com.pe"
+          ],
+          "PARA": [],
+          "RECONEXIONES": [
+            "mvalerol@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "ucuevac@distriluz.com.pe"
+          ]
+        }
+      },
+      "TARMA": {
+        "JUNIN SAN PEDRO CARHUAMAYO": {
+          "CLIENTES_MAYORES_VENTAS": [],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "ecardenasc@distriluz.com.pe",
+            "jtorreso@distriluz.com.pe",
+            "jmendozag@distriluz.com.pe",
+            "aporrase@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "ecardenasc@distriluz.com.pe",
+            "jtorreso@distriluz.com.pe",
+            "jmendozag@distriluz.com.pe",
+            "aporrase@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorrecatclab@grupodlaborum.com"
+          ],
+          "RECONEXIONES": []
+        },
+        "TARMA": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "jtorreso@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "jtorreso@distriluz.com.pe",
+            "ybernardog@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "jtorreso@distriluz.com.pe",
+            "ybernardog@distriluz.com.pe",
+            "jtovarr@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisortaratclab@grupodlaborum.com"
+          ],
+          "RECONEXIONES": [
+            "jtovarr@distriluz.com.pe"
+          ]
+        },
+        "YAULI LA OROYA": {
+          "CLIENTES_MAYORES_VENTAS": [],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "ecardenasc@distriluz.com.pe",
+            "jtorreso@distriluz.com.pe",
+            "jpomah@distriluz.com.pe",
+            "jreynosob@distriluz.com.pe",
+            "pnanar@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "ecardenasc@distriluz.com.pe",
+            "jtorreso@distriluz.com.pe",
+            "jpomah@distriluz.com.pe",
+            "pnanar@distriluz.com.pe",
+            "jreynosob@distriluz.com.pe"
+          ],
+          "PARA": [
+            "mantarovalle34@gmail.com"
+          ],
+          "RECONEXIONES": []
+        }
+      },
+      "TINGO MARIA": {
+        "TINGO MARIA": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "jchavezc@distriluz.com.pe",
+            "rzorrillam@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "jchavezc@distriluz.com.pe",
+            "kmunozc@distriluz.com.pe",
+            "rzorrillam@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "jchavezc@distriluz.com.pe",
+            "kmunozc@distriluz.com.pe",
+            "rzorrillam@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisortgomatclab@grupodlaborum.com",
+            "backoffice4.grupolaborum@gmail.com",
+            "supervisorrecatclab@grupodlaborum.com"
+          ],
+          "RECONEXIONES": []
+        }
+      },
+      "VALLE MANTARO": {
+        "CHUPACA": {
+          "CLIENTES_MAYORES_VENTAS": [],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "esihuay@distriluz.com.pe",
+            "ebarzolah@distriluz.com.pe",
+            "ccuicapusag@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "crodriguezd@distriluz.com.pe",
+            "jsotos@distriluz.com.pe",
+            "ccuicapusag@distriluz.com.pe"
+          ],
+          "PARA": [],
+          "RECONEXIONES": []
+        },
+        "CONCEPCION": {
+          "CLIENTES_MAYORES_VENTAS": [],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "jsotos@distriluz.com.pe",
+            "ebarzolah@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "crodriguezd@distriluz.com.pe",
+            "jsotos@distriluz.com.pe"
+          ],
+          "PARA": [],
+          "RECONEXIONES": []
+        },
+        "JAUJA": {
+          "CLIENTES_MAYORES_VENTAS": [
+            "jsotos@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_DENUNCIAS": [
+            "ebarzolah@distriluz.com.pe",
+            "jsotos@distriluz.com.pe"
+          ],
+          "CONTROL_PERDIDAS_INTERRUPCIONES": [
+            "wciertos@distriluz.com.pe",
+            "ahuamanc@distriluz.com.pe",
+            "crodriguezd@distriluz.com.pe",
+            "jsotos@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorvmtoatclab@grupodlaborum.com",
+            "backhuancayo.grupolaborum@gmail.com",
+            "mantarovalle34@gmail.com",
+            "supervisorrecatclab@grupodlaborum.com"
+          ],
+          "RECONEXIONES": [
+            "ebarzolah@distriluz.com.pe",
+            "jsotos@distriluz.com.pe"
+          ]
+        }
+      }
+    },
+    "TECNICA": {
+      "AYACUCHO": {
+        "CANGALLO": {
+          "ALUMBRADO_PUBLICO": [
+            "joriundos@distriluz.com.pe",
+            "jroquef@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "joriundos@distriluz.com.pe",
+            "jroquef@distriluz.com.pe",
+            "wvegah@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "joriundos@distriluz.com.pe",
+            "jroquef@distriluz.com.pe",
+            "wvegah@distriluz.com.pe"
+          ],
+          "PARA": []
+        },
+        "CHURCAMPA": {
+          "ALUMBRADO_PUBLICO": [
+            "mcarhuamacap@distriluz.com.pe",
+            "amaldonadop@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "mcarhuamacap@distriluz.com.pe",
+            "amaldonadop@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "mcarhuamacap@distriluz.com.pe",
+            "amaldonadop@distriluz.com.pe",
+            "wvegah@distriluz.com.pe"
+          ],
+          "PARA": []
+        },
+        "HUAMANGA": {
+          "ALUMBRADO_PUBLICO": [
+            "jhuallulloc@distriluz.com.pe",
+            "jvegap@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "jhuallulloc@distriluz.com.pe",
+            "jalaricom@distriluz.com.pe",
+            "jvegap@distriluz.com.pe",
+            "jroquef@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "jhuallulloc@distriluz.com.pe",
+            "jalaricom@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorrecatclab@grupodlaborum.com",
+            "supervisorayaatclab1@grupodlaborum.com"
+          ]
+        },
+        "HUANTA RURAL": {
+          "ALUMBRADO_PUBLICO": [
+            "aherrerag@distriluz.com.pe",
+            "aaronio@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "aaronio@distriluz.com.pe",
+            "jhuallulloc@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "aherrerag@distriluz.com.pe",
+            "aaronio@distriluz.com.pe",
+            "wvegah@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorayaatclab2@grupodlaborum.com"
+          ]
+        },
+        "SAN FRANCISCO": {
+          "ALUMBRADO_PUBLICO": [
+            "cramosm@distriluz.com.pe",
+            "rbranezc@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "cramosm@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "cramosm@distriluz.com.pe",
+            "rbranezc@distriluz.com.pe",
+            "wvegah@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorayaatclab3@grupodlaborum.com"
+          ]
+        }
+      },
+      "HUANCAVELICA": {
+        "ACOBAMBA": {
+          "ALUMBRADO_PUBLICO": [
+            "apuentef@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "apuentef@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "apuentef@distriluz.com.pe"
+          ],
+          "PARA": []
+        },
+        "COLCABAMBA": {
+          "ALUMBRADO_PUBLICO": [
+            "mdelgadop@distriluz.com.pe",
+            "jcahuanaq@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "jcahuanaq@distriluz.com.pe",
+            "mdelgadop@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "jcahuanaq@distriluz.com.pe",
+            "mdelgadop@distriluz.com.pe"
+          ],
+          "PARA": [
+            "mantarovalle34@gmail.com"
+          ]
+        },
+        "HUANCAVELICA": {
+          "ALUMBRADO_PUBLICO": [
+            "psalomonb@distriluz.com.pe",
+            "cyachip@distriluz.com.pe",
+            "dfelixs@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "psalomonb@distriluz.com.pe",
+            "cyachip@distriluz.com.pe",
+            "dfelixs@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "psalomonb@distriluz.com.pe",
+            "cyachip@distriluz.com.pe",
+            "dfelixs@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorhvcaatclab@grupodlaborum.com"
+          ]
+        },
+        "LIRCAY": {
+          "ALUMBRADO_PUBLICO": [
+            "rvilchezg@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "rvilchezg@distriluz.com.pe",
+            "lingarocac@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "rvilchezg@distriluz.com.pe",
+            "lingarocac@distriluz.com.pe"
+          ],
+          "PARA": []
+        },
+        "PAMPAS": {
+          "ALUMBRADO_PUBLICO": [
+            "aromerom@distriluz.com.pe",
+            "fcorasmar@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "cyachip@distriluz.com.pe",
+            "fcorasmar@distriluz.com.pe",
+            "aromerom@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "cyachip@distriluz.com.pe",
+            "fcorasmar@distriluz.com.pe",
+            "aromerom@distriluz.com.pe"
+          ],
+          "PARA": [
+            "backhuancayo.grupolaborum@gmail.com"
+          ]
+        },
+        "TABLACHACA": {
+          "ALUMBRADO_PUBLICO": [
+            "jromerov@distriluz.com.pe",
+            "vherrerac@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "jromerov@distriluz.com.pe",
+            "vherrerac@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "jromerov@distriluz.com.pe",
+            "vherrerac@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorrecatclab@grupodlaborum.com"
+          ]
+        }
+      },
+      "HUANCAYO": {
+        "HUANCAYO": {
+          "ALUMBRADO_PUBLICO": [
+            "ldiazg@distriluz.com.pe",
+            "jrodriguezco@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "fpomas@distriluz.com.pe",
+            "jcamposh@distriluz.com.pe",
+            "cmolinao@distriluz.com.pe",
+            "oliram@distriluz.com.pe",
+            "jrodriguezco@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "bsantivanezc@distriluz.com.pe",
+            "mlaraba@distriluz.com.pe",
+            "jrodriguezco@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorhyoatclab1@grupodlaborum.com",
+            "supervisorhyoatclab2@grupodlaborum.com",
+            "backhuancayo.grupolaborum@gmail.com",
+            "supervisorrecatclab@grupodlaborum.com"
+          ]
+        }
+      },
+      "HUÁNUCO": {
+        "HUANUCO": {
+          "ALUMBRADO_PUBLICO": [
+            "ringam@distriluz.com.pe",
+            "flopezc@distriluz.com.pe",
+            "ffernandezr@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "mbeltrang@distriluz.com.pe",
+            "flopezc@distriluz.com.pe",
+            "jgomezca@distriluz.com.pe",
+            "ringam@distriluz.com.pe",
+            "ffernandezr@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "mbeltrang@distriluz.com.pe",
+            "flopezc@distriluz.com.pe",
+            "jgomezca@distriluz.com.pe",
+            "ringam@distriluz.com.pe",
+            "ffernandezr@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorhcoatclab@grupodlaborum.com",
+            "supervisorrecatclab@grupodlaborum.com",
+            "backofficehuanuco.laborum@gmail.com"
+          ]
+        }
+      },
+      "PASCO": {
+        "CERRO DE PASCO": {
+          "ALUMBRADO_PUBLICO": [
+            "parzapalor@distriluz.com.pe",
+            "rramosd@distriluz.com.pe",
+            "bguevarac@distriluz.com.pe",
+            "erick.samaniego.cieec@gmail.com",
+            "cristian.espinal@ayjmultiservicios.com",
+            "arejasg@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "parzapalor@distriluz.com.pe",
+            "rramosd@distriluz.com.pe",
+            "bguevarac@distriluz.com.pe",
+            "erick.samaniego.cieec@gmail.com",
+            "cristian.espinal@ayjmultiservicios.com",
+            "arejasg@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "parzapalor@distriluz.com.pe",
+            "rramosd@distriluz.com.pe",
+            "bguevarac@distriluz.com.pe",
+            "erick.samaniego.cieec@gmail.com",
+            "cristian.espinal@ayjmultiservicios.com",
+            "arejasg@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorpasatclab@grupodlaborum.com",
+            "backoffice4.grupolaborum@gmail.com",
+            "supervisorrecatclab@grupodlaborum.com"
+          ]
+        }
+      },
+      "SELVA CENTRAL": {
+        "CHANCHAMAYO": {
+          "ALUMBRADO_PUBLICO": [
+            "jramonc@distriluz.com.pe",
+            "bsantivanezc@distriluz.com.pe",
+            "jrobladillot@distriluz.com.pe",
+            "arosalesn@distriluz.com.pe",
+            "econtreraso@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "jramonc@distriluz.com.pe",
+            "bsantivanezc@distriluz.com.pe",
+            "jrobladillot@distriluz.com.pe",
+            "arosalesn@distriluz.com.pe",
+            "econtreraso@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "jramonc@distriluz.com.pe",
+            "bsantivanezc@distriluz.com.pe",
+            "jrobladillot@distriluz.com.pe",
+            "arosalesn@distriluz.com.pe",
+            "econtreraso@distriluz.com.pe"
+          ],
+          "PARA": [
+            "backoffice.selva@gmail.com"
+          ]
+        },
+        "OXAPAMPA": {
+          "ALUMBRADO_PUBLICO": [
+            "jramonc@distriluz.com.pe",
+            "projasm@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "dterrelv@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "jramonc@distriluz.com.pe",
+            "projasm@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "dterrelv@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "jramonc@distriluz.com.pe",
+            "projasm@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "dterrelv@distriluz.com.pe"
+          ],
+          "PARA": []
+        },
+        "PALCAZU PUERTO INCA PUERTO BERMUDEZ": {
+          "ALUMBRADO_PUBLICO": [
+            "jramonc@distriluz.com.pe",
+            "paguirreo@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "jperezm@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "jramonc@distriluz.com.pe",
+            "paguirreo@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "jperezm@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "jramonc@distriluz.com.pe",
+            "paguirreo@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "jperezm@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorsctlatclab2@grupodlaborum.com"
+          ]
+        },
+        "PICHANAKI": {
+          "ALUMBRADO_PUBLICO": [
+            "jrobladillot@distriluz.com.pe",
+            "asalomer@distriluz.com.pe",
+            "aperezj@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "jrobladillot@distriluz.com.pe",
+            "asalomer@distriluz.com.pe",
+            "aperezj@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "jrobladillot@distriluz.com.pe",
+            "asalomer@distriluz.com.pe",
+            "aperezj@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorsctlatclab1@grupodlaborum.com"
+          ]
+        },
+        "POZUZO": {
+          "ALUMBRADO_PUBLICO": [
+            "jramonc@distriluz.com.pe",
+            "paguirreo@distriluz.com.pe",
+            "lalfaroa@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "jramonc@distriluz.com.pe",
+            "paguirreo@distriluz.com.pe",
+            "lalfaroa@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "jramonc@distriluz.com.pe",
+            "paguirreo@distriluz.com.pe",
+            "lalfaroa@distriluz.com.pe"
+          ],
+          "PARA": []
+        },
+        "SATIPO": {
+          "ALUMBRADO_PUBLICO": [
+            "hamesa@distriluz.com.pe",
+            "andrevf15@gmail.com",
+            "jramonc@distriluz.com.pe",
+            "jponcev@distriluz.com.pe",
+            "achanga@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "econtreraso@distriluz.com.pe",
+            "hamesa@distriluz.com.pe",
+            "jramonc@distriluz.com.pe",
+            "jponcev@distriluz.com.pe",
+            "achanga@distriluz.com.pe",
+            "andrevf15@gmail.com"
+          ],
+          "DISTRIBUCION": [
+            "econtreraso@distriluz.com.pe",
+            "hamesa@distriluz.com.pe",
+            "jramonc@distriluz.com.pe",
+            "jponcev@distriluz.com.pe",
+            "achanga@distriluz.com.pe",
+            "andrevf15@gmail.com"
+          ],
+          "PARA": [
+            "supervisorrecatclab@grupodlaborum.com"
+          ]
+        },
+        "VILLA RICA": {
+          "ALUMBRADO_PUBLICO": [
+            "jramonc@distriluz.com.pe",
+            "mvalerol@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "ucuevac@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "jramonc@distriluz.com.pe",
+            "mvalerol@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "ucuevac@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "jramonc@distriluz.com.pe",
+            "mvalerol@distriluz.com.pe",
+            "eandress@orientesac.com",
+            "ucuevac@distriluz.com.pe"
+          ],
+          "PARA": []
+        }
+      },
+      "TARMA": {
+        "JUNIN SAN PEDRO CARHUAMAYO": {
+          "ALUMBRADO_PUBLICO": [
+            "ecardenasc@distriluz.com.pe",
+            "jmendozag@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "jmendozag@distriluz.com.pe",
+            "gorellanap@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "ecardenasc@distriluz.com.pe",
+            "jmendozag@distriluz.com.pe",
+            "gorellanap@distriluz.com.pe"
+          ],
+          "PARA": [
+            "mantarovalle34@gmail.com",
+            "supervisorrecatclab@grupodlaborum.com"
+          ]
+        },
+        "TARMA": {
+          "ALUMBRADO_PUBLICO": [
+            "gorellanap@distriluz.com.pe",
+            "ecardenasc@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "gorellanap@distriluz.com.pe",
+            "ecardenasc@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "gorellanap@distriluz.com.pe",
+            "ecardenasc@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisortaratclab@grupodlaborum.com"
+          ]
+        },
+        "YAULI LA OROYA": {
+          "ALUMBRADO_PUBLICO": [
+            "ecardenasc@distriluz.com.pe",
+            "tenriquezm@distriluz.com.pe",
+            "pnanar@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "ecardenasc@distriluz.com.pe",
+            "tenriquezm@distriluz.com.pe",
+            "pnanar@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "ecardenasc@distriluz.com.pe",
+            "jreynosob@distriluz.com.pe",
+            "pnanar@distriluz.com.pe"
+          ],
+          "PARA": []
+        }
+      },
+      "TINGO MARIA": {
+        "TINGO MARIA": {
+          "ALUMBRADO_PUBLICO": [
+            "esanchezg@distriluz.com.pe",
+            "mramirezc@distriluz.com.pe",
+            "rzorrillam@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "esanchezg@distriluz.com.pe",
+            "mramirezc@distriluz.com.pe",
+            "rzorrillam@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "esanchezg@distriluz.com.pe",
+            "mramirezc@distriluz.com.pe",
+            "rzorrillam@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisortgomatclab@grupodlaborum.com",
+            "supervisorrecatclab@grupodlaborum.com",
+            "backoffice4.grupolaborum@gmail.com"
+          ]
+        }
+      },
+      "VALLE MANTARO": {
+        "CHUPACA": {
+          "ALUMBRADO_PUBLICO": [
+            "ccuicapusag@distriluz.com.pe",
+            "eauquig@distriluz.com.pe",
+            "ecantoh@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "ccuicapusag@distriluz.com.pe",
+            "cespejom@distriluz.com.pe",
+            "eauquig@distriluz.com.pe",
+            "hramost@distriluz.com.pe",
+            "lcerrona@distriluz.com.pe",
+            "ecantoh@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "ccuicapusag@distriluz.com.pe",
+            "cespejom@distriluz.com.pe",
+            "eauquig@distriluz.com.pe",
+            "morihuelas@distriluz.com.pe",
+            "ecantoh@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorrecatclab@grupodlaborum.com",
+            "mantarovalle34@gmail.com"
+          ]
+        },
+        "CONCEPCION": {
+          "ALUMBRADO_PUBLICO": [
+            "jmartinezq@distriluz.com.pe",
+            "morihuelas@distriluz.com.pe",
+            "eauquig@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "jmartinezq@distriluz.com.pe",
+            "morihuelas@distriluz.com.pe",
+            "eauquig@distriluz.com.pe",
+            "mhuachosq@distriluz.com.pe",
+            "aaguilarf@distriluz.com.pe",
+            "ecantoh@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "jmartinezq@distriluz.com.pe",
+            "morihuelas@distriluz.com.pe",
+            "eauquig@distriluz.com.pe"
+          ],
+          "PARA": []
+        },
+        "JAUJA": {
+          "ALUMBRADO_PUBLICO": [
+            "pnanar@distriluz.com.pe",
+            "wciertos@distriluz.com.pe",
+            "ahuamanc@distriluz.com.pe",
+            "eauquig@distriluz.com.pe"
+          ],
+          "DENUNCIAS": [
+            "pnanar@distriluz.com.pe",
+            "ebarzolah@distriluz.com.pe",
+            "gingac@distriluz.com.pe",
+            "wciertos@distriluz.com.pe",
+            "ahuamanc@distriluz.com.pe",
+            "eauquig@distriluz.com.pe",
+            "ecantoh@distriluz.com.pe"
+          ],
+          "DISTRIBUCION": [
+            "pnanar@distriluz.com.pe",
+            "ebarzolah@distriluz.com.pe",
+            "gingac@distriluz.com.pe",
+            "wciertos@distriluz.com.pe",
+            "ahuamanc@distriluz.com.pe",
+            "eauquig@distriluz.com.pe"
+          ],
+          "PARA": [
+            "supervisorvmtoatclab@grupodlaborum.com",
+            "backhuancayo.grupolaborum@gmail.com"
+          ]
+        }
+      }
+    }
+  },
+  "facturacion_atc": {
+    "AYACUCHO": [
+      "facunaa@distriluz.com.pe"
+    ],
+    "HUANCAVELICA": [
+      "rilopez@distriluz.com.pe"
+    ],
+    "HUANCAYO": [
+      "jrodriguezco@distriluz.com.pe"
+    ],
+    "HUÁNUCO": [
+      "mmanriquev@distriluz.com.pe"
+    ],
+    "PASCO": [
+      "eoliverah@distriluz.com.pe",
+      "arejasg@distriluz.com.pe"
+    ],
+    "SELVA CENTRAL": [
+      "epaucarg@distriluz.com.pe"
+    ],
+    "TARMA": [
+      "jtorreso@distriluz.com.pe"
+    ],
+    "TINGO MARIA": [
+      "jchavezc@distriluz.com.pe"
+    ],
+    "VALLE MANTARO": [
+      "jsotos@distriluz.com.pe"
+    ]
+  },
+  "fecha": "2026-07-15 15:56:45",
+  "fuente": "COORDINACIONES RECLAMOS.xlsx",
+  "schema": 1,
+  "tipo": "RECLAMOS",
+  "version": "2026.07.15.02"
+}

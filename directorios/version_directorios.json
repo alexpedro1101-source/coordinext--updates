@@ -1,0 +1,53 @@
+{
+  "actualizado_por": "Administrador",
+  "archivos": {
+    "comercial": {
+      "combinaciones": 130,
+      "correos": 289,
+      "nombre": "incidencias_comercial.json",
+      "sha256": "335b8a3d644c10fa32788b125d2833693a7fba4c2ca9b058bbecbcc2e3a8c924"
+    },
+    "reclamos": {
+      "centros": 56,
+      "combinaciones": 252,
+      "correos": 614,
+      "facturacion": 10,
+      "nombre": "reclamos.json",
+      "sha256": "742c4cbb324237faf7ee72b2454971b27eb7601268e1401535a5a5919fbf91c9"
+    },
+    "solicitudes": {
+      "correos": 87,
+      "nombre": "solicitudes.json",
+      "sha256": "1d9b25d1db5fba12fe5628da9dd6f1c3069d788f910d4172af33870ccb10fbdb",
+      "unidades": 9
+    },
+    "tecnica": {
+      "combinaciones": 79,
+      "correos": 233,
+      "nombre": "incidencias_tecnica.json",
+      "sha256": "c264ae64ae530d096e831ea2d4229645576888f09643c306740a524d7cb6ff88"
+    }
+  },
+  "fecha": "2026-07-15 15:56:45",
+  "fuentes": {
+    "comercial": {
+      "archivo": "DIRECTORIO ELECTROCENTRO COMERCIAL 2026-1.xlsx",
+      "sha256": "32e20f32775fc495300dcd38feebaf5ba735ccfa545bb004c2c5b66e107510b1"
+    },
+    "reclamos": {
+      "archivo": "COORDINACIONES RECLAMOS.xlsx",
+      "sha256": "6e528aaa0ec27884d8df6bd1c751c397c9ce04cf72caf020c552f5bef76c5dc5"
+    },
+    "solicitudes": {
+      "archivo": "APELACIONES.xlsx",
+      "sha256": "89aa83786664c85862ae215f6614b76da4b6c4723fd6bf1b885b35a73f6bb99c"
+    },
+    "tecnica": {
+      "archivo": "DIRECTORIO ELECTROCENTRO TECNICA 2026-1.xlsx",
+      "sha256": "025f57101e96f00e188a28a5277da8007de439b1513039c22224853015aff7e5"
+    }
+  },
+  "pc_admin": "PAQUETE INICIAL",
+  "schema": 2,
+  "version": "2026.07.15.02"
+}

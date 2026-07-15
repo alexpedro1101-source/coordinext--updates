@@ -1,0 +1,150 @@
+{
+  "data": {
+    "AYACUCHO": {
+      "CC": [
+        "reclamossegundainstancia2@gmail.com",
+        "jquispea@distriluz.com.pe",
+        "facunaa@distriluz.com.pe",
+        "jhuallulloc@distriluz.com.pe"
+      ],
+      "PARA": [
+        "supervisor01contactcenter@asta.pe",
+        "supervisor04contactcenter@asta.pe",
+        "supervisor05contactcenter@asta.pe",
+        "supervisorrecatclab@grupodlaborum.com",
+        "supervisorayaatclab1@grupodlaborum.com",
+        "supervisorayaatclab2@grupodlaborum.com"
+      ]
+    },
+    "HUANCAVELICA": {
+      "CC": [
+        "apoyotecnico2.grupolaborum@gmail.com",
+        "reclamossegundainstancia2@gmail.com",
+        "lgutierrezl@distriluz.com.pe",
+        "rilopez@distriluz.com.pe",
+        "psalomonb@distriluz.com.pe"
+      ],
+      "PARA": [
+        "supervisor01contactcenter@asta.pe",
+        "supervisor04contactcenter@asta.pe",
+        "supervisor05contactcenter@asta.pe",
+        "supervisorhvcaatclab@grupodlaborum.com",
+        "supervisorrecatclab@grupodlaborum.com"
+      ]
+    },
+    "HUANCAYO": {
+      "CC": [
+        "rmondargom@distriluz.com.pe",
+        "apoyotecnico2.grupolaborum@gmail.com",
+        "reclamossegundainstancia2@gmail.com"
+      ],
+      "PARA": [
+        "supervisor01contactcenter@asta.pe",
+        "supervisor04contactcenter@asta.pe",
+        "supervisor05contactcenter@asta.pe",
+        "supervisorhyoatclab1@grupodlaborum.com",
+        "supervisorhyoatclab2@grupodlaborum.com",
+        "supervisorrecatclab@grupodlaborum.com"
+      ]
+    },
+    "HUÁNUCO": {
+      "CC": [
+        "apoyotecnico3.grupolaborum@gmail.com",
+        "reclamossegundainstancia2@gmail.com",
+        "ffernandezr@distriluz.com.pe",
+        "jchinchayr@distriluz.com.pe",
+        "flopezc@distriluz.com.pe"
+      ],
+      "PARA": [
+        "supervisor01contactcenter@asta.pe",
+        "supervisor04contactcenter@asta.pe",
+        "supervisor05contactcenter@asta.pe",
+        "supervisorhcoatclab@grupodlaborum.com",
+        "supervisorrecatclab@grupodlaborum.com"
+      ]
+    },
+    "PASCO": {
+      "CC": [
+        "eoliverah@distriluz.com.pe",
+        "kzunigac@distriluz.com.pe",
+        "arejasg@distriluz.com.pe",
+        "reclamossegundainstancia2@gmail.com",
+        "apoyotecnico3.grupolaborum@gmail.com"
+      ],
+      "PARA": [
+        "supervisor01contactcenter@asta.pe",
+        "supervisor04contactcenter@asta.pe",
+        "supervisor05contactcenter@asta.pe",
+        "supervisorpasatclab@grupodlaborum.com",
+        "supervisorrecatclab@grupodlaborum.com"
+      ]
+    },
+    "SELVA CENTRAL": {
+      "CC": [
+        "apoyotecnico1.grupolaborum@gmail.com",
+        "reclamossegundainstancia2@gmail.com",
+        "epaucarg@distriluz.com.pe",
+        "rbaquerizob@distriluz.com.pe"
+      ],
+      "PARA": [
+        "supervisor01contactcenter@asta.pe",
+        "supervisor04contactcenter@asta.pe",
+        "supervisor05contactcenter@asta.pe",
+        "supervisorsctlatclab1@grupodlaborum.com",
+        "supervisorrecatclab@grupodlaborum.com"
+      ]
+    },
+    "TARMA": {
+      "CC": [
+        "apoyotecnico1.grupolaborum@gmail.com",
+        "reclamossegundainstancia2@gmail.com",
+        "gorellanap@distriluz.com.pe",
+        "jtorreso@distriluz.com.pe"
+      ],
+      "PARA": [
+        "supervisor01contactcenter@asta.pe",
+        "supervisor04contactcenter@asta.pe",
+        "supervisor05contactcenter@asta.pe",
+        "supervisortaratclab@grupodlaborum.com",
+        "supervisorrecatclab@grupodlaborum.com"
+      ]
+    },
+    "TINGO MARIA": {
+      "CC": [
+        "apoyotecnico3.grupolaborum@gmail.com",
+        "reclamossegundainstancia2@gmail.com",
+        "rzorrillam@distriluz.com.pe",
+        "kmunozc@distriluz.com.pe",
+        "esanchezg@distriluz.com.pe"
+      ],
+      "PARA": [
+        "supervisor01contactcenter@asta.pe",
+        "supervisor04contactcenter@asta.pe",
+        "supervisor05contactcenter@asta.pe",
+        "supervisortgomatclab@grupodlaborum.com",
+        "supervisorrecatclab@grupodlaborum.com"
+      ]
+    },
+    "VALLE MANTARO": {
+      "CC": [
+        "apoyotecnico2.grupolaborum@gmail.com",
+        "reclamossegundainstancia2@gmail.com",
+        "cespejom@distriluz.com.pe",
+        "jsotos@distriluz.com.pe",
+        "eauquig@distriluz.com.pe"
+      ],
+      "PARA": [
+        "supervisor01contactcenter@asta.pe",
+        "supervisor04contactcenter@asta.pe",
+        "supervisor05contactcenter@asta.pe",
+        "supervisorvmtoatclab@grupodlaborum.com",
+        "supervisorrecatclab@grupodlaborum.com"
+      ]
+    }
+  },
+  "fecha": "2026-07-15 15:56:45",
+  "fuente": "APELACIONES.xlsx",
+  "schema": 1,
+  "tipo": "SOLICITUDES",
+  "version": "2026.07.15.02"
+}
