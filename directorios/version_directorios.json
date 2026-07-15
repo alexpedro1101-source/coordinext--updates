@@ -1,0 +1,20 @@
+{
+  "actualizado_por": "Administrador",
+  "archivos": {
+    "comercial": {
+      "combinaciones": 130,
+      "correos": 289,
+      "nombre": "incidencias_comercial.json",
+      "sha256": "955e64276e55365eadcb11c2d22a20da357676b3bf9c52b07820fc3b4f0009b6"
+    },
+    "tecnica": {
+      "combinaciones": 79,
+      "correos": 233,
+      "nombre": "incidencias_tecnica.json",
+      "sha256": "cc35cf24cd13171c017621cbe8a7c5f355d2c959010289eec7e6cf4b4cfc7a50"
+    }
+  },
+  "fecha": "2026-07-15 00:00:00",
+  "schema": 1,
+  "version": "2026.07.15.01"
+}
