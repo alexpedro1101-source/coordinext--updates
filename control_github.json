@@ -1,25 +1,13 @@
-
 {
-    "sistema_activo": true,
-    "mensaje_global": "El sistema está temporalmente bloqueado por el propietario.",
-    "modo_autorizacion": "lista",
-    "intervalo_minutos": 2,
-    "tolerancia_sin_internet_minutos": 0,
-    "version_minima": "9.7",
-    "equipos_autorizados": [
-        {
-            "id": "CN-COLO-QUEA-QUIE-LID",
-            "nombre": "PC PRINCIPAL",
-            "activo": true,
-            "vence": "",
-            "mensaje": "PC autorizada por el propietario"
-        }
-            {
-            "id": "CN-C887-66B3-3C79-BC81",
-            "nombre": "PC PRUEBAS",
-            "activo": true,
-            "vence": "",
-            "mensaje": "PC autorizada por el propietario"
-        }
-
-    "equipos_bloqueados": []
+  "schema": 2,
+  "sistema_activo": true,
+  "modo_autorizacion": "abierto",
+  "mensaje_global": "Sistema operativo.",
+  "version_minima": "9.6.5",
+  "intervalo_minutos": 2,
+  "tolerancia_sin_internet_horas": 24,
+  "bloquear_sin_internet": false,
+  "actualizado_en": "2026-07-16 10:00:00",
+  "equipos_autorizados": [],
+  "equipos_bloqueados": []
+}
