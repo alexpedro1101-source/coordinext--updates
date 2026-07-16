@@ -7,7 +7,15 @@
   "intervalo_minutos": 2,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-16 10:00:00",
-  "equipos_autorizados": [],
+  "actualizado_en": "2026-07-16 17:31:48",
+  "equipos_autorizados": [
+    {
+      "id": "CN-24F5-D43A-B8F8-3B4E",
+      "nombre": "PC PRINCIPAL",
+      "activo": true,
+      "vence": "2026-12-30",
+      "mensaje": ""
+    }
+  ],
   "equipos_bloqueados": []
 }
