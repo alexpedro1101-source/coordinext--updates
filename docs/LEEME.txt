@@ -1,0 +1,15 @@
+COORDINEXT - CARPETA DOCS LISTA
+
+1. En el repositorio, cree la carpeta docs en la raíz.
+2. Suba DENTRO de docs:
+   - index.html
+   - .nojekyll
+3. No cambie el nombre index.html.
+4. Deje control_github.json en la raíz del repositorio.
+5. En GitHub:
+   Settings > Pages
+   Source: Deploy from a branch
+   Branch: main
+   Folder: /docs
+   Save
+6. Espere a que termine la publicación y abra la URL mostrada por GitHub Pages.
