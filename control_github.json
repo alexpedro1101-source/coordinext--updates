@@ -1,19 +1,15 @@
 {
-  "schema": 2,
+  "schema": 4,
   "sistema_activo": true,
   "modo_autorizacion": "abierto",
   "mensaje_global": "Sistema operativo.",
   "version_minima": "9.6.5",
-  "intervalo_minutos": 2,
+  "intervalo_minutos": 1,
+  "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-19 05:39:01",
+  "actualizado_en": "2026-07-19 00:00:00",
+  "usuarios": [],
   "equipos_autorizados": [],
-  "equipos_bloqueados": [
-    {
-      "id": "CN-24F5-D43A-B8F8-3B4E",
-      "nombre": "PC PRINCIPAL",
-      "mensaje": "Equipo bloqueado por administración."
-    }
-  ]
+  "equipos_bloqueados": []
 }
