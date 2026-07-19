@@ -8,8 +8,27 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-19 00:00:00",
-  "usuarios": [],
+  "actualizado_en": "2026-07-19 07:04:13",
+  "usuarios": [
+    {
+      "id": "USR-e1434c0d-fd5b-4103-8b30-eb18ec1fdb77",
+      "usuario": "alex-trujillo",
+      "nombre": "alexander condor pedro",
+      "rol": "operador",
+      "activo": true,
+      "vence": "2026-12-20",
+      "equipos": [
+        "CN-4081-203D-2CCC-8F1B"
+      ],
+      "password": {
+        "algoritmo": "pbkdf2_sha256",
+        "iteraciones": 600000,
+        "salt": "0UT0R8Hty+/LWj6Y5kAU4Q==",
+        "hash": "H6Uex9p7gXP4bck9swE73Ui5AtRmbHmBZwlECaxy+ak="
+      },
+      "actualizado_en": "2026-07-19 07:03:31"
+    }
+  ],
   "equipos_autorizados": [],
   "equipos_bloqueados": []
 }
