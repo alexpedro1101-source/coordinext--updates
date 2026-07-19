@@ -8,23 +8,23 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-19 16:52:04",
+  "actualizado_en": "2026-07-19 16:56:55",
   "usuarios": [
     {
-      "id": "USR-3dc80b3f-d267-4a69-bc55-5e708e59bc97",
+      "id": "USR-c9f3dfd1-d2f1-4e91-b354-b47e21eb9a00",
       "usuario": "alex.pedro",
-      "nombre": "central alex",
+      "nombre": "CENTRAL ALEX",
       "rol": "operador",
       "activo": true,
-      "vence": "2026-12-20",
+      "vence": "",
       "equipos": [],
       "password": {
         "algoritmo": "pbkdf2_sha256",
         "iteraciones": 600000,
-        "salt": "lCP8mFfCEucAbbwo0RorEQ==",
-        "hash": "ihgEOC8c12IL4rriJUFGSdIOKxfPk0bd8fPpa+rMOeM="
+        "salt": "oJyPrJ2R69h4Q54q6bLr3A==",
+        "hash": "jzoNtCWeuhVnC4f9KFwYcxANh9G8vkOyf5Pwn7vE25I="
       },
-      "actualizado_en": "2026-07-19 16:51:54"
+      "actualizado_en": "2026-07-19 16:56:46"
     }
   ],
   "equipos_autorizados": [],
