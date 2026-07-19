@@ -1,5 +1,5 @@
 {
-  "schema": 4,
+  "schema": 3,
   "sistema_activo": true,
   "modo_autorizacion": "abierto",
   "mensaje_global": "Sistema operativo.",
@@ -8,12 +8,12 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-19 07:11:13",
+  "actualizado_en": "2026-07-19 16:47:54",
   "usuarios": [
     {
-      "id": "USR-77147e4f-ef52-4986-bfbc-b325518e005f",
-      "usuario": "alex.pedroo",
-      "nombre": "alex pedro",
+      "id": "USR-5232fecd-a234-4ec7-a52e-d2e4b7d104dd",
+      "usuario": "admin2",
+      "nombre": "ALEX PEDRO",
       "rol": "operador",
       "activo": true,
       "vence": "2026-12-20",
@@ -21,10 +21,10 @@
       "password": {
         "algoritmo": "pbkdf2_sha256",
         "iteraciones": 600000,
-        "salt": "YkZRLs25X9BsillZ0NNHwA==",
-        "hash": "DH3qAWIdtXY6AwAqp0HLgxewhZfTfw7EjR4OZpM1wnQ="
+        "salt": "EnEqKxr22dy7nH05L5CHFQ==",
+        "hash": "7+/ejGI3nf7vB513XSzd5ZcPdFOOG7pxbzEmXgfboPU="
       },
-      "actualizado_en": "2026-07-19 07:09:11"
+      "actualizado_en": "2026-07-19 16:47:49"
     }
   ],
   "equipos_autorizados": [],
