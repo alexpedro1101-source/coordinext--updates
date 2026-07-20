@@ -8,7 +8,7 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-20 20:16:35",
+  "actualizado_en": "2026-07-20 20:46:47",
   "usuarios": [
     {
       "id": "USR-c9f3dfd1-d2f1-4e91-b354-b47e21eb9a00",
@@ -34,7 +34,7 @@
       "nombre": "Alex pedro",
       "rol": "operador",
       "activo": true,
-      "vence": "2027-07-19",
+      "vence": "2027-07-30",
       "equipos": [
         "CN-928F-B3A7-40A7-16EF"
       ],
@@ -44,7 +44,7 @@
         "salt": "M7Togp4G7lQjZ2s7jW0XYQ==",
         "hash": "XocbXvqm4v4JVRTU6J4bi+gGu2FJkrFgDRJT6yMF2FU="
       },
-      "actualizado_en": "2026-07-20 20:04:17"
+      "actualizado_en": "2026-07-20 20:46:29"
     }
   ],
   "equipos_autorizados": [],
