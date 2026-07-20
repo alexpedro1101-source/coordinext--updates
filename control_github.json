@@ -8,8 +8,25 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-20 21:06:04",
-  "usuarios": [],
+  "actualizado_en": "2026-07-20 21:17:16",
+  "usuarios": [
+    {
+      "id": "USR-e87774b5-7250-47a5-a66b-b3c7870b3dde",
+      "usuario": "admin23",
+      "nombre": "Alexpedro",
+      "rol": "operador",
+      "activo": true,
+      "vence": "2026-07-24",
+      "equipos": [],
+      "password": {
+        "algoritmo": "pbkdf2_sha256",
+        "iteraciones": 600000,
+        "salt": "Pvr8UC/jnKOP8pqrpmKrPA==",
+        "hash": "pTB26T5Syxjxo+EY6CM6t6pyrqJkLkJkCdhfs2d4as8="
+      },
+      "actualizado_en": "2026-07-20 21:16:00"
+    }
+  ],
   "equipos_autorizados": [],
   "equipos_bloqueados": []
 }
