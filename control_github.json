@@ -8,7 +8,7 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-20 20:46:47",
+  "actualizado_en": "2026-07-20 20:49:04",
   "usuarios": [
     {
       "id": "USR-c9f3dfd1-d2f1-4e91-b354-b47e21eb9a00",
@@ -29,22 +29,20 @@
       "actualizado_en": "2026-07-20 17:48:49"
     },
     {
-      "id": "USR-5408a123-ae7b-4202-9dd7-10351baf455b",
-      "usuario": "trabajo.alex",
+      "id": "USR-63648f40-1b46-4f59-a520-3f95581c1c89",
+      "usuario": "admi23",
       "nombre": "Alex pedro",
       "rol": "operador",
       "activo": true,
-      "vence": "2027-07-30",
-      "equipos": [
-        "CN-928F-B3A7-40A7-16EF"
-      ],
+      "vence": "2026-07-22",
+      "equipos": [],
       "password": {
         "algoritmo": "pbkdf2_sha256",
         "iteraciones": 600000,
-        "salt": "M7Togp4G7lQjZ2s7jW0XYQ==",
-        "hash": "XocbXvqm4v4JVRTU6J4bi+gGu2FJkrFgDRJT6yMF2FU="
+        "salt": "qZg3fcLUstdKHC0imslrgw==",
+        "hash": "VLlUaxmcM02yIAGFVzEKnVOM6McvxJ8QyM7Y5teiJtw="
       },
-      "actualizado_en": "2026-07-20 20:46:29"
+      "actualizado_en": "2026-07-20 20:48:56"
     }
   ],
   "equipos_autorizados": [],
