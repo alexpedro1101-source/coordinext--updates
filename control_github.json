@@ -8,14 +8,14 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-19 20:02:30",
+  "actualizado_en": "2026-07-20 17:42:15",
   "usuarios": [
     {
       "id": "USR-c9f3dfd1-d2f1-4e91-b354-b47e21eb9a00",
       "usuario": "alex.pedro",
       "nombre": "CENTRAL ALEX",
       "rol": "operador",
-      "activo": false,
+      "activo": true,
       "vence": "",
       "equipos": [
         "CN-4081-203D-2CCC-8F1B"
@@ -26,7 +26,7 @@
         "salt": "oJyPrJ2R69h4Q54q6bLr3A==",
         "hash": "jzoNtCWeuhVnC4f9KFwYcxANh9G8vkOyf5Pwn7vE25I="
       },
-      "actualizado_en": "2026-07-19 17:38:35"
+      "actualizado_en": "2026-07-20 17:42:07"
     },
     {
       "id": "USR-5408a123-ae7b-4202-9dd7-10351baf455b",
