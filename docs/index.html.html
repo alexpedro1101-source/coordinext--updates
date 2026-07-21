@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#061221">
+  <title>CoordiNext · Panel de Control</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg:#000814; --panel:#061221; --panel2:#0a1b32; --card:#0d223c;
+      --input:#071426; --text:#f1f5f9; --muted:#a5b4cf; --line:#1e3a5f;
+      --blue:#2563eb; --cyan:#22d3ee; --green:#059669; --red:#dc2626;
+      --gold:#f59e0b; --purple:#7c3aed; --shadow:0 18px 50px rgba(0,0,0,.30);
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; font-family:Inter,Segoe UI,Arial,sans-serif; color:var(--text);
+      background:radial-gradient(circle at 10% 0%,#0d2b4a 0,transparent 35%),var(--bg);
+      min-height:100vh;
+    }
+    button,input,select,textarea { font:inherit; }
+    .shell { width:min(1240px,100%); margin:auto; padding:18px; }
+    header {
+      display:flex; gap:16px; align-items:center; justify-content:space-between;
+      background:linear-gradient(135deg,var(--panel2),var(--panel));
+      border:1px solid #16446f; border-radius:22px; padding:20px; box-shadow:var(--shadow);
+      position:sticky; top:10px; z-index:20; backdrop-filter:blur(12px);
+    }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { margin-bottom:5px; font-size:clamp(1.35rem,4vw,2rem); }
+    h2 { display:flex; align-items:center; gap:9px; }
+    .sub { color:var(--muted); margin:0; }
+    .status {
+      min-width:150px; text-align:center; padding:10px 14px; border-radius:999px;
+      background:#112842; border:1px solid var(--line); font-weight:800;
+    }
+    .status.ok { color:#6ee7b7; border-color:#047857; }
+    .status.error { color:#fca5a5; border-color:#991b1b; }
+    .status.busy { color:#67e8f9; border-color:#0e7490; }
+    .grid { display:grid; grid-template-columns:repeat(12,1fr); gap:14px; margin-top:14px; }
+    .panel {
+      grid-column:span 12; background:rgba(6,18,33,.96); border:1px solid var(--line);
+      border-radius:20px; padding:18px; box-shadow:var(--shadow);
+    }
+    .half { grid-column:span 6; }
+    .row { display:grid; grid-template-columns:repeat(12,1fr); gap:12px; }
+    .field { grid-column:span 4; }
+    .field.wide { grid-column:span 8; }
+    .field.full { grid-column:span 12; }
+    label { display:block; color:#cbd5e1; font-size:.82rem; font-weight:800; margin:0 0 6px; }
+    input,select,textarea {
+      width:100%; border:1px solid #234766; background:var(--input); color:var(--text);
+      padding:11px 12px; border-radius:12px; outline:none;
+    }
+    input:focus,select:focus,textarea:focus {
+      border-color:var(--cyan); box-shadow:0 0 0 3px rgba(34,211,238,.10);
+    }
+    textarea { min-height:88px; resize:vertical; }
+    .actions { display:flex; flex-wrap:wrap; gap:9px; margin-top:14px; }
+    button {
+      border:0; border-radius:12px; padding:11px 15px; color:#fff; font-weight:850;
+      cursor:pointer; background:var(--blue);
+    }
+    button:hover { filter:brightness(1.12); }
+    button:disabled { opacity:.55; cursor:not-allowed; }
+    .secondary { background:#334155; }
+    .success { background:var(--green); }
+    .danger { background:var(--red); }
+    .warning { background:var(--gold); color:#151515; }
+    .purple { background:var(--purple); }
+    .ghost { background:transparent; border:1px solid #315574; }
+    .cards { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:12px; }
+    .metric { padding:14px; background:var(--card); border:1px solid var(--line); border-radius:15px; }
+    .metric small { color:var(--muted); display:block; }
+    .metric strong { display:block; font-size:1.45rem; margin-top:4px; }
+    .list { display:grid; gap:10px; margin-top:12px; }
+    .item {
+      display:grid; gap:10px; align-items:end; background:var(--card);
+      border:1px solid var(--line); padding:12px; border-radius:15px;
+    }
+    .device { grid-template-columns:1.15fr 1fr .72fr 1.2fr auto; }
+    .user { grid-template-columns:1fr 1.1fr .75fr .75fr 1.35fr auto; }
+    .mini label { font-size:.70rem; }
+    .btns { display:flex; gap:6px; align-self:center; flex-wrap:wrap; }
+    .btns button { padding:9px 10px; }
+    .empty {
+      color:var(--muted); padding:18px; text-align:center;
+      border:1px dashed #315574; border-radius:14px;
+    }
+    .switchline { display:flex; align-items:center; gap:10px; min-height:44px; }
+    .switchline input { width:22px; height:22px; }
+    details { background:#08182b; border:1px solid var(--line); border-radius:14px; padding:12px; margin-top:12px; }
+    summary { cursor:pointer; font-weight:850; color:var(--cyan); }
+    pre {
+      white-space:pre-wrap; word-break:break-word; background:#020817; border-radius:12px;
+      padding:12px; max-height:420px; overflow:auto; border:1px solid #162d48;
+    }
+    .note { color:var(--muted); font-size:.88rem; line-height:1.45; }
+    .notice {
+      margin-top:12px; padding:12px; border-radius:12px; background:#0c2941;
+      border-left:4px solid var(--cyan); color:#dbeafe;
+    }
+    .danger-note { background:#361415; border-left-color:var(--red); }
+    .secure-note { background:#102b22; border-left-color:#10b981; }
+    .badge {
+      display:inline-flex; align-items:center; border-radius:999px; padding:4px 9px;
+      font-size:.72rem; font-weight:900; border:1px solid var(--line); background:#10243c;
+    }
+    .badge.on { color:#6ee7b7; border-color:#047857; }
+    .badge.off { color:#fca5a5; border-color:#991b1b; }
+    .toast {
+      position:fixed; right:18px; bottom:18px; max-width:440px; padding:14px 16px;
+      border-radius:14px; background:#10243c; border:1px solid #315574;
+      box-shadow:var(--shadow); display:none; z-index:50;
+    }
+    .toast.show { display:block; }
+    .toast.error { border-color:#991b1b; background:#351416; }
+    dialog {
+      width:min(520px,calc(100% - 24px)); color:var(--text); background:var(--panel);
+      border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); padding:20px;
+    }
+    dialog::backdrop { background:rgba(0,0,0,.72); backdrop-filter:blur(3px); }
+    @media (max-width:1020px) {
+      .half { grid-column:span 12; }
+      .field,.field.wide { grid-column:span 6; }
+      .cards { grid-template-columns:repeat(3,1fr); }
+      .device,.user { grid-template-columns:1fr 1fr; }
+      .btns { grid-column:span 2; }
+    }
+    @media (max-width:580px) {
+      .shell { padding:10px; }
+      header { position:static; align-items:flex-start; flex-direction:column; border-radius:16px; }
+      .status { width:100%; }
+      .panel { padding:14px; border-radius:16px; }
+      .field,.field.wide,.field.full { grid-column:span 12; }
+      .cards { grid-template-columns:1fr 1fr; }
+      .device,.user { grid-template-columns:1fr; }
+      .btns { grid-column:span 1; }
+      .actions button { flex:1 1 145px; }
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div>
+      <h1>CoordiNext PRO AA · Panel de Control</h1>
+      <p class="sub">Usuarios, contraseñas y bloqueo remoto de computadoras mediante GitHub.</p>
+    </div>
+    <div id="status" class="status">Sin conectar</div>
+  </header>
+
+  <div class="grid">
+    <section class="panel">
+      <h2>1. Conexión con GitHub</h2>
+      <div class="row">
+        <div class="field"><label>Propietario</label><input id="owner" value="alexpedro1101-source"></div>
+        <div class="field"><label>Repositorio</label><input id="repo" value="coordinext--updates"></div>
+        <div class="field"><label>Rama</label><input id="branch" value="main"></div>
+        <div class="field wide"><label>Ruta del archivo de control</label><input id="path" value="control_github.json"></div>
+        <div class="field"><label>Token GitHub (solo administrador)</label><input id="token" type="password" autocomplete="off" placeholder="github_pat_..."></div>
+        <div class="field full switchline">
+          <input id="rememberToken" type="checkbox">
+          <label for="rememberToken" style="margin:0">Recordar el token únicamente en este navegador</label>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="loadBtn" onclick="loadRemote()">Cargar control</button>
+        <button class="success" id="saveBtn" onclick="saveRemote()">Guardar y publicar</button>
+        <button class="secondary" onclick="saveConnection()">Guardar datos del repositorio</button>
+        <button class="ghost" onclick="exportJson()">Exportar JSON</button>
+        <button class="ghost" onclick="document.getElementById('importFile').click()">Importar JSON</button>
+        <input id="importFile" type="file" accept=".json,application/json" hidden onchange="importJson(event)">
+      </div>
+      <div class="notice">
+        El token no se guarda dentro de <b>app.py</b> ni se publica en el JSON. Para publicar necesita
+        permiso <b>Contents: Read and write</b> únicamente sobre este repositorio.
+      </div>
+      <div class="notice" style="border-left-color:#10b981;background:#082d24">
+        <b>Bloqueo rápido:</b> al pulsar “Bloquear ahora”, el panel publica automáticamente.
+        Con revisión de 5 segundos, la PC suele cerrarse aproximadamente entre 5 y 10 segundos,
+        dependiendo de Internet y de la propagación de GitHub.
+      </div>
+    </section>
+
+    <section class="panel half">
+      <h2>2. Estado general</h2>
+      <div class="row">
+        <div class="field full switchline">
+          <input id="systemActive" type="checkbox" checked onchange="syncFromForm()">
+          <label for="systemActive" style="margin:0">Sistema activo</label>
+        </div>
+        <div class="field"><label>Modo de autorización</label>
+          <select id="mode" onchange="syncFromForm()">
+            <option value="abierto">Abierto: permite todas las PC</option>
+            <option value="lista">Lista: solo PC autorizadas</option>
+          </select>
+        </div>
+        <div class="field"><label>Versión mínima</label><input id="minVersion" value="9.6.5" onchange="syncFromForm()"></div>
+        <div class="field"><label>Revisión rápida (segundos)</label><input id="interval" type="number" min="3" max="60" value="5" onchange="syncFromForm()"></div>
+        <div class="field"><label>Tolerancia sin Internet (horas)</label><input id="offlineHours" type="number" min="0" max="720" value="24" onchange="syncFromForm()"></div>
+        <div class="field full switchline">
+          <input id="blockOffline" type="checkbox" onchange="syncFromForm()">
+          <label for="blockOffline" style="margin:0">Bloquear cuando venza la copia local y no haya Internet</label>
+        </div>
+        <div class="field full"><label>Mensaje global</label><textarea id="globalMessage" onchange="syncFromForm()">Sistema operativo.</textarea></div>
+      </div>
+      <div class="actions">
+        <button class="success" onclick="quickEnable()">Activar sistema</button>
+        <button class="danger" onclick="quickDisable()">Bloquear todo</button>
+        <button class="warning" onclick="switchToList()">Usar lista autorizada</button>
+      </div>
+    </section>
+
+    <section class="panel half">
+      <h2>Resumen</h2>
+      <div class="cards">
+        <div class="metric"><small>Sistema</small><strong id="mSystem">Activo</strong></div>
+        <div class="metric"><small>Modo</small><strong id="mMode">Abierto</strong></div>
+        <div class="metric"><small>Usuarios</small><strong id="mUsers">0</strong></div>
+        <div class="metric"><small>Autorizados</small><strong id="mAllowed">0</strong></div>
+        <div class="metric"><small>Bloqueados</small><strong id="mBlocked">0</strong></div>
+      </div>
+      <div class="notice" id="lastUpdate">Todavía no se cargó una configuración remota.</div>
+      <p class="note" style="margin-top:12px">
+        Primero registre las computadoras y usuarios. Después puede cambiar el modo a <b>Lista</b>.
+        Un usuario puede limitarse a determinadas PC.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>3. Gestión de usuarios y contraseñas</h2>
+      <div class="row">
+        <div class="field"><label>Usuario</label><input id="newUser" autocomplete="off" placeholder="pedro.huancayo"></div>
+        <div class="field"><label>Nombre completo</label><input id="newFullName" placeholder="Pedro Apellido"></div>
+        <div class="field"><label>Rol</label>
+          <select id="newRole">
+            <option value="operador">Operador</option>
+            <option value="supervisor">Supervisor</option>
+            <option value="consulta">Solo consulta</option>
+            <option value="administrador">Administrador</option>
+          </select>
+        </div>
+        <div class="field"><label>Contraseña inicial</label><input id="newPassword" type="password" autocomplete="new-password" placeholder="Mínimo 4 caracteres"></div>
+        <div class="field"><label>Vence (opcional)</label><input id="newUserExpiry" type="date"></div>
+        <div class="field wide"><label>PC permitidas (opcional)</label><input id="newUserPcs" placeholder="CN-AAAA-BBBB-CCCC-DDDD, CN-1111-2222-3333-4444"></div>
+        <div class="field"><label>&nbsp;</label><button class="purple" style="width:100%" onclick="addUser()">Crear usuario</button></div>
+      </div>
+      <div class="notice secure-note">
+        Las contraseñas no se publican en texto visible. El panel genera un hash
+        <b>PBKDF2-HMAC-SHA256</b> con salt independiente para cada usuario.
+      </div>
+      <div id="userList" class="list"></div>
+    </section>
+
+    <section class="panel">
+      <h2>4. Equipos autorizados</h2>
+      <div class="row">
+        <div class="field"><label>ID de la PC</label><input id="newId" placeholder="CN-1234-5678-ABCD-EF01"></div>
+        <div class="field"><label>Nombre</label><input id="newName" placeholder="PC HUANCAYO 01"></div>
+        <div class="field"><label>Vence (opcional)</label><input id="newExpiry" type="date"></div>
+        <div class="field wide"><label>Mensaje para el equipo (opcional)</label><input id="newMessage" placeholder="Autorizado por administración"></div>
+        <div class="field"><label>&nbsp;</label><button class="success" style="width:100%" onclick="addAuthorized()">Agregar equipo</button></div>
+      </div>
+      <div id="authorizedList" class="list"></div>
+    </section>
+
+    <section class="panel">
+      <h2>5. Equipos bloqueados</h2>
+      <div class="row">
+        <div class="field"><label>ID de la PC</label><input id="blockId" placeholder="CN-1234-5678-ABCD-EF01"></div>
+        <div class="field wide"><label>Motivo o mensaje</label><input id="blockMessage" placeholder="Acceso desactivado por actividad sospechosa"></div>
+        <div class="field"><label>&nbsp;</label><button class="danger" style="width:100%" onclick="addBlocked()">Bloquear y publicar ahora</button></div>
+      </div>
+      <div id="blockedList" class="list"></div>
+    </section>
+
+    <section class="panel">
+      <h2>6. Vista técnica</h2>
+      <details>
+        <summary>Ver JSON que se publicará</summary>
+        <pre id="jsonPreview"></pre>
+      </details>
+      <details>
+        <summary>Cómo usar usuarios remotos</summary>
+        <ol class="note">
+          <li>Cree el usuario y una contraseña fuerte.</li>
+          <li>Opcionalmente asigne una o varias PC al usuario.</li>
+          <li>Agregue esas PC en Equipos autorizados y use el modo Lista.</li>
+          <li>Pulse Guardar y publicar.</li>
+          <li>El usuario podrá entrar con sus credenciales desde la aplicación.</li>
+          <li>Para expulsarlo, desactive el usuario o bloquee su PC y publique.</li>
+        </ol>
+      </details>
+      <div class="notice danger-note">
+        No publique su token en GitHub, WhatsApp, capturas ni dentro del ejecutable.
+        Use contraseñas largas y distintas para cada usuario.
+      </div>
+    </section>
+  </div>
+</div>
+
+<dialog id="passwordDialog">
+  <form method="dialog" onsubmit="return false">
+    <h3>Cambiar contraseña</h3>
+    <p class="note" id="passwordDialogUser"></p>
+    <label>Nueva contraseña</label>
+    <input id="resetPassword" type="password" autocomplete="new-password" placeholder="Mínimo 4 caracteres">
+    <div class="actions">
+      <button type="button" class="success" onclick="confirmPasswordReset()">Guardar contraseña</button>
+      <button type="button" class="secondary" onclick="closePasswordDialog()">Cancelar</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast"></div>
+
+<script>
+'use strict';
+
+const PBKDF2_ITERATIONS = 600000;
+let currentSha = '';
+let state = defaultState();
+let passwordResetIndex = -1;
+
+function defaultState() {
+  return {
+    schema: 3,
+    sistema_activo: true,
+    modo_autorizacion: 'abierto',
+    mensaje_global: 'Sistema operativo.',
+    version_minima: '9.6.5',
+    intervalo_minutos: 1,
+    intervalo_segundos: 5,
+    tolerancia_sin_internet_horas: 24,
+    bloquear_sin_internet: false,
+    actualizado_en: new Date().toISOString().replace('T',' ').slice(0,19),
+    usuarios: [],
+    equipos_autorizados: [],
+    equipos_bloqueados: []
+  };
+}
+
+function normalizeId(value) {
+  return String(value || '').trim().toUpperCase().replace(/\s+/g, '');
+}
+
+function normalizeUsername(value) {
+  return String(value || '').trim().toLowerCase().replace(/\s+/g, '');
+}
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
+    .replaceAll('"','&quot;').replaceAll("'","&#039;");
+}
+
+function parsePcList(value) {
+  return [...new Set(
+    String(value || '').split(/[,;\n]+/).map(normalizeId).filter(Boolean)
+  )];
+}
+
+function normalizePasswordRecord(value) {
+  const v = value && typeof value === 'object' ? value : {};
+  return {
+    algoritmo: String(v.algoritmo || v.algorithm || ''),
+    iteraciones: Number(v.iteraciones || v.iterations || 0),
+    salt: String(v.salt || ''),
+    hash: String(v.hash || v.digest || '')
+  };
+}
+
+function normalizeState(value) {
+  const base = defaultState();
+  const data = value && typeof value === 'object' ? value : {};
+  const result = {...base, ...data};
+  result.schema = Math.max(3, Number(result.schema || 3));
+  result.sistema_activo = result.sistema_activo !== false;
+  result.modo_autorizacion =
+    String(result.modo_autorizacion || 'abierto').toLowerCase() === 'lista' ? 'lista' : 'abierto';
+
+  // Compatibilidad: un JSON antiguo puede traer solo intervalo_minutos.
+  const secondsFromOldFile = Number(result.intervalo_minutos || 1) * 60;
+  result.intervalo_segundos = Math.min(
+    60,
+    Math.max(3, Number(result.intervalo_segundos || secondsFromOldFile || 5))
+  );
+
+  result.usuarios = Array.isArray(result.usuarios) ? result.usuarios.map((item, index) => ({
+    id: String(item?.id || `USR-${Date.now()}-${index}`),
+    usuario: normalizeUsername(item?.usuario),
+    nombre: String(item?.nombre || ''),
+    rol: String(item?.rol || 'operador').toLowerCase(),
+    activo: item?.activo !== false,
+    vence: String(item?.vence || ''),
+    equipos: Array.isArray(item?.equipos) ? item.equipos.map(normalizeId).filter(Boolean) : [],
+    password: normalizePasswordRecord(item?.password || item?.password_hash),
+    actualizado_en: String(item?.actualizado_en || '')
+  })).filter(item => item.usuario) : [];
+
+  result.equipos_autorizados = Array.isArray(result.equipos_autorizados)
+    ? result.equipos_autorizados.map(item => {
+        if (typeof item === 'string') return {id:normalizeId(item), nombre:item, activo:true, vence:'', mensaje:''};
+        return {
+          id:normalizeId(item?.id || item?.equipo_id), nombre:String(item?.nombre || ''),
+          activo:item?.activo !== false, vence:String(item?.vence || ''), mensaje:String(item?.mensaje || '')
+        };
+      }).filter(item => item.id)
+    : [];
+
+  result.equipos_bloqueados = Array.isArray(result.equipos_bloqueados)
+    ? result.equipos_bloqueados.map(item => {
+        if (typeof item === 'string') return {id:normalizeId(item), nombre:'', mensaje:''};
+        return {
+          id:normalizeId(item?.id || item?.equipo_id), nombre:String(item?.nombre || ''),
+          mensaje:String(item?.mensaje || '')
+        };
+      }).filter(item => item.id)
+    : [];
+
+  return result;
+}
+
+function connection() {
+  return {
+    owner: document.getElementById('owner').value.trim(),
+    repo: document.getElementById('repo').value.trim(),
+    branch: document.getElementById('branch').value.trim() || 'main',
+    path: document.getElementById('path').value.trim().replace(/^\/+|\/+$/g,''),
+    token: document.getElementById('token').value.trim()
+  };
+}
+
+function saveConnection() {
+  const c = connection();
+  localStorage.setItem('coordi_connection', JSON.stringify({...c, token:undefined}));
+  if (document.getElementById('rememberToken').checked) {
+    localStorage.setItem('coordi_token', c.token);
+  } else {
+    localStorage.removeItem('coordi_token');
+  }
+  toast('Datos guardados en este navegador.');
+}
+
+function restoreConnection() {
+  try {
+    const c = JSON.parse(localStorage.getItem('coordi_connection') || '{}');
+    if (c.owner) document.getElementById('owner').value = c.owner;
+    if (c.repo) document.getElementById('repo').value = c.repo;
+    if (c.branch) document.getElementById('branch').value = c.branch;
+    if (c.path) document.getElementById('path').value = c.path;
+    const token = localStorage.getItem('coordi_token') || '';
+    if (token) {
+      document.getElementById('token').value = token;
+      document.getElementById('rememberToken').checked = true;
+    }
+  } catch (_) {}
+}
+
+function apiPath(path) {
+  return path.split('/').filter(Boolean).map(encodeURIComponent).join('/');
+}
+function apiUrl(c) {
+  return `https://api.github.com/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/contents/${apiPath(c.path)}`;
+}
+function headers(token) {
+  const h = {'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
+  if (token) h.Authorization = `Bearer ${token}`;
+  return h;
+}
+function decodeUtf8Base64(value) {
+  const binary = atob(String(value || '').replace(/\n/g,''));
+  const bytes = Uint8Array.from(binary, ch => ch.charCodeAt(0));
+  return new TextDecoder('utf-8').decode(bytes);
+}
+function encodeUtf8Base64(value) {
+  const bytes = new TextEncoder().encode(value);
+  let binary = '';
+  const chunk = 0x8000;
+  for (let i=0; i<bytes.length; i+=chunk) binary += String.fromCharCode(...bytes.subarray(i,i+chunk));
+  return btoa(binary);
+}
+function bytesToBase64(bytes) {
+  let binary = '';
+  for (let i=0; i<bytes.length; i+=0x8000) {
+    binary += String.fromCharCode(...bytes.subarray(i,i+0x8000));
+  }
+  return btoa(binary);
+}
+async function readError(response) {
+  try { const body = await response.json(); return body.message || JSON.stringify(body); }
+  catch (_) { return `${response.status} ${response.statusText}`; }
+}
+function setStatus(text, type='') {
+  const el = document.getElementById('status');
+  el.textContent = text; el.className = `status ${type}`.trim();
+}
+function setBusy(busy) {
+  document.getElementById('loadBtn').disabled = busy;
+  document.getElementById('saveBtn').disabled = busy;
+  if (busy) setStatus('Procesando…','busy');
+}
+
+async function loadRemote() {
+  const c = connection();
+  if (!c.owner || !c.repo || !c.path) return toast('Complete propietario, repositorio y ruta.', true);
+  setBusy(true);
+  try {
+    const url = `${apiUrl(c)}?ref=${encodeURIComponent(c.branch)}&t=${Date.now()}`;
+    const response = await fetch(url,{headers:headers(c.token),cache:'no-store'});
+    if (!response.ok) throw new Error(await readError(response));
+    const payload = await response.json();
+    currentSha = payload.sha || '';
+    state = normalizeState(JSON.parse(decodeUtf8Base64(payload.content)));
+    render();
+    saveConnection();
+    setStatus('Conectado','ok');
+    document.getElementById('lastUpdate').textContent =
+      `Archivo cargado. Última marca: ${state.actualizado_en || 'sin fecha'}. SHA: ${currentSha.slice(0,10)}…`;
+    toast('Control remoto cargado correctamente.');
+  } catch (error) {
+    setStatus('Error de conexión','error');
+    toast(`No se pudo cargar: ${error.message}`,true);
+  } finally { setBusy(false); }
+}
+
+async function saveRemote(options = {}) {
+  syncFromForm();
+  const c = connection();
+  if (!c.owner || !c.repo || !c.path) {
+    toast('Complete los datos del repositorio.',true);
+    return false;
+  }
+  if (!c.token) {
+    toast('Ingrese el token GitHub del administrador para publicar el bloqueo.',true);
+    return false;
+  }
+  if (state.modo_autorizacion === 'lista' && state.equipos_autorizados.length === 0) {
+    if (!confirm('El modo LISTA no tiene equipos autorizados. Todas las PC quedarán bloqueadas. ¿Continuar?')) {
+      return false;
+    }
+  }
+
+  setBusy(true);
+  try {
+    // Si el panel se abrió sin pulsar "Cargar control", obtiene el SHA actual
+    // antes de publicar. Esto evita el error 422 de GitHub.
+    if (!currentSha) {
+      const checkUrl = `${apiUrl(c)}?ref=${encodeURIComponent(c.branch)}&t=${Date.now()}`;
+      const checkResponse = await fetch(checkUrl,{
+        headers:headers(c.token),
+        cache:'no-store'
+      });
+      if (checkResponse.ok) {
+        const remotePayload = await checkResponse.json();
+        currentSha = remotePayload.sha || '';
+      } else if (checkResponse.status !== 404) {
+        throw new Error(await readError(checkResponse));
+      }
+    }
+
+    state.actualizado_en = new Date().toISOString().replace('T',' ').slice(0,19);
+    const content = JSON.stringify(state,null,2) + '\n';
+    const body = {
+      message: options.commitMessage || `Actualiza control CoordiNext ${state.actualizado_en}`,
+      content:encodeUtf8Base64(content),
+      branch:c.branch
+    };
+    if (currentSha) body.sha = currentSha;
+
+    const response = await fetch(apiUrl(c),{
+      method:'PUT',
+      headers:{...headers(c.token),'Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+    if (!response.ok) throw new Error(await readError(response));
+
+    const payload = await response.json();
+    currentSha = payload.content?.sha || payload.commit?.sha || currentSha;
+    render();
+    saveConnection();
+    setStatus('Publicado','ok');
+    document.getElementById('lastUpdate').textContent =
+      `Publicado: ${state.actualizado_en}. SHA: ${String(currentSha).slice(0,10)}…`;
+    toast(options.successMessage || 'Cambios publicados correctamente.');
+    return true;
+  } catch (error) {
+    setStatus('Error al publicar','error');
+    toast(`No se pudo guardar: ${error.message}`,true);
+    return false;
+  } finally {
+    setBusy(false);
+  }
+}
+
+function syncFromForm() {
+  state.sistema_activo = document.getElementById('systemActive').checked;
+  state.modo_autorizacion = document.getElementById('mode').value;
+  state.version_minima = document.getElementById('minVersion').value.trim();
+  state.intervalo_segundos = Math.min(60,Math.max(3,Number(document.getElementById('interval').value || 5)));
+  // Se conserva este campo para clientes antiguos; los clientes nuevos usan segundos.
+  state.intervalo_minutos = Math.max(1,Math.ceil(state.intervalo_segundos / 60));
+  state.tolerancia_sin_internet_horas = Math.min(720,Math.max(0,Number(document.getElementById('offlineHours').value || 24)));
+  state.bloquear_sin_internet = document.getElementById('blockOffline').checked;
+  state.mensaje_global = document.getElementById('globalMessage').value.trim();
+  updateSummary();
+  updatePreview();
+}
+
+function quickEnable() {
+  state.sistema_activo = true;
+  document.getElementById('systemActive').checked = true;
+  syncFromForm(); toast('Sistema marcado como activo. Publique para aplicar.');
+}
+function quickDisable() {
+  if (!confirm('Esto bloqueará todas las PC cuando publique. ¿Continuar?')) return;
+  state.sistema_activo = false;
+  document.getElementById('systemActive').checked = false;
+  syncFromForm(); toast('Sistema marcado como bloqueado. Publique para aplicar.');
+}
+function switchToList() {
+  state.modo_autorizacion = 'lista';
+  document.getElementById('mode').value = 'lista';
+  syncFromForm(); toast('Modo Lista seleccionado. Publique para aplicar.');
+}
+
+function passwordIsValid(value) {
+  const p = String(value || '');
+  return p.length >= 4 && p === p.trim();
+}
+
+async function createPasswordRecord(password) {
+  if (!window.crypto?.subtle) throw new Error('Este navegador no permite criptografía segura. Abra el panel mediante HTTPS.');
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const keyMaterial = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(password), {name:'PBKDF2'}, false, ['deriveBits']
+  );
+  const bits = await crypto.subtle.deriveBits(
+    {name:'PBKDF2',hash:'SHA-256',salt,iterations:PBKDF2_ITERATIONS},
+    keyMaterial, 256
+  );
+  return {
+    algoritmo:'pbkdf2_sha256',
+    iteraciones:PBKDF2_ITERATIONS,
+    salt:bytesToBase64(salt),
+    hash:bytesToBase64(new Uint8Array(bits))
+  };
+}
+
+async function addUser() {
+  const usuario = normalizeUsername(document.getElementById('newUser').value);
+  const nombre = document.getElementById('newFullName').value.trim();
+  const rol = document.getElementById('newRole').value;
+  const password = document.getElementById('newPassword').value;
+  const vence = document.getElementById('newUserExpiry').value;
+  const equipos = parsePcList(document.getElementById('newUserPcs').value);
+
+  if (!/^[a-z0-9._-]{3,40}$/.test(usuario)) {
+    return toast('El usuario debe tener 3 a 40 caracteres: letras, números, punto, guion o guion bajo.',true);
+  }
+  if (state.usuarios.some(item => item.usuario === usuario)) return toast('Ese usuario ya existe.',true);
+  if (!passwordIsValid(password)) {
+    return toast('La contraseña debe tener mínimo 4 caracteres y no puede comenzar ni terminar con espacios.',true);
+  }
+
+  try {
+    setStatus('Protegiendo clave…','busy');
+    const passwordRecord = await createPasswordRecord(password);
+    state.usuarios.push({
+      id:`USR-${crypto.randomUUID ? crypto.randomUUID() : Date.now()}`,
+      usuario,nombre,rol,activo:true,vence,equipos,password:passwordRecord,
+      actualizado_en:new Date().toISOString().replace('T',' ').slice(0,19)
+    });
+    ['newUser','newFullName','newPassword','newUserExpiry','newUserPcs'].forEach(id => document.getElementById(id).value='');
+    render();
+    setStatus('Cambios locales','ok');
+    toast('Usuario creado. Pulse Guardar y publicar para habilitarlo.');
+  } catch (error) {
+    setStatus('Error','error'); toast(error.message,true);
+  }
+}
+
+function updateUser(index) {
+  const user = state.usuarios[index];
+  if (!user) return;
+  const usuario = normalizeUsername(document.getElementById(`u-user-${index}`).value);
+  if (!/^[a-z0-9._-]{3,40}$/.test(usuario)) return toast('Nombre de usuario inválido.',true);
+  if (state.usuarios.some((item,i) => i !== index && item.usuario === usuario)) return toast('Ese usuario ya existe.',true);
+  user.usuario = usuario;
+  user.nombre = document.getElementById(`u-name-${index}`).value.trim();
+  user.rol = document.getElementById(`u-role-${index}`).value;
+  user.vence = document.getElementById(`u-exp-${index}`).value;
+  user.equipos = parsePcList(document.getElementById(`u-pcs-${index}`).value);
+  user.actualizado_en = new Date().toISOString().replace('T',' ').slice(0,19);
+  render(); toast('Usuario actualizado. Publique para aplicar.');
+}
+
+function toggleUser(index) {
+  const user = state.usuarios[index];
+  if (!user) return;
+  user.activo = !user.activo;
+  user.actualizado_en = new Date().toISOString().replace('T',' ').slice(0,19);
+  render(); toast(user.activo ? 'Usuario activado.' : 'Usuario desactivado. Su sesión se cerrará en la siguiente revisión.');
+}
+
+function deleteUser(index) {
+  const user = state.usuarios[index];
+  if (!user || !confirm(`¿Eliminar al usuario ${user.usuario}?`)) return;
+  state.usuarios.splice(index,1); render(); toast('Usuario eliminado. Publique para aplicar.');
+}
+
+function openPasswordDialog(index) {
+  passwordResetIndex = index;
+  const user = state.usuarios[index];
+  document.getElementById('passwordDialogUser').textContent = user ? `Usuario: ${user.usuario}` : '';
+  document.getElementById('resetPassword').value = '';
+  document.getElementById('passwordDialog').showModal();
+}
+function closePasswordDialog() {
+  passwordResetIndex = -1;
+  document.getElementById('passwordDialog').close();
+}
+async function confirmPasswordReset() {
+  const password = document.getElementById('resetPassword').value;
+  if (!passwordIsValid(password)) return toast('La contraseña debe tener mínimo 4 caracteres y no puede comenzar ni terminar con espacios.',true);
+  const user = state.usuarios[passwordResetIndex];
+  if (!user) return closePasswordDialog();
+  try {
+    user.password = await createPasswordRecord(password);
+    user.actualizado_en = new Date().toISOString().replace('T',' ').slice(0,19);
+    closePasswordDialog(); render();
+    toast('Contraseña cambiada. Publique para aplicar.');
+  } catch (error) { toast(error.message,true); }
+}
+
+function addAuthorized() {
+  const id = normalizeId(document.getElementById('newId').value);
+  if (!id) return toast('Ingrese el ID de la PC.',true);
+  if (state.equipos_autorizados.some(item => item.id === id)) return toast('La PC ya está autorizada.',true);
+  state.equipos_bloqueados = state.equipos_bloqueados.filter(item => item.id !== id);
+  state.equipos_autorizados.push({
+    id, nombre:document.getElementById('newName').value.trim(),
+    activo:true, vence:document.getElementById('newExpiry').value,
+    mensaje:document.getElementById('newMessage').value.trim()
+  });
+  ['newId','newName','newExpiry','newMessage'].forEach(x => document.getElementById(x).value='');
+  render(); toast('Equipo autorizado. Publique para aplicar.');
+}
+function updateAuthorized(index) {
+  const item = state.equipos_autorizados[index]; if (!item) return;
+  const id = normalizeId(document.getElementById(`a-id-${index}`).value);
+  if (!id) return toast('ID inválido.',true);
+  item.id=id; item.nombre=document.getElementById(`a-name-${index}`).value.trim();
+  item.vence=document.getElementById(`a-exp-${index}`).value;
+  item.mensaje=document.getElementById(`a-msg-${index}`).value.trim();
+  render(); toast('Equipo actualizado.');
+}
+function toggleAuthorized(index) {
+  const item=state.equipos_autorizados[index]; if (!item) return;
+  item.activo=!item.activo; render(); toast(item.activo?'Autorización activada.':'Autorización desactivada.');
+}
+function removeAuthorized(index) {
+  if (!confirm('¿Quitar este equipo de autorizados?')) return;
+  state.equipos_autorizados.splice(index,1); render(); toast('Equipo retirado.');
+}
+async function blockAuthorized(index) {
+  const item=state.equipos_autorizados[index];
+  if (!item) return;
+
+  const reason=prompt(
+    'Motivo del bloqueo:',
+    'Actividad sospechosa detectada por administración.'
+  );
+  if (reason===null) return;
+  if (!confirm(`¿Bloquear y publicar inmediatamente la PC ${item.id}?`)) return;
+
+  state.equipos_autorizados.splice(index,1);
+  state.equipos_bloqueados=state.equipos_bloqueados.filter(x=>x.id!==item.id);
+  state.equipos_bloqueados.push({
+    id:item.id,
+    nombre:item.nombre,
+    mensaje:reason.trim() || 'Acceso bloqueado por administración.'
+  });
+  render();
+  setStatus('Publicando bloqueo…','busy');
+
+  await saveRemote({
+    commitMessage:`BLOQUEO INMEDIATO ${item.id}`,
+    successMessage:`PC ${item.id} bloqueada y publicada. La aplicación la detectará en pocos segundos.`
+  });
+}
+
+async function addBlocked() {
+  const id=normalizeId(document.getElementById('blockId').value);
+  if (!id) return toast('Ingrese el ID de la PC.',true);
+
+  const message=document.getElementById('blockMessage').value.trim()
+    || 'Acceso bloqueado por administración.';
+  if (!confirm(`¿Bloquear y publicar inmediatamente la PC ${id}?`)) return;
+
+  state.equipos_autorizados=state.equipos_autorizados.filter(item=>item.id!==id);
+  state.equipos_bloqueados=state.equipos_bloqueados.filter(item=>item.id!==id);
+  state.equipos_bloqueados.push({id,nombre:'',mensaje:message});
+  document.getElementById('blockId').value='';
+  document.getElementById('blockMessage').value='';
+  render();
+  setStatus('Publicando bloqueo…','busy');
+
+  await saveRemote({
+    commitMessage:`BLOQUEO INMEDIATO ${id}`,
+    successMessage:`PC ${id} bloqueada y publicada. La aplicación la detectará en pocos segundos.`
+  });
+}
+function updateBlocked(index) {
+  const item=state.equipos_bloqueados[index]; if (!item) return;
+  item.id=normalizeId(document.getElementById(`b-id-${index}`).value);
+  item.nombre=document.getElementById(`b-name-${index}`).value.trim();
+  item.mensaje=document.getElementById(`b-msg-${index}`).value.trim();
+  render(); toast('Bloqueo actualizado.');
+}
+function unblock(index) {
+  const item=state.equipos_bloqueados[index]; if (!item) return;
+  state.equipos_bloqueados.splice(index,1);
+  state.equipos_autorizados=state.equipos_autorizados.filter(x=>x.id!==item.id);
+  state.equipos_autorizados.push({id:item.id,nombre:item.nombre,activo:true,vence:'',mensaje:'Desbloqueado por administración'});
+  render(); toast('Equipo desbloqueado y autorizado.');
+}
+function removeBlocked(index) {
+  if (!confirm('¿Quitar este registro de bloqueados?')) return;
+  state.equipos_bloqueados.splice(index,1); render(); toast('Registro eliminado.');
+}
+
+function renderUsers() {
+  const box=document.getElementById('userList');
+  if (!state.usuarios.length) {
+    box.innerHTML='<div class="empty">No hay usuarios remotos. El administrador local de la aplicación seguirá disponible.</div>';
+    return;
+  }
+  box.innerHTML=state.usuarios.map((u,i)=>`
+    <div class="item user">
+      <div class="mini"><label>Usuario ${u.activo?'<span class="badge on">ACTIVO</span>':'<span class="badge off">DESACTIVADO</span>'}</label>
+        <input id="u-user-${i}" value="${escapeHtml(u.usuario)}"></div>
+      <div class="mini"><label>Nombre</label><input id="u-name-${i}" value="${escapeHtml(u.nombre)}"></div>
+      <div class="mini"><label>Rol</label><select id="u-role-${i}">
+        ${['operador','supervisor','consulta','administrador'].map(r=>`<option value="${r}" ${u.rol===r?'selected':''}>${r}</option>`).join('')}
+      </select></div>
+      <div class="mini"><label>Vence</label><input id="u-exp-${i}" type="date" value="${escapeHtml(u.vence)}"></div>
+      <div class="mini"><label>PC permitidas; vacío = cualquiera</label><input id="u-pcs-${i}" value="${escapeHtml((u.equipos||[]).join(', '))}"></div>
+      <div class="btns">
+        <button class="secondary" onclick="updateUser(${i})">Guardar</button>
+        <button class="${u.activo?'warning':'success'}" onclick="toggleUser(${i})">${u.activo?'Desactivar':'Activar'}</button>
+        <button class="purple" onclick="openPasswordDialog(${i})">Contraseña</button>
+        <button class="danger" onclick="deleteUser(${i})">Eliminar</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderAuthorized() {
+  const box=document.getElementById('authorizedList');
+  if (!state.equipos_autorizados.length) { box.innerHTML='<div class="empty">No hay equipos autorizados registrados.</div>'; return; }
+  box.innerHTML=state.equipos_autorizados.map((d,i)=>`
+    <div class="item device">
+      <div class="mini"><label>ID ${d.activo?'<span class="badge on">ACTIVO</span>':'<span class="badge off">INACTIVO</span>'}</label><input id="a-id-${i}" value="${escapeHtml(d.id)}"></div>
+      <div class="mini"><label>Nombre</label><input id="a-name-${i}" value="${escapeHtml(d.nombre)}"></div>
+      <div class="mini"><label>Vence</label><input id="a-exp-${i}" type="date" value="${escapeHtml(d.vence)}"></div>
+      <div class="mini"><label>Mensaje</label><input id="a-msg-${i}" value="${escapeHtml(d.mensaje)}"></div>
+      <div class="btns">
+        <button class="secondary" onclick="updateAuthorized(${i})">Guardar</button>
+        <button class="${d.activo?'warning':'success'}" onclick="toggleAuthorized(${i})">${d.activo?'Desactivar':'Activar'}</button>
+        <button class="danger" onclick="blockAuthorized(${i})">Bloquear ahora</button>
+        <button class="ghost" onclick="removeAuthorized(${i})">Quitar</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderBlocked() {
+  const box=document.getElementById('blockedList');
+  if (!state.equipos_bloqueados.length) { box.innerHTML='<div class="empty">No hay equipos bloqueados.</div>'; return; }
+  box.innerHTML=state.equipos_bloqueados.map((d,i)=>`
+    <div class="item device">
+      <div class="mini"><label>ID <span class="badge off">BLOQUEADO</span></label><input id="b-id-${i}" value="${escapeHtml(d.id)}"></div>
+      <div class="mini"><label>Nombre</label><input id="b-name-${i}" value="${escapeHtml(d.nombre)}"></div>
+      <div class="mini" style="grid-column:span 2"><label>Motivo o mensaje</label><input id="b-msg-${i}" value="${escapeHtml(d.mensaje)}"></div>
+      <div class="btns">
+        <button class="secondary" onclick="updateBlocked(${i})">Guardar</button>
+        <button class="success" onclick="unblock(${i})">Desbloquear</button>
+        <button class="ghost" onclick="removeBlocked(${i})">Quitar</button>
+      </div>
+    </div>`).join('');
+}
+
+function updateSummary() {
+  document.getElementById('mSystem').textContent=state.sistema_activo?'Activo':'Bloqueado';
+  document.getElementById('mMode').textContent=state.modo_autorizacion==='lista'?'Lista':'Abierto';
+  document.getElementById('mUsers').textContent=state.usuarios.filter(u=>u.activo).length;
+  document.getElementById('mAllowed').textContent=state.equipos_autorizados.filter(x=>x.activo).length;
+  document.getElementById('mBlocked').textContent=state.equipos_bloqueados.length;
+}
+function updatePreview() {
+  document.getElementById('jsonPreview').textContent=JSON.stringify(state,null,2);
+}
+function render() {
+  document.getElementById('systemActive').checked=state.sistema_activo;
+  document.getElementById('mode').value=state.modo_autorizacion;
+  document.getElementById('minVersion').value=state.version_minima;
+  document.getElementById('interval').value=state.intervalo_segundos;
+  document.getElementById('offlineHours').value=state.tolerancia_sin_internet_horas;
+  document.getElementById('blockOffline').checked=state.bloquear_sin_internet;
+  document.getElementById('globalMessage').value=state.mensaje_global;
+  renderUsers(); renderAuthorized(); renderBlocked(); updateSummary(); updatePreview();
+}
+
+function exportJson() {
+  syncFromForm();
+  const blob=new Blob([JSON.stringify(state,null,2)+'\n'],{type:'application/json;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='control_github.json'; a.click();
+  URL.revokeObjectURL(url); toast('JSON exportado.');
+}
+async function importJson(event) {
+  const file=event.target.files?.[0]; event.target.value='';
+  if (!file) return;
+  try {
+    state=normalizeState(JSON.parse(await file.text()));
+    currentSha=''; render(); toast('JSON importado. Revise y publique.');
+  } catch (error) { toast(`Archivo inválido: ${error.message}`,true); }
+}
+function toast(message,error=false) {
+  const el=document.getElementById('toast');
+  el.textContent=message; el.className=`toast show${error?' error':''}`;
+  clearTimeout(toast.timer); toast.timer=setTimeout(()=>el.className='toast',4800);
+}
+
+restoreConnection();
+render();
+</script>
+</body>
+</html>
