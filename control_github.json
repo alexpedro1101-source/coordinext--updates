@@ -8,28 +8,12 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-21 16:00:51",
+  "actualizado_en": "2026-07-21 17:07:13",
   "usuarios": [
     {
-      "id": "USR-e87774b5-7250-47a5-a66b-b3c7870b3dde",
-      "usuario": "admin23",
-      "nombre": "Alexpedro",
-      "rol": "operador",
-      "activo": true,
-      "vence": "2026-07-24",
-      "equipos": [],
-      "password": {
-        "algoritmo": "pbkdf2_sha256",
-        "iteraciones": 600000,
-        "salt": "QZwQLzWeTqOx6lwsL+iwsg==",
-        "hash": "Glv2ocxpYwiqCMLPn6v7r/tWhcmBJF8hyRY0P+am5wg="
-      },
-      "actualizado_en": "2026-07-21 15:24:06"
-    },
-    {
-      "id": "USR-a0062735-f61c-4dc6-a4ae-eada4b7cd10d",
-      "usuario": "alex.pedro",
-      "nombre": "alexpedro",
+      "id": "USR-13936527-9281-4ea4-b4ae-e54349bd9733",
+      "usuario": "alexpedro",
+      "nombre": "alexander pedro",
       "rol": "administrador",
       "activo": true,
       "vence": "",
@@ -37,10 +21,10 @@
       "password": {
         "algoritmo": "pbkdf2_sha256",
         "iteraciones": 600000,
-        "salt": "vYwYMeC66szY2e1pOUrE0g==",
-        "hash": "ZPA6coSHDBfqhNwSx0xsvpk659eQEHbhyevlupCaTro="
+        "salt": "LS0JfB7K8s5FlWD1T17vkw==",
+        "hash": "tcowa8/DZ295z+wwrTMbLBmS8U+7DjgHnAR60inLh3I="
       },
-      "actualizado_en": "2026-07-21 16:00:45"
+      "actualizado_en": "2026-07-21 17:07:08"
     }
   ],
   "equipos_autorizados": [],
