@@ -8,7 +8,7 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-21 17:32:56",
+  "actualizado_en": "2026-07-24 19:39:42",
   "usuarios": [
     {
       "id": "USR-13936527-9281-4ea4-b4ae-e54349bd9733",
@@ -37,10 +37,10 @@
       "password": {
         "algoritmo": "pbkdf2_sha256",
         "iteraciones": 600000,
-        "salt": "Z6ZfHVSwb7p51CVZSdlRIw==",
-        "hash": "V0CABWM0CdP7cBsJXnreVfBp1AvbUmlBNgrM2izQ51k="
+        "salt": "7zY40rKMMdBEKhdDAu/MPQ==",
+        "hash": "C8d1Gp8fdVc3zGlu2udnQJ8l5jJHwdn+ksiOlKjDOIg="
       },
-      "actualizado_en": "2026-07-21 17:25:04"
+      "actualizado_en": "2026-07-24 19:39:34"
     }
   ],
   "equipos_autorizados": [],
