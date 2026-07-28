@@ -8,7 +8,7 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-28 18:39:01",
+  "actualizado_en": "2026-07-28 18:56:31",
   "usuarios": [
     {
       "id": "USR-13936527-9281-4ea4-b4ae-e54349bd9733",
@@ -48,15 +48,17 @@
       "nombre": "Victor cardenas",
       "rol": "supervisor",
       "activo": true,
-      "vence": "",
-      "equipos": [],
+      "vence": "2026-08-30",
+      "equipos": [
+        "CN-46C7-8305-8596-4291"
+      ],
       "password": {
         "algoritmo": "pbkdf2_sha256",
         "iteraciones": 600000,
         "salt": "w9DPGWZuoNZDFH6HC6as4g==",
         "hash": "pXutPl0I06JqEA0xSMfILS3WsNbya5Hz+Wx91ItMXHA="
       },
-      "actualizado_en": "2026-07-28 18:38:49"
+      "actualizado_en": "2026-07-28 18:56:18"
     }
   ],
   "equipos_autorizados": [],
