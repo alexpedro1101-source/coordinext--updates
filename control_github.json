@@ -8,7 +8,7 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-28 16:40:04",
+  "actualizado_en": "2026-07-28 16:41:17",
   "usuarios": [
     {
       "id": "USR-13936527-9281-4ea4-b4ae-e54349bd9733",
@@ -25,22 +25,6 @@
         "hash": "GLjV55H+Sfv/Z0NZXE1dad24Pv/4fGkC1FDC0f9Kyjs="
       },
       "actualizado_en": "2026-07-21 17:32:46"
-    },
-    {
-      "id": "USR-bd13e600-4125-4cfc-a962-20954ff0351b",
-      "usuario": "adri20",
-      "nombre": "adriel condor",
-      "rol": "operador",
-      "activo": true,
-      "vence": "",
-      "equipos": [],
-      "password": {
-        "algoritmo": "pbkdf2_sha256",
-        "iteraciones": 600000,
-        "salt": "gIYlpEI/ujwxXzVO9qjp5g==",
-        "hash": "df0yMhLURdgFq5+DPNgfPFpr7iL6Gb7ORIZ/aIPAY3w="
-      },
-      "actualizado_en": "2026-07-28 16:39:55"
     },
     {
       "id": "USR-554c210f-30ca-4354-bcf7-ff72c32fecbb",
