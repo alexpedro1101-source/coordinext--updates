@@ -8,14 +8,14 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-29 20:15:01",
+  "actualizado_en": "2026-07-29 20:17:09",
   "usuarios": [
     {
       "id": "USR-13936527-9281-4ea4-b4ae-e54349bd9733",
       "usuario": "alexpedro",
       "nombre": "alexander pedro",
       "rol": "administrador",
-      "activo": false,
+      "activo": true,
       "vence": "2026-07-31",
       "equipos": [
         "CN-928F-B3A7-40A7-16EF"
@@ -26,7 +26,7 @@
         "salt": "8ASE7Z8FZ/DeGaSw6iMbLQ==",
         "hash": "GLjV55H+Sfv/Z0NZXE1dad24Pv/4fGkC1FDC0f9Kyjs="
       },
-      "actualizado_en": "2026-07-29 20:14:10"
+      "actualizado_en": "2026-07-29 20:17:04"
     },
     {
       "id": "USR-554c210f-30ca-4354-bcf7-ff72c32fecbb",
