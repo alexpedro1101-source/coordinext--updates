@@ -8,7 +8,7 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-30 20:52:07",
+  "actualizado_en": "2026-07-30 21:00:12",
   "usuarios": [
     {
       "id": "USR-13936527-9281-4ea4-b4ae-e54349bd9733",
@@ -62,7 +62,7 @@
         "salt": "QDCZwmzFlgciVdt6bTUh8Q==",
         "hash": "x3WYRooUKgl+lrcX7I5/JOhDet6WVE4vBymTVFBlhJ8="
       },
-      "actualizado_en": "2026-07-30 20:51:59"
+      "actualizado_en": "2026-07-30 21:00:05"
     }
   ],
   "equipos_autorizados": [],
