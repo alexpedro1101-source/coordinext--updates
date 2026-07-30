@@ -8,7 +8,7 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-30 20:47:48",
+  "actualizado_en": "2026-07-30 20:48:20",
   "usuarios": [
     {
       "id": "USR-13936527-9281-4ea4-b4ae-e54349bd9733",
@@ -27,24 +27,6 @@
         "hash": "GLjV55H+Sfv/Z0NZXE1dad24Pv/4fGkC1FDC0f9Kyjs="
       },
       "actualizado_en": "2026-07-29 20:17:04"
-    },
-    {
-      "id": "USR-554c210f-30ca-4354-bcf7-ff72c32fecbb",
-      "usuario": "supervisor01",
-      "nombre": "Katherine becerra",
-      "rol": "supervisor",
-      "activo": true,
-      "vence": "2026-08-30",
-      "equipos": [
-        "CU-74AD-607C-D25D-0B8D"
-      ],
-      "password": {
-        "algoritmo": "pbkdf2_sha256",
-        "iteraciones": 600000,
-        "salt": "Fox/dFGgBd221ZwsjRioTQ==",
-        "hash": "/Gb4ZeACiaDe/5D1hEY72i2ZxjPM8PoEsQvAT7+W+e4="
-      },
-      "actualizado_en": "2026-07-30 20:47:40"
     },
     {
       "id": "USR-318246fc-a8f8-478d-b8f5-a71d7db22211",
