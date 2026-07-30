@@ -8,7 +8,7 @@
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-30 21:00:12",
+  "actualizado_en": "2026-07-30 21:08:39",
   "usuarios": [
     {
       "id": "USR-13936527-9281-4ea4-b4ae-e54349bd9733",
@@ -65,7 +65,26 @@
       "actualizado_en": "2026-07-30 21:00:05"
     }
   ],
-  "equipos_autorizados": [],
+  "equipos_autorizados": [
+    {
+      "id": "CU-74AD-607C-D25D-0B8D",
+      "nombre": "Katerine becerra",
+      "activo": true,
+      "vence": "2026-08-30",
+      "mensaje": "Autorizado"
+    }
+  ],
   "equipos_bloqueados": [],
-  "acciones_soporte": []
+  "acciones_soporte": [
+    {
+      "id": "SUP-deb55830-a23d-4b61-962d-ccea025cb214",
+      "equipo_id": "*",
+      "equipo_nombre": "Todas las PC autorizadas",
+      "accion": "sincronizar_directorios",
+      "mensaje": "",
+      "creada_en": "2026-07-30 21:06:48",
+      "creada_por": "administracion",
+      "activa": true
+    }
+  ]
 }
