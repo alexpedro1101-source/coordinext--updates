@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#061221">
-  <title>CoordiNext PRO AA v10.5.0 Enterprise · Panel de Control</title>
+  <title>CoordiNext PRO AA v10.5.8 Enterprise · Panel de Control</title>
   <style>
     :root {
       color-scheme: dark;
@@ -139,103 +139,13 @@
       .btns { grid-column:span 1; }
       .actions button { flex:1 1 145px; }
     }
-  
-
-    /* ===== Acceso seguro del panel v10.5 ===== */
-    body.panel-locked { overflow:hidden; }
-    body.panel-locked .shell { display:none; }
-    body.panel-unlocked #loginGate { display:none; }
-    #loginGate {
-      position:fixed; inset:0; z-index:9999; display:grid; place-items:center;
-      padding:20px; background:
-        radial-gradient(circle at 15% 5%,rgba(34,211,238,.18),transparent 32%),
-        radial-gradient(circle at 85% 90%,rgba(124,58,237,.20),transparent 34%),
-        #030713;
-    }
-    .login-card {
-      width:min(460px,100%); border:1px solid #225681; border-radius:24px;
-      padding:26px; background:linear-gradient(145deg,rgba(13,27,49,.98),rgba(6,18,33,.98));
-      box-shadow:0 30px 90px rgba(0,0,0,.55); position:relative; overflow:hidden;
-    }
-    .login-card::before {
-      content:""; position:absolute; inset:0 auto auto 0; width:100%; height:4px;
-      background:linear-gradient(90deg,var(--cyan),var(--blue),var(--purple));
-    }
-    .login-brand { display:flex; gap:14px; align-items:center; margin-bottom:20px; }
-    .login-logo {
-      width:58px; height:58px; border-radius:17px; display:grid; place-items:center;
-      font-size:1.65rem; font-weight:950; background:linear-gradient(135deg,#0ea5e9,#22d3ee);
-      color:#03111f; box-shadow:0 12px 30px rgba(34,211,238,.22);
-    }
-    .login-title { margin:0 0 3px; font-size:1.4rem; }
-    .login-sub { margin:0; color:var(--muted); font-size:.9rem; line-height:1.45; }
-    .login-field { margin-top:14px; }
-    .login-field label { margin-bottom:7px; }
-    .password-wrap { position:relative; }
-    .password-wrap input { padding-right:54px; }
-    .password-toggle {
-      position:absolute; top:50%; right:7px; transform:translateY(-50%);
-      width:39px; height:36px; padding:0; border-radius:10px; background:#132a45;
-    }
-    .login-actions { display:grid; grid-template-columns:1fr; gap:10px; margin-top:17px; }
-    .login-primary {
-      min-height:48px; background:linear-gradient(90deg,#2563eb,#0891b2); font-size:1rem;
-    }
-    .login-message {
-      min-height:22px; margin-top:12px; color:#fbbf24; font-size:.86rem; text-align:center;
-    }
-    .login-security {
-      margin-top:18px; padding:11px 12px; border-radius:12px; background:#082a25;
-      border:1px solid #0f766e; color:#a7f3d0; font-size:.78rem; line-height:1.45;
-    }
-    #logoutPanelBtn {
-      position:fixed; right:18px; top:18px; z-index:110;
-      display:none; background:#7f1d1d; border:1px solid #ef4444;
-      box-shadow:0 10px 30px rgba(0,0,0,.3);
-    }
-    body.panel-unlocked #logoutPanelBtn { display:block; }
-    @media (max-width:580px) {
-      #logoutPanelBtn { right:10px; top:10px; padding:9px 11px; font-size:.78rem; }
-      .login-card { padding:22px 18px; border-radius:19px; }
-    }
-
   </style>
 </head>
-<body class="panel-locked">
-
-<div id="loginGate" aria-modal="true" role="dialog" aria-labelledby="loginTitle">
-  <div class="login-card">
-    <div class="login-brand">
-      <div class="login-logo">CN</div>
-      <div>
-        <h1 id="loginTitle" class="login-title">Acceso administrativo</h1>
-        <p class="login-sub">CoordiNext PRO AA v10.5 Enterprise · Panel protegido</p>
-      </div>
-    </div>
-
-    <div class="login-field">
-      <label for="panelPassword">Contraseña del panel</label>
-      <div class="password-wrap">
-        <input id="panelPassword" type="password" autocomplete="current-password" placeholder="Ingrese la contraseña" maxlength="80">
-        <button id="togglePanelPassword" class="password-toggle" type="button" aria-label="Mostrar contraseña">👁</button>
-      </div>
-    </div>
-
-    <div class="login-actions">
-      <button id="panelLoginBtn" class="login-primary" type="button">🔐 Ingresar al panel</button>
-    </div>
-    <div id="panelLoginMessage" class="login-message"></div>
-    <div class="login-security">
-      Protección PBKDF2-HMAC-SHA256, máximo 5 intentos y bloqueo temporal. La sesión se cierra automáticamente después de 20 minutos sin actividad.
-    </div>
-  </div>
-</div>
-<button id="logoutPanelBtn" type="button" onclick="lockPanel(true)">🔒 Cerrar panel</button>
-
+<body>
 <div class="shell">
   <header>
     <div>
-      <h1>CoordiNext PRO AA v10.5.0 Enterprise · Panel de Control</h1>
+      <h1>CoordiNext PRO AA v10.5.8 Enterprise · Panel de Control</h1>
       <p class="sub">Usuarios, contraseñas, soporte remoto y bloqueo de computadoras mediante GitHub.</p>
     </div>
     <div id="status" class="status">Sin conectar</div>
@@ -283,15 +193,15 @@
         </div>
         <div class="field"><label>Modo de autorización</label>
           <select id="mode" onchange="syncFromForm()">
+            <option value="lista" selected>Lista: solo PC autorizadas</option>
             <option value="abierto">Abierto: permite todas las PC</option>
-            <option value="lista">Lista: solo PC autorizadas</option>
           </select>
         </div>
         <div class="field"><label>Versión mínima</label><input id="minVersion" value="9.6.5" onchange="syncFromForm()"></div>
         <div class="field"><label>Revisión rápida (segundos)</label><input id="interval" type="number" min="3" max="60" value="5" onchange="syncFromForm()"></div>
-        <div class="field"><label>Tolerancia sin Internet (horas)</label><input id="offlineHours" type="number" min="0" max="720" value="24" onchange="syncFromForm()"></div>
+        <div class="field"><label>Tolerancia sin Internet (horas)</label><input id="offlineHours" type="number" min="0" max="720" value="2" onchange="syncFromForm()"></div>
         <div class="field full switchline">
-          <input id="blockOffline" type="checkbox" onchange="syncFromForm()">
+          <input id="blockOffline" type="checkbox" checked onchange="syncFromForm()">
           <label for="blockOffline" style="margin:0">Bloquear cuando venza la copia local y no haya Internet</label>
         </div>
         <div class="field full"><label>Mensaje global</label><textarea id="globalMessage" onchange="syncFromForm()">Sistema operativo.</textarea></div>
@@ -315,8 +225,7 @@
       </div>
       <div class="notice" id="lastUpdate">Todavía no se cargó una configuración remota.</div>
       <p class="note" style="margin-top:12px">
-        Primero registre las computadoras y usuarios. Después puede cambiar el modo a <b>Lista</b>.
-        Un usuario puede limitarse a determinadas PC.
+        Mantenga el modo <b>Lista</b>. En cada usuario puede colocar, en el mismo campo, el código <b>CN</b> de la PC o el código individual <b>CU</b>. Un bloqueo CU siempre tiene prioridad.
       </p>
     </section>
 
@@ -335,7 +244,7 @@
         </div>
         <div class="field"><label>Contraseña inicial</label><input id="newPassword" type="password" autocomplete="new-password" placeholder="Mínimo 4 caracteres"></div>
         <div class="field"><label>Vence (opcional)</label><input id="newUserExpiry" type="date"></div>
-        <div class="field wide"><label>PC permitidas (opcional)</label><input id="newUserPcs" placeholder="CN-AAAA-BBBB-CCCC-DDDD, CN-1111-2222-3333-4444"></div>
+        <div class="field wide"><label>Códigos permitidos CN o CU (opcional)</label><input id="newUserPcs" placeholder="CN-AAAA-BBBB-CCCC-DDDD o CU-1111-2222-3333-4444"></div>
         <div class="field"><label>&nbsp;</label><button class="purple" style="width:100%" onclick="addUser()">Crear usuario</button></div>
       </div>
       <div class="notice secure-note">
@@ -404,8 +313,8 @@
         <summary>Cómo usar usuarios remotos</summary>
         <ol class="note">
           <li>Cree el usuario y una contraseña fuerte.</li>
-          <li>Opcionalmente asigne una o varias PC al usuario.</li>
-          <li>Agregue esas PC en Equipos autorizados y use el modo Lista.</li>
+          <li>En el mismo campo asigne uno o varios códigos CN o CU al usuario.</li>
+          <li>Si usa CN, agregue también esa PC en Equipos autorizados y use el modo Lista.</li>
           <li>Pulse Guardar y publicar.</li>
           <li>El usuario podrá entrar con sus credenciales desde la aplicación.</li>
           <li>Para expulsarlo, desactive el usuario o bloquee su PC y publique.</li>
@@ -444,19 +353,22 @@ let passwordResetIndex = -1;
 
 function defaultState() {
   return {
-    schema: 4,
+    schema: 6,
     sistema_activo: true,
-    modo_autorizacion: 'abierto',
+    modo_autorizacion: 'lista',
+    modo_acceso_usuario: 'lista',
     mensaje_global: 'Sistema operativo.',
     version_minima: '9.6.5',
     intervalo_minutos: 1,
     intervalo_segundos: 5,
-    tolerancia_sin_internet_horas: 24,
-    bloquear_sin_internet: false,
+    tolerancia_sin_internet_horas: 2,
+    bloquear_sin_internet: true,
     actualizado_en: new Date().toISOString().replace('T',' ').slice(0,19),
     usuarios: [],
     equipos_autorizados: [],
     equipos_bloqueados: [],
+    accesos_usuario_autorizados: [],
+    accesos_usuario_bloqueados: [],
     acciones_soporte: []
   };
 }
@@ -467,6 +379,75 @@ function normalizeId(value) {
 
 function normalizeUsername(value) {
   return String(value || '').trim().toLowerCase().replace(/\s+/g, '');
+}
+
+async function generateUserPcControlCode(username, pcId) {
+  const user = normalizeUsername(username);
+  const pc = normalizeId(pcId);
+  if (!user || !pc) throw new Error('Usuario o PC incompletos.');
+  const seed = `COORDINEXT-PRO-AA|USUARIO-PC|V1|${user}|${pc}`;
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(seed));
+  const hex = Array.from(new Uint8Array(digest))
+    .map(value => value.toString(16).padStart(2, '0'))
+    .join('').toUpperCase().slice(0, 16);
+  return `CU-${hex.slice(0,4)}-${hex.slice(4,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}`;
+}
+
+function isDirectCuCode(value) {
+  return normalizeId(value).startsWith('CU-');
+}
+
+function requiresExplicitUserPcApproval() {
+  const value = state.requerir_aprobacion_usuario_pc;
+  if (typeof value === 'boolean') return value;
+  return ['1','true','si','sí','yes','on','estricto','strict']
+    .includes(String(value || '').trim().toLowerCase());
+}
+
+async function resolveUserIdentifier(user, identifierIndex) {
+  const identifier = normalizeId(user?.equipos?.[identifierIndex]);
+  if (!user || !identifier) return null;
+  if (isDirectCuCode(identifier)) {
+    return {identifier, code:identifier, pcId:'', source:'CU'};
+  }
+  return {
+    identifier,
+    code:await generateUserPcControlCode(user.usuario, identifier),
+    pcId:identifier,
+    source:'CN'
+  };
+}
+
+function accessBlockByCode(code) {
+  const normalized = normalizeId(code);
+  return (state.accesos_usuario_bloqueados || []).find(item => normalizeId(item.codigo) === normalized) || null;
+}
+
+function accessAuthorizationByCode(code) {
+  const normalized = normalizeId(code);
+  return (state.accesos_usuario_autorizados || []).find(item => normalizeId(item.codigo) === normalized) || null;
+}
+
+async function migrateLegacyUserPcAuthorizations(rawValue) {
+  const raw = rawValue && typeof rawValue === 'object' ? rawValue : {};
+  if (Object.prototype.hasOwnProperty.call(raw, 'accesos_usuario_autorizados')) return false;
+  const migrated = [];
+  for (const user of state.usuarios || []) {
+    for (const pcId of user.equipos || []) {
+      if (isDirectCuCode(pcId)) continue;
+      const code = await generateUserPcControlCode(user.usuario, pcId);
+      if (migrated.some(item => normalizeId(item.codigo) === code)) continue;
+      migrated.push({
+        codigo:code, usuario:user.usuario, equipo_id:normalizeId(pcId),
+        nombre:user.nombre || '', activo:true, vence:'',
+        mensaje:'Migrado automáticamente desde una asignación existente.',
+        autorizado_en:new Date().toISOString().replace('T',' ').slice(0,19)
+      });
+    }
+  }
+  state.accesos_usuario_autorizados = migrated;
+  state.modo_acceso_usuario = 'lista';
+  return migrated.length > 0;
 }
 
 function escapeHtml(value) {
@@ -495,10 +476,12 @@ function normalizeState(value) {
   const base = defaultState();
   const data = value && typeof value === 'object' ? value : {};
   const result = {...base, ...data};
-  result.schema = Math.max(3, Number(result.schema || 3));
+  result.schema = Math.max(6, Number(result.schema || 6));
   result.sistema_activo = result.sistema_activo !== false;
   result.modo_autorizacion =
-    String(result.modo_autorizacion || 'abierto').toLowerCase() === 'lista' ? 'lista' : 'abierto';
+    String(result.modo_autorizacion || 'lista').toLowerCase() === 'abierto' ? 'abierto' : 'lista';
+  result.modo_acceso_usuario =
+    String(result.modo_acceso_usuario || 'lista').toLowerCase() === 'abierto' ? 'abierto' : 'lista';
 
   // Compatibilidad: un JSON antiguo puede traer solo intervalo_minutos.
   const secondsFromOldFile = Number(result.intervalo_minutos || 1) * 60;
@@ -537,6 +520,36 @@ function normalizeState(value) {
           mensaje:String(item?.mensaje || '')
         };
       }).filter(item => item.id)
+    : [];
+
+  result.accesos_usuario_autorizados = Array.isArray(result.accesos_usuario_autorizados)
+    ? result.accesos_usuario_autorizados.map(item => {
+        if (typeof item === 'string') return {codigo:normalizeId(item), usuario:'', equipo_id:'', nombre:'', activo:true, vence:'', mensaje:''};
+        return {
+          codigo:normalizeId(item?.codigo || item?.id || item?.codigo_control),
+          usuario:normalizeUsername(item?.usuario),
+          equipo_id:normalizeId(item?.equipo_id || item?.pc),
+          nombre:String(item?.nombre || ''),
+          activo:item?.activo !== false,
+          vence:String(item?.vence || ''),
+          mensaje:String(item?.mensaje || ''),
+          autorizado_en:String(item?.autorizado_en || '')
+        };
+      }).filter(item => item.codigo)
+    : [];
+
+  result.accesos_usuario_bloqueados = Array.isArray(result.accesos_usuario_bloqueados)
+    ? result.accesos_usuario_bloqueados.map(item => {
+        if (typeof item === 'string') return {codigo:normalizeId(item), usuario:'', equipo_id:'', mensaje:''};
+        return {
+          codigo:normalizeId(item?.codigo || item?.id || item?.codigo_control),
+          usuario:normalizeUsername(item?.usuario),
+          equipo_id:normalizeId(item?.equipo_id || item?.pc),
+          nombre:String(item?.nombre || ''),
+          mensaje:String(item?.mensaje || ''),
+          bloqueado_en:String(item?.bloqueado_en || '')
+        };
+      }).filter(item => item.codigo)
     : [];
 
   result.acciones_soporte = Array.isArray(result.acciones_soporte)
@@ -645,8 +658,11 @@ async function loadRemote() {
     if (!response.ok) throw new Error(await readError(response));
     const payload = await response.json();
     currentSha = payload.sha || '';
-    state = normalizeState(JSON.parse(decodeUtf8Base64(payload.content)));
+    const rawControl = JSON.parse(decodeUtf8Base64(payload.content));
+    state = normalizeState(rawControl);
+    const migrated = await migrateLegacyUserPcAuthorizations(rawControl);
     render();
+    if (migrated) toast('Control antiguo migrado al modo seguro. Pulse Guardar y publicar.');
     saveConnection();
     setStatus('Conectado','ok');
     document.getElementById('lastUpdate').textContent =
@@ -760,7 +776,7 @@ function switchToList() {
 
 function passwordIsValid(value) {
   const p = String(value || '');
-  return p.length >= 4 && p === p.trim();
+  return p.length >= 8 && p === p.trim();
 }
 
 async function createPasswordRecord(password) {
@@ -794,7 +810,7 @@ async function addUser() {
   }
   if (state.usuarios.some(item => item.usuario === usuario)) return toast('Ese usuario ya existe.',true);
   if (!passwordIsValid(password)) {
-    return toast('La contraseña debe tener mínimo 4 caracteres y no puede comenzar ni terminar con espacios.',true);
+    return toast('La contraseña debe tener mínimo 8 caracteres y no puede comenzar ni terminar con espacios.',true);
   }
 
   try {
@@ -840,7 +856,11 @@ function toggleUser(index) {
 function deleteUser(index) {
   const user = state.usuarios[index];
   if (!user || !confirm(`¿Eliminar al usuario ${user.usuario}?`)) return;
-  state.usuarios.splice(index,1); render(); toast('Usuario eliminado. Publique para aplicar.');
+  state.accesos_usuario_autorizados = (state.accesos_usuario_autorizados || [])
+    .filter(item => normalizeUsername(item.usuario) !== normalizeUsername(user.usuario));
+  state.accesos_usuario_bloqueados = (state.accesos_usuario_bloqueados || [])
+    .filter(item => normalizeUsername(item.usuario) !== normalizeUsername(user.usuario));
+  state.usuarios.splice(index,1); render(); toast('Usuario y permisos usuario-PC eliminados. Publique para aplicar.');
 }
 
 function openPasswordDialog(index) {
@@ -856,7 +876,7 @@ function closePasswordDialog() {
 }
 async function confirmPasswordReset() {
   const password = document.getElementById('resetPassword').value;
-  if (!passwordIsValid(password)) return toast('La contraseña debe tener mínimo 4 caracteres y no puede comenzar ni terminar con espacios.',true);
+  if (!passwordIsValid(password)) return toast('La contraseña debe tener mínimo 8 caracteres y no puede comenzar ni terminar con espacios.',true);
   const user = state.usuarios[passwordResetIndex];
   if (!user) return closePasswordDialog();
   try {
@@ -1047,6 +1067,168 @@ function renderSupport() {
     </div>`).join('');
 }
 
+async function renderUserPcCodes() {
+  for (let userIndex = 0; userIndex < state.usuarios.length; userIndex += 1) {
+    const user = state.usuarios[userIndex];
+    const target = document.getElementById(`u-codes-${userIndex}`);
+    if (!target) continue;
+
+    const identifiers = Array.isArray(user.equipos) ? user.equipos : [];
+    if (!identifiers.length) {
+      target.innerHTML = '<span class="note">Sin códigos permitidos: agregue el CN de la PC o el CU individual.</span>';
+      continue;
+    }
+
+    const strict = requiresExplicitUserPcApproval();
+    const lines = [];
+    for (let identifierIndex = 0; identifierIndex < identifiers.length; identifierIndex += 1) {
+      const access = await resolveUserIdentifier(user, identifierIndex);
+      if (!access) continue;
+      const {identifier, code, source} = access;
+      const block = accessBlockByCode(code);
+      const authorization = accessAuthorizationByCode(code);
+      const authorizedExplicitly = Boolean(authorization) && !block;
+      const allowedByList = !strict && !block;
+      const status = block
+        ? 'BLOQUEADO'
+        : (authorizedExplicitly ? 'AUTORIZADO' : (allowedByList ? `PERMITIDO POR ${source}` : 'PENDIENTE'));
+      const icon = block ? '⛔' : ((authorizedExplicitly || allowedByList) ? '🟢' : '🟡');
+      const detail = block
+        ? (block.mensaje || 'Bloqueado por el propietario.')
+        : (authorizedExplicitly
+          ? (authorization.mensaje || 'Aprobado por el propietario.')
+          : (allowedByList
+            ? 'Acceso permitido directamente por el código escrito en este mismo campo.'
+            : 'Modo estricto: pulse Autorizar para permitir el acceso.'));
+
+      let mainAction = '';
+      if (block) {
+        mainAction = `<button class="success" onclick="unblockUserPc(${userIndex},${identifierIndex})">Quitar bloqueo</button>`;
+      } else if (strict && authorizedExplicitly) {
+        mainAction = `<button class="warning" onclick="revokeUserPc(${userIndex},${identifierIndex})">Revocar</button>`;
+      } else if (strict) {
+        mainAction = `<button class="success" onclick="authorizeUserPc(${userIndex},${identifierIndex})">Autorizar</button>`;
+      }
+      const blockAction = block
+        ? ''
+        : `<button class="danger" onclick="blockUserPc(${userIndex},${identifierIndex})">Bloquear</button>`;
+
+      lines.push(`
+        <div class="notice" style="margin-top:6px;padding:9px 10px">
+          <b>${icon} ${status}</b> · ${escapeHtml(identifier)}<br>
+          <code>${escapeHtml(code)}</code><br>
+          <small>${escapeHtml(detail)}</small>
+          <div class="btns" style="margin-top:7px">
+            <button class="secondary" onclick="copyUserPcCode(${userIndex},${identifierIndex})">Copiar CU</button>
+            ${mainAction}
+            ${blockAction}
+          </div>
+        </div>`);
+    }
+    target.innerHTML = lines.join('');
+  }
+}
+
+async function copyUserPcCode(userIndex, identifierIndex) {
+  const user = state.usuarios[userIndex];
+  const access = await resolveUserIdentifier(user, identifierIndex);
+  if (!access) return;
+  await navigator.clipboard.writeText(access.code);
+  toast(`Código copiado: ${access.code}`);
+}
+
+function removeAccessByCode(list, code) {
+  return (list || []).filter(item => normalizeId(item.codigo || item.id || item.codigo_control) !== normalizeId(code));
+}
+
+async function authorizeUserPc(userIndex, identifierIndex) {
+  const user = state.usuarios[userIndex];
+  const access = await resolveUserIdentifier(user, identifierIndex);
+  if (!user || !access) return;
+  const {identifier, code, pcId} = access;
+  if (!confirm(`¿Autorizar a ${user.usuario}?\n\nReferencia: ${identifier}\nCódigo: ${code}`)) return;
+
+  state.modo_acceso_usuario = 'lista';
+  state.accesos_usuario_bloqueados = removeAccessByCode(state.accesos_usuario_bloqueados, code);
+  state.accesos_usuario_autorizados = removeAccessByCode(state.accesos_usuario_autorizados, code);
+  state.accesos_usuario_autorizados.push({
+    codigo:code,
+    usuario:user.usuario,
+    equipo_id:pcId,
+    nombre:user.nombre || '',
+    activo:true,
+    vence:'',
+    mensaje:'Aprobado por el propietario.',
+    autorizado_en:new Date().toISOString().replace('T',' ').slice(0,19)
+  });
+  render();
+  setStatus('Publicando autorización individual…','busy');
+  await saveRemote({
+    commitMessage:`AUTORIZA USUARIO-PC ${code}`,
+    successMessage:`Acceso ${code} autorizado por el propietario.`
+  });
+}
+
+async function revokeUserPc(userIndex, identifierIndex) {
+  const user = state.usuarios[userIndex];
+  const access = await resolveUserIdentifier(user, identifierIndex);
+  if (!user || !access) return;
+  const {code} = access;
+  if (!confirm(`¿Revocar el permiso ${code}?\n\nEl acceso quedará pendiente en modo estricto.`)) return;
+  state.accesos_usuario_autorizados = removeAccessByCode(state.accesos_usuario_autorizados, code);
+  render();
+  setStatus('Publicando revocación individual…','busy');
+  await saveRemote({
+    commitMessage:`REVOCA USUARIO-PC ${code}`,
+    successMessage:`Permiso ${code} revocado.`
+  });
+}
+
+async function blockUserPc(userIndex, identifierIndex) {
+  const user = state.usuarios[userIndex];
+  const access = await resolveUserIdentifier(user, identifierIndex);
+  if (!user || !access) return;
+  const {identifier, code, pcId} = access;
+  const reason = prompt(
+    `Motivo para bloquear únicamente a ${user.usuario} (${identifier}):`,
+    'Acceso de usuario bloqueado por el propietario.'
+  );
+  if (reason === null) return;
+  if (!confirm(`¿Bloquear y publicar el acceso ${code}?\n\nLos demás usuarios de la PC continuarán funcionando.`)) return;
+
+  state.accesos_usuario_autorizados = removeAccessByCode(state.accesos_usuario_autorizados, code);
+  state.accesos_usuario_bloqueados = removeAccessByCode(state.accesos_usuario_bloqueados, code);
+  state.accesos_usuario_bloqueados.push({
+    codigo:code,
+    usuario:user.usuario,
+    equipo_id:pcId,
+    nombre:user.nombre || '',
+    mensaje:reason.trim() || 'Acceso de usuario bloqueado por el propietario.',
+    bloqueado_en:new Date().toISOString().replace('T',' ').slice(0,19)
+  });
+  render();
+  setStatus('Publicando bloqueo individual…','busy');
+  await saveRemote({
+    commitMessage:`BLOQUEO USUARIO-PC ${code}`,
+    successMessage:`Acceso ${code} bloqueado. Solo ${user.usuario} cerrará sesión.`
+  });
+}
+
+async function unblockUserPc(userIndex, identifierIndex) {
+  const user = state.usuarios[userIndex];
+  const access = await resolveUserIdentifier(user, identifierIndex);
+  if (!user || !access) return;
+  const {code} = access;
+  if (!confirm(`¿Quitar el bloqueo ${code}?`)) return;
+  state.accesos_usuario_bloqueados = removeAccessByCode(state.accesos_usuario_bloqueados, code);
+  render();
+  setStatus('Publicando retiro del bloqueo…','busy');
+  await saveRemote({
+    commitMessage:`QUITA BLOQUEO USUARIO-PC ${code}`,
+    successMessage:`Bloqueo ${code} retirado.`
+  });
+}
+
 function renderUsers() {
   const box=document.getElementById('userList');
   if (!state.usuarios.length) {
@@ -1062,7 +1244,8 @@ function renderUsers() {
         ${['operador','supervisor','consulta','administrador'].map(r=>`<option value="${r}" ${u.rol===r?'selected':''}>${r}</option>`).join('')}
       </select></div>
       <div class="mini"><label>Vence</label><input id="u-exp-${i}" type="date" value="${escapeHtml(u.vence)}"></div>
-      <div class="mini"><label>PC permitidas; vacío = cualquiera</label><input id="u-pcs-${i}" value="${escapeHtml((u.equipos||[]).join(', '))}"></div>
+      <div class="mini"><label>Códigos permitidos CN o CU; vacío = acceso denegado</label><input id="u-pcs-${i}" value="${escapeHtml((u.equipos||[]).join(', '))}"></div>
+      <div class="mini wide"><label>Control individual CN/CU</label><div id="u-codes-${i}"><span class="note">Calculando códigos…</span></div></div>
       <div class="btns">
         <button class="secondary" onclick="updateUser(${i})">Guardar</button>
         <button class="${u.activo?'warning':'success'}" onclick="toggleUser(${i})">${u.activo?'Desactivar':'Activar'}</button>
@@ -1070,6 +1253,7 @@ function renderUsers() {
         <button class="danger" onclick="deleteUser(${i})">Eliminar</button>
       </div>
     </div>`).join('');
+  renderUserPcCodes().catch(error => console.error('No se pudieron renderizar códigos usuario-PC', error));
 }
 
 function renderAuthorized() {
@@ -1111,7 +1295,7 @@ function updateSummary() {
   document.getElementById('mMode').textContent=state.modo_autorizacion==='lista'?'Lista':'Abierto';
   document.getElementById('mUsers').textContent=state.usuarios.filter(u=>u.activo).length;
   document.getElementById('mAllowed').textContent=state.equipos_autorizados.filter(x=>x.activo).length;
-  document.getElementById('mBlocked').textContent=state.equipos_bloqueados.length;
+  document.getElementById('mBlocked').textContent=state.equipos_bloqueados.length + state.accesos_usuario_bloqueados.length;
   document.getElementById('mSupport').textContent=(state.acciones_soporte || []).length;
 }
 function updatePreview() {
@@ -1139,8 +1323,11 @@ async function importJson(event) {
   const file=event.target.files?.[0]; event.target.value='';
   if (!file) return;
   try {
-    state=normalizeState(JSON.parse(await file.text()));
-    currentSha=''; render(); toast('JSON importado. Revise y publique.');
+    const rawControl = JSON.parse(await file.text());
+    state=normalizeState(rawControl);
+    const migrated = await migrateLegacyUserPcAuthorizations(rawControl);
+    currentSha=''; render();
+    toast(migrated ? 'JSON importado y migrado al modo seguro. Revise y publique.' : 'JSON importado. Revise y publique.');
   } catch (error) { toast(`Archivo inválido: ${error.message}`,true); }
 }
 function toast(message,error=false) {
@@ -1149,162 +1336,8 @@ function toast(message,error=false) {
   clearTimeout(toast.timer); toast.timer=setTimeout(()=>el.className='toast',4800);
 }
 
-
-
-/* ===== Seguridad de acceso del panel v10.5 ===== */
-const PANEL_AUTH = {
-  saltB64: 'V/BCDEqK2m8jV4EwAXTwvg==',
-  hashB64: 'xknSCVCJRPiwDmoLwDW3NAP9HYyEFc/QqbF4IAGjfJc=',
-  iterations: 600000,
-  maxAttempts: 5,
-  lockSeconds: 60,
-  idleMinutes: 20
-};
-let panelAttempts = 0;
-let panelLockedUntil = 0;
-let panelIdleTimer = null;
-
-function b64ToBytes(value) {
-  const binary = atob(String(value || ''));
-  return Uint8Array.from(binary, ch => ch.charCodeAt(0));
-}
-
-function constantTimeEqual(a, b) {
-  if (!(a instanceof Uint8Array) || !(b instanceof Uint8Array) || a.length !== b.length) return false;
-  let diff = 0;
-  for (let i = 0; i < a.length; i++) diff |= a[i] ^ b[i];
-  return diff === 0;
-}
-
-async function derivePanelHash(password) {
-  if (!window.crypto?.subtle) throw new Error('Este navegador no permite verificación segura. Abra el panel mediante HTTPS.');
-  const key = await crypto.subtle.importKey(
-    'raw', new TextEncoder().encode(password), {name:'PBKDF2'}, false, ['deriveBits']
-  );
-  const bits = await crypto.subtle.deriveBits({
-    name:'PBKDF2', hash:'SHA-256', salt:b64ToBytes(PANEL_AUTH.saltB64), iterations:PANEL_AUTH.iterations
-  }, key, 256);
-  return new Uint8Array(bits);
-}
-
-function panelMessage(text, error=false) {
-  const el = document.getElementById('panelLoginMessage');
-  if (!el) return;
-  el.textContent = text || '';
-  el.style.color = error ? '#fca5a5' : '#fbbf24';
-}
-
-function remainingLockSeconds() {
-  return Math.max(0, Math.ceil((panelLockedUntil - Date.now()) / 1000));
-}
-
-function refreshPanelLockMessage() {
-  const seconds = remainingLockSeconds();
-  const btn = document.getElementById('panelLoginBtn');
-  if (seconds > 0) {
-    if (btn) btn.disabled = true;
-    panelMessage(`Demasiados intentos. Espere ${seconds} segundos.`, true);
-    setTimeout(refreshPanelLockMessage, 1000);
-  } else {
-    if (btn) btn.disabled = false;
-    if (panelAttempts >= PANEL_AUTH.maxAttempts) panelAttempts = 0;
-    panelMessage('');
-  }
-}
-
-function resetPanelIdleTimer() {
-  if (!document.body.classList.contains('panel-unlocked')) return;
-  clearTimeout(panelIdleTimer);
-  panelIdleTimer = setTimeout(() => lockPanel(false), PANEL_AUTH.idleMinutes * 60 * 1000);
-}
-
-function unlockPanel() {
-  sessionStorage.setItem('coordi_panel_unlocked', String(Date.now()));
-  document.body.classList.remove('panel-locked');
-  document.body.classList.add('panel-unlocked');
-  const password = document.getElementById('panelPassword');
-  if (password) password.value = '';
-  panelAttempts = 0;
-  panelMessage('Acceso autorizado.');
-  resetPanelIdleTimer();
-}
-
-function lockPanel(manual=false) {
-  sessionStorage.removeItem('coordi_panel_unlocked');
-  clearTimeout(panelIdleTimer);
-  document.body.classList.remove('panel-unlocked');
-  document.body.classList.add('panel-locked');
-  const password = document.getElementById('panelPassword');
-  if (password) {
-    password.value = '';
-    setTimeout(() => password.focus(), 80);
-  }
-  panelMessage(manual ? 'Panel cerrado correctamente.' : 'Sesión cerrada por inactividad.');
-}
-
-async function tryPanelLogin() {
-  const now = Date.now();
-  if (now < panelLockedUntil) return refreshPanelLockMessage();
-
-  const input = document.getElementById('panelPassword');
-  const btn = document.getElementById('panelLoginBtn');
-  const password = String(input?.value || '');
-  if (!password) return panelMessage('Ingrese la contraseña.', true);
-
-  try {
-    if (btn) { btn.disabled = true; btn.textContent = 'Verificando…'; }
-    const derived = await derivePanelHash(password);
-    const expected = b64ToBytes(PANEL_AUTH.hashB64);
-    if (constantTimeEqual(derived, expected)) {
-      unlockPanel();
-      return;
-    }
-
-    panelAttempts += 1;
-    const remaining = PANEL_AUTH.maxAttempts - panelAttempts;
-    if (panelAttempts >= PANEL_AUTH.maxAttempts) {
-      panelLockedUntil = Date.now() + PANEL_AUTH.lockSeconds * 1000;
-      if (input) input.value = '';
-      refreshPanelLockMessage();
-    } else {
-      panelMessage(`Contraseña incorrecta. Intentos restantes: ${remaining}.`, true);
-      if (input) { input.select(); input.focus(); }
-    }
-  } catch (error) {
-    panelMessage(error.message || 'No se pudo validar el acceso.', true);
-  } finally {
-    if (btn && remainingLockSeconds() === 0) {
-      btn.disabled = false;
-      btn.textContent = '🔐 Ingresar al panel';
-    }
-  }
-}
-
-function initializePanelSecurity() {
-  const unlockedAt = Number(sessionStorage.getItem('coordi_panel_unlocked') || 0);
-  const sessionAge = Date.now() - unlockedAt;
-  if (unlockedAt > 0 && sessionAge < PANEL_AUTH.idleMinutes * 60 * 1000) unlockPanel();
-  else lockPanel(false);
-
-  document.getElementById('panelLoginBtn')?.addEventListener('click', tryPanelLogin);
-  document.getElementById('panelPassword')?.addEventListener('keydown', event => {
-    if (event.key === 'Enter') tryPanelLogin();
-  });
-  document.getElementById('togglePanelPassword')?.addEventListener('click', () => {
-    const input = document.getElementById('panelPassword');
-    if (!input) return;
-    input.type = input.type === 'password' ? 'text' : 'password';
-  });
-
-  ['click','keydown','touchstart','mousemove','scroll'].forEach(name => {
-    document.addEventListener(name, resetPanelIdleTimer, {passive:true});
-  });
-}
-
-
 restoreConnection();
 render();
-initializePanelSecurity();
 </script>
 </body>
 </html>
