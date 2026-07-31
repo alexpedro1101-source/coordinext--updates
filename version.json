@@ -1,11 +1,11 @@
 {
-    "version": "10.5.0",
-    "fecha": "2026-07-28",
-    "archivo": "CoordiNextPROAA.exe",
-    "cambios": [
-        "Sistema de actualización por GitHub",
-        "Descarga de nueva versión desde repositorio público",
-        "Configuración de usuario, repositorio y rama",
-        "Mejoras de seguridad y control operativo"
-    ]
+  "version": "10.6.1",
+  "panel": "supabase",
+  "fecha": "2026-07-31",
+  "obligatoria": false,
+  "cambios": [
+    "Mismo panel web migrado a Supabase",
+    "Gestión completa de usuarios y PCs",
+    "Sin token GitHub para administración"
+  ]
 }

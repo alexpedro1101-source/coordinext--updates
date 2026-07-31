@@ -1,15 +1,14 @@
 {
-  "schema": 6,
+  "schema": 3,
   "sistema_activo": true,
   "modo_autorizacion": "abierto",
-  "modo_acceso_usuario": "lista",
   "mensaje_global": "Sistema operativo.",
   "version_minima": "9.6.5",
   "intervalo_minutos": 1,
   "intervalo_segundos": 5,
   "tolerancia_sin_internet_horas": 24,
   "bloquear_sin_internet": false,
-  "actualizado_en": "2026-07-31 17:14:58",
+  "actualizado_en": "2026-07-30 21:10:36",
   "usuarios": [
     {
       "id": "USR-13936527-9281-4ea4-b4ae-e54349bd9733",
@@ -64,22 +63,6 @@
         "hash": "tlMXCw+hO8Ex6aPWZ72qnhDC7jm7pDp0v0EG1p6geO0="
       },
       "actualizado_en": "2026-07-30 21:10:30"
-    },
-    {
-      "id": "USR-5f846a6d-b025-4dfd-b9c6-cb5315cfbb69",
-      "usuario": "adriel22",
-      "nombre": "alexander",
-      "rol": "administrador",
-      "activo": true,
-      "vence": "",
-      "equipos": [],
-      "password": {
-        "algoritmo": "pbkdf2_sha256",
-        "iteraciones": 600000,
-        "salt": "4DT6zmDtSIHTLCxujBQUfw==",
-        "hash": "M3rOYw2bBXrfNrSxR41MbUD+QG1zjppDQycpbo+3iuI="
-      },
-      "actualizado_en": "2026-07-31 17:14:47"
     }
   ],
   "equipos_autorizados": [
@@ -92,29 +75,6 @@
     }
   ],
   "equipos_bloqueados": [],
-  "accesos_usuario_autorizados": [
-    {
-      "codigo": "CU-DA9A-34C9-034E-9AFA",
-      "usuario": "alexpedro",
-      "equipo_id": "CN-928F-B3A7-40A7-16EF",
-      "nombre": "alexander pedro",
-      "activo": true,
-      "vence": "",
-      "mensaje": "Migrado automáticamente desde una asignación existente.",
-      "autorizado_en": "2026-07-31 17:07:34"
-    },
-    {
-      "codigo": "CU-35CC-F6A2-6BED-5EC7",
-      "usuario": "supervisor04",
-      "equipo_id": "CN-46C7-8305-8596-4291",
-      "nombre": "Victor cardenas",
-      "activo": true,
-      "vence": "",
-      "mensaje": "Migrado automáticamente desde una asignación existente.",
-      "autorizado_en": "2026-07-31 17:07:34"
-    }
-  ],
-  "accesos_usuario_bloqueados": [],
   "acciones_soporte": [
     {
       "id": "SUP-deb55830-a23d-4b61-962d-ccea025cb214",

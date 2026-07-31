@@ -1,0 +1,28 @@
+COORDINEXT PRO AA v10.6.1 - MISMO PANEL WEB, AHORA CON SUPABASE
+================================================================
+
+Este paquete conserva el diseño del panel web que ya utilizabas, pero elimina el manejo operativo por GitHub.
+Desde el panel se administran:
+- usuarios y contraseñas
+- roles y estado de cuentas
+- asignación de PCs CN/CU
+- equipos autorizados, pendientes y bloqueados
+- mensaje global y parámetros del sistema
+- soporte remoto
+- versiones y URL de actualización
+- directorios JSON y correos
+- auditoría
+
+CONFIGURACIÓN ÚNICA
+1. En Supabase > SQL Editor, ejecute: supabase/PANEL_WEB_SQL.sql
+2. Despliegue la función: supabase/functions/admin-users/index.ts con el nombre admin-users.
+   Puede hacerlo con Supabase CLI:
+     supabase functions deploy admin-users
+3. Suba el contenido de esta carpeta al mismo repositorio coordinext--updates.
+   GitHub Pages seguirá abriendo docs/index.html.
+
+IMPORTANTE
+- No se necesita token de GitHub en el navegador.
+- No publique SUPABASE_SERVICE_ROLE_KEY.
+- La página usa únicamente la clave pública publishable.
+- Para entrar, la cuenta debe tener rol admin y activo=true en public.perfiles.

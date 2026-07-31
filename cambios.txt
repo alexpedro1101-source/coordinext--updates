@@ -1,6 +1,6 @@
-CoordiNext PRO AA v9.2
-
-- Sistema de actualización por GitHub.
-- Descarga de nueva versión desde repositorio público.
-- Configuración de usuario, repositorio y rama desde la app.
-- Mejoras de seguridad y control operativo.
+CoordiNext PRO AA v10.6.1 - Panel Web Supabase
+- Se conserva el mismo panel web y diseño Enterprise.
+- Se elimina el token de GitHub del manejo operativo.
+- Usuarios completos desde el panel: Auth, perfil, rol, PC y contraseña.
+- Equipos, bloqueos, soporte, configuración, versiones y directorios en Supabase.
+- Auditoría centralizada.
