@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#061221">
-  <title>CoordiNext PRO AA v10.5.8 Enterprise · Panel de Control</title>
+  <title>CoordiNext PRO AA v10.6.1 Enterprise · Panel de Control</title>
   <style>
     :root {
       color-scheme: dark;
@@ -20,7 +20,7 @@
       min-height:100vh;
     }
     button,input,select,textarea { font:inherit; }
-    .shell { width:min(1240px,100%); margin:auto; padding:18px; }
+    .shell { width:min(1320px,100%); margin:auto; padding:18px; }
     header {
       display:flex; gap:16px; align-items:center; justify-content:space-between;
       background:linear-gradient(135deg,var(--panel2),var(--panel));
@@ -32,7 +32,7 @@
     h2 { display:flex; align-items:center; gap:9px; }
     .sub { color:var(--muted); margin:0; }
     .status {
-      min-width:150px; text-align:center; padding:10px 14px; border-radius:999px;
+      min-width:165px; text-align:center; padding:10px 14px; border-radius:999px;
       background:#112842; border:1px solid var(--line); font-weight:800;
     }
     .status.ok { color:#6ee7b7; border-color:#047857; }
@@ -44,9 +44,11 @@
       border-radius:20px; padding:18px; box-shadow:var(--shadow);
     }
     .half { grid-column:span 6; }
+    .third { grid-column:span 4; }
     .row { display:grid; grid-template-columns:repeat(12,1fr); gap:12px; }
     .field { grid-column:span 4; }
     .field.wide { grid-column:span 8; }
+    .field.half { grid-column:span 6; }
     .field.full { grid-column:span 12; }
     label { display:block; color:#cbd5e1; font-size:.82rem; font-weight:800; margin:0 0 6px; }
     input,select,textarea {
@@ -70,17 +72,21 @@
     .warning { background:var(--gold); color:#151515; }
     .purple { background:var(--purple); }
     .ghost { background:transparent; border:1px solid #315574; }
-    .cards { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin-top:12px; }
+    .cards { display:grid; grid-template-columns:repeat(8,1fr); gap:10px; margin-top:12px; }
     .metric { padding:14px; background:var(--card); border:1px solid var(--line); border-radius:15px; }
     .metric small { color:var(--muted); display:block; }
-    .metric strong { display:block; font-size:1.45rem; margin-top:4px; }
+    .metric strong { display:block; font-size:1.35rem; margin-top:4px; }
     .list { display:grid; gap:10px; margin-top:12px; }
     .item {
       display:grid; gap:10px; align-items:end; background:var(--card);
       border:1px solid var(--line); padding:12px; border-radius:15px;
     }
-    .device { grid-template-columns:1.15fr 1fr .72fr 1.2fr auto; }
-    .user { grid-template-columns:1fr 1.1fr .75fr .75fr 1.35fr auto; }
+    .user { grid-template-columns:1fr 1.2fr .75fr .65fr 1.25fr auto; }
+    .device { grid-template-columns:1.05fr 1fr .72fr .85fr 1.2fr auto; }
+    .support { grid-template-columns:1fr .95fr 1.4fr .8fr auto; }
+    .version { grid-template-columns:.75fr .75fr 1.45fr .7fr auto; }
+    .directory { grid-template-columns:1fr .7fr 1.2fr .8fr auto; }
+    .audit { grid-template-columns:.9fr 1fr 1.7fr; align-items:start; }
     .mini label { font-size:.70rem; }
     .btns { display:flex; gap:6px; align-self:center; flex-wrap:wrap; }
     .btns button { padding:9px 10px; }
@@ -109,33 +115,32 @@
     }
     .badge.on { color:#6ee7b7; border-color:#047857; }
     .badge.off { color:#fca5a5; border-color:#991b1b; }
+    .badge.pending { color:#fde68a; border-color:#a16207; }
     .toast {
-      position:fixed; right:18px; bottom:18px; max-width:440px; padding:14px 16px;
+      position:fixed; right:18px; bottom:18px; max-width:460px; padding:14px 16px;
       border-radius:14px; background:#10243c; border:1px solid #315574;
       box-shadow:var(--shadow); display:none; z-index:50;
     }
     .toast.show { display:block; }
     .toast.error { border-color:#991b1b; background:#351416; }
-    dialog {
-      width:min(520px,calc(100% - 24px)); color:var(--text); background:var(--panel);
-      border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); padding:20px;
-    }
-    dialog::backdrop { background:rgba(0,0,0,.72); backdrop-filter:blur(3px); }
-    @media (max-width:1020px) {
-      .half { grid-column:span 12; }
-      .field,.field.wide { grid-column:span 6; }
-      .cards { grid-template-columns:repeat(3,1fr); }
-      .device,.user { grid-template-columns:1fr 1fr; }
+    .hidden { display:none !important; }
+    .loading { opacity:.6; pointer-events:none; }
+    code { color:#67e8f9; }
+    @media (max-width:1080px) {
+      .half,.third { grid-column:span 12; }
+      .field,.field.wide,.field.half { grid-column:span 6; }
+      .cards { grid-template-columns:repeat(4,1fr); }
+      .user,.device,.support,.version,.directory { grid-template-columns:1fr 1fr; }
       .btns { grid-column:span 2; }
     }
-    @media (max-width:580px) {
+    @media (max-width:620px) {
       .shell { padding:10px; }
       header { position:static; align-items:flex-start; flex-direction:column; border-radius:16px; }
       .status { width:100%; }
       .panel { padding:14px; border-radius:16px; }
-      .field,.field.wide,.field.full { grid-column:span 12; }
+      .field,.field.wide,.field.half,.field.full { grid-column:span 12; }
       .cards { grid-template-columns:1fr 1fr; }
-      .device,.user { grid-template-columns:1fr; }
+      .user,.device,.support,.version,.directory,.audit { grid-template-columns:1fr; }
       .btns { grid-column:span 1; }
       .actions button { flex:1 1 145px; }
     }
@@ -145,1199 +150,405 @@
 <div class="shell">
   <header>
     <div>
-      <h1>CoordiNext PRO AA v10.5.8 Enterprise · Panel de Control</h1>
-      <p class="sub">Usuarios, contraseñas, soporte remoto y bloqueo de computadoras mediante GitHub.</p>
+      <h1>CoordiNext PRO AA v10.6.1 Enterprise · Panel de Control</h1>
+      <p class="sub">Administración completa desde este panel. Supabase trabaja detrás; no se usa token de GitHub.</p>
     </div>
     <div id="status" class="status">Sin conectar</div>
   </header>
 
   <div class="grid">
-    <section class="panel">
-      <h2>1. Conexión con GitHub</h2>
+    <section class="panel" id="loginPanel">
+      <h2>1. Acceso administrativo</h2>
       <div class="row">
-        <div class="field"><label>Propietario</label><input id="owner" value="alexpedro1101-source"></div>
-        <div class="field"><label>Repositorio</label><input id="repo" value="coordinext--updates"></div>
-        <div class="field"><label>Rama</label><input id="branch" value="main"></div>
-        <div class="field wide"><label>Ruta del archivo de control</label><input id="path" value="control_github.json"></div>
-        <div class="field"><label>Token GitHub (solo administrador)</label><input id="token" type="password" autocomplete="off" placeholder="github_pat_..."></div>
+        <div class="field wide"><label>URL de Supabase</label><input id="supabaseUrl" autocomplete="off"></div>
+        <div class="field"><label>Clave pública / publishable</label><input id="supabaseKey" type="password" autocomplete="off"></div>
+        <div class="field"><label>Correo administrador</label><input id="adminEmail" type="email" autocomplete="username" placeholder="administrador@correo.com"></div>
+        <div class="field"><label>Contraseña</label><input id="adminPassword" type="password" autocomplete="current-password"></div>
         <div class="field full switchline">
-          <input id="rememberToken" type="checkbox">
-          <label for="rememberToken" style="margin:0">Recordar el token únicamente en este navegador</label>
+          <input id="rememberConnection" type="checkbox" checked>
+          <label for="rememberConnection" style="margin:0">Recordar conexión y correo en este navegador. La contraseña nunca se guarda.</label>
         </div>
       </div>
       <div class="actions">
-        <button id="loadBtn" onclick="loadRemote()">Cargar control</button>
-        <button class="success" id="saveBtn" onclick="saveRemote()">Guardar y publicar</button>
-        <button class="secondary" onclick="saveConnection()">Guardar datos del repositorio</button>
-        <button class="ghost" onclick="exportJson()">Exportar JSON</button>
-        <button class="ghost" onclick="document.getElementById('importFile').click()">Importar JSON</button>
-        <input id="importFile" type="file" accept=".json,application/json" hidden onchange="importJson(event)">
-      </div>
-      <div class="notice">
-        El token no se guarda dentro de <b>app.py</b> ni se publica en el JSON. Para publicar necesita
-        permiso <b>Contents: Read and write</b> únicamente sobre este repositorio.
-      </div>
-      <div class="notice" style="border-left-color:#10b981;background:#082d24">
-        <b>Bloqueo rápido:</b> al pulsar “Bloquear ahora”, el panel publica automáticamente.
-        Con revisión de 5 segundos, la PC suele cerrarse aproximadamente entre 5 y 10 segundos,
-        dependiendo de Internet y de la propagación de GitHub.
-      </div>
-    </section>
-
-    <section class="panel half">
-      <h2>2. Estado general</h2>
-      <div class="row">
-        <div class="field full switchline">
-          <input id="systemActive" type="checkbox" checked onchange="syncFromForm()">
-          <label for="systemActive" style="margin:0">Sistema activo</label>
-        </div>
-        <div class="field"><label>Modo de autorización</label>
-          <select id="mode" onchange="syncFromForm()">
-            <option value="lista" selected>Lista: solo PC autorizadas</option>
-            <option value="abierto">Abierto: permite todas las PC</option>
-          </select>
-        </div>
-        <div class="field"><label>Versión mínima</label><input id="minVersion" value="9.6.5" onchange="syncFromForm()"></div>
-        <div class="field"><label>Revisión rápida (segundos)</label><input id="interval" type="number" min="3" max="60" value="5" onchange="syncFromForm()"></div>
-        <div class="field"><label>Tolerancia sin Internet (horas)</label><input id="offlineHours" type="number" min="0" max="720" value="2" onchange="syncFromForm()"></div>
-        <div class="field full switchline">
-          <input id="blockOffline" type="checkbox" checked onchange="syncFromForm()">
-          <label for="blockOffline" style="margin:0">Bloquear cuando venza la copia local y no haya Internet</label>
-        </div>
-        <div class="field full"><label>Mensaje global</label><textarea id="globalMessage" onchange="syncFromForm()">Sistema operativo.</textarea></div>
-      </div>
-      <div class="actions">
-        <button class="success" onclick="quickEnable()">Activar sistema</button>
-        <button class="danger" onclick="quickDisable()">Bloquear todo</button>
-        <button class="warning" onclick="switchToList()">Usar lista autorizada</button>
-      </div>
-    </section>
-
-    <section class="panel half">
-      <h2>Resumen</h2>
-      <div class="cards">
-        <div class="metric"><small>Sistema</small><strong id="mSystem">Activo</strong></div>
-        <div class="metric"><small>Modo</small><strong id="mMode">Abierto</strong></div>
-        <div class="metric"><small>Usuarios</small><strong id="mUsers">0</strong></div>
-        <div class="metric"><small>Autorizados</small><strong id="mAllowed">0</strong></div>
-        <div class="metric"><small>Bloqueados</small><strong id="mBlocked">0</strong></div>
-        <div class="metric"><small>Soporte pendiente</small><strong id="mSupport">0</strong></div>
-      </div>
-      <div class="notice" id="lastUpdate">Todavía no se cargó una configuración remota.</div>
-      <p class="note" style="margin-top:12px">
-        Mantenga el modo <b>Lista</b>. En cada usuario puede colocar, en el mismo campo, el código <b>CN</b> de la PC o el código individual <b>CU</b>. Un bloqueo CU siempre tiene prioridad.
-      </p>
-    </section>
-
-    <section class="panel">
-      <h2>3. Gestión de usuarios y contraseñas</h2>
-      <div class="row">
-        <div class="field"><label>Usuario</label><input id="newUser" autocomplete="off" placeholder="pedro.huancayo"></div>
-        <div class="field"><label>Nombre completo</label><input id="newFullName" placeholder="Pedro Apellido"></div>
-        <div class="field"><label>Rol</label>
-          <select id="newRole">
-            <option value="operador">Operador</option>
-            <option value="supervisor">Supervisor</option>
-            <option value="consulta">Solo consulta</option>
-            <option value="administrador">Administrador</option>
-          </select>
-        </div>
-        <div class="field"><label>Contraseña inicial</label><input id="newPassword" type="password" autocomplete="new-password" placeholder="Mínimo 4 caracteres"></div>
-        <div class="field"><label>Vence (opcional)</label><input id="newUserExpiry" type="date"></div>
-        <div class="field wide"><label>Códigos permitidos CN o CU (opcional)</label><input id="newUserPcs" placeholder="CN-AAAA-BBBB-CCCC-DDDD o CU-1111-2222-3333-4444"></div>
-        <div class="field"><label>&nbsp;</label><button class="purple" style="width:100%" onclick="addUser()">Crear usuario</button></div>
+        <button class="success" onclick="loginAdmin()">Entrar al panel</button>
+        <button class="secondary" onclick="restoreConnectionFields()">Restaurar configuración</button>
+        <button class="danger hidden" id="logoutBtn" onclick="logoutAdmin()">Cerrar sesión</button>
       </div>
       <div class="notice secure-note">
-        Las contraseñas no se publican en texto visible. El panel genera un hash
-        <b>PBKDF2-HMAC-SHA256</b> con salt independiente para cada usuario.
+        La clave pública de Supabase puede usarse en una página web. La clave <b>service_role</b> no está aquí ni debe publicarse.
+        La creación y eliminación de cuentas se ejecuta mediante la función segura <b>admin-users</b>.
       </div>
-      <div id="userList" class="list"></div>
     </section>
 
-    <section class="panel">
-      <h2>4. Equipos autorizados</h2>
-      <div class="row">
-        <div class="field"><label>ID de la PC</label><input id="newId" placeholder="CN-1234-5678-ABCD-EF01"></div>
-        <div class="field"><label>Nombre</label><input id="newName" placeholder="PC HUANCAYO 01"></div>
-        <div class="field"><label>Vence (opcional)</label><input id="newExpiry" type="date"></div>
-        <div class="field wide"><label>Mensaje para el equipo (opcional)</label><input id="newMessage" placeholder="Autorizado por administración"></div>
-        <div class="field"><label>&nbsp;</label><button class="success" style="width:100%" onclick="addAuthorized()">Agregar equipo</button></div>
-      </div>
-      <div id="authorizedList" class="list"></div>
-    </section>
-
-    <section class="panel">
-      <h2>5. Equipos bloqueados</h2>
-      <div class="row">
-        <div class="field"><label>ID de la PC</label><input id="blockId" placeholder="CN-1234-5678-ABCD-EF01"></div>
-        <div class="field wide"><label>Motivo o mensaje</label><input id="blockMessage" placeholder="Acceso desactivado por actividad sospechosa"></div>
-        <div class="field"><label>&nbsp;</label><button class="danger" style="width:100%" onclick="addBlocked()">Bloquear y publicar ahora</button></div>
-      </div>
-      <div id="blockedList" class="list"></div>
-    </section>
-
-
-
-    <section class="panel">
-      <h2>6. Centro de soporte remoto</h2>
-      <div class="notice">
-        Envíe una acción a una sola PC sin afectar a las demás. Las PCs revisan el panel cada pocos segundos y ejecutan solo acciones seguras ya programadas.
-      </div>
-      <div class="row">
-        <div class="field"><label>PC objetivo</label>
-          <select id="supportTarget"></select>
+    <div id="adminArea" class="grid hidden" style="grid-column:span 12;margin-top:0">
+      <section class="panel">
+        <h2>2. Resumen en línea</h2>
+        <div class="cards">
+          <div class="metric"><small>Sistema</small><strong id="mSystem">—</strong></div>
+          <div class="metric"><small>Usuarios</small><strong id="mUsers">0</strong></div>
+          <div class="metric"><small>Activos</small><strong id="mActiveUsers">0</strong></div>
+          <div class="metric"><small>PC autorizadas</small><strong id="mAllowed">0</strong></div>
+          <div class="metric"><small>PC bloqueadas</small><strong id="mBlocked">0</strong></div>
+          <div class="metric"><small>Soporte pendiente</small><strong id="mSupport">0</strong></div>
+          <div class="metric"><small>Versiones</small><strong id="mVersions">0</strong></div>
+          <div class="metric"><small>Directorios</small><strong id="mDirectories">0</strong></div>
         </div>
-        <div class="field"><label>ID manual (opcional)</label><input id="supportManualId" placeholder="CN-1234-5678-ABCD-EF01"></div>
-        <div class="field"><label>Acción</label>
-          <select id="supportAction">
-            <option value="sincronizar_directorios">Sincronizar directorios</option>
-            <option value="reparar_configuracion">Reparar configuración</option>
-            <option value="limpiar_cache">Limpiar caché local</option>
-            <option value="forzar_revision">Forzar revisión remota</option>
-            <option value="reiniciar_aplicacion">Reiniciar aplicación</option>
-          </select>
+        <div class="actions">
+          <button onclick="loadAll(true)">Actualizar ahora</button>
+          <button class="ghost" onclick="exportBackup()">Exportar respaldo JSON</button>
+          <button class="purple" onclick="verifyAdminModule()">Verificar módulo seguro</button>
         </div>
-        <div class="field wide"><label>Detalle / motivo</label><input id="supportMessage" placeholder="Ejemplo: reparar solo esta PC porque se dañó la configuración."></div>
-        <div class="field"><label>&nbsp;</label><button class="purple" style="width:100%" onclick="queueSupportAction()">Agregar acción</button></div>
-      </div>
-      <div id="supportList" class="list"></div>
-    </section>
+        <div class="notice" id="lastUpdate">Esperando la primera sincronización.</div>
+      </section>
 
-    <section class="panel">
-      <h2>7. Vista técnica</h2>
-      <details>
-        <summary>Ver JSON que se publicará</summary>
-        <pre id="jsonPreview"></pre>
-      </details>
-      <details>
-        <summary>Cómo usar usuarios remotos</summary>
-        <ol class="note">
-          <li>Cree el usuario y una contraseña fuerte.</li>
-          <li>En el mismo campo asigne uno o varios códigos CN o CU al usuario.</li>
-          <li>Si usa CN, agregue también esa PC en Equipos autorizados y use el modo Lista.</li>
-          <li>Pulse Guardar y publicar.</li>
-          <li>El usuario podrá entrar con sus credenciales desde la aplicación.</li>
-          <li>Para expulsarlo, desactive el usuario o bloquee su PC y publique.</li>
-        </ol>
-      </details>
-      <div class="notice danger-note">
-        No publique su token en GitHub, WhatsApp, capturas ni dentro del ejecutable.
-        Use contraseñas largas y distintas para cada usuario.
-      </div>
-    </section>
+      <section class="panel half">
+        <h2>3. Estado general</h2>
+        <div class="row">
+          <div class="field full switchline">
+            <input id="systemActive" type="checkbox">
+            <label for="systemActive" style="margin:0">Sistema activo</label>
+          </div>
+          <div class="field"><label>Modo de acceso</label>
+            <select id="accessMode"><option value="lista">Lista autorizada</option><option value="abierto">Abierto</option></select>
+          </div>
+          <div class="field"><label>Versión mínima</label><input id="minVersion" value="1.0.0"></div>
+          <div class="field"><label>Revisión (segundos)</label><input id="intervalSeconds" type="number" min="3" max="3600" value="60"></div>
+          <div class="field"><label>Tolerancia sin Internet (minutos)</label><input id="offlineMinutes" type="number" min="0" max="43200" value="30"></div>
+          <div class="field full switchline">
+            <input id="blockOffline" type="checkbox">
+            <label for="blockOffline" style="margin:0">Bloquear al vencer la tolerancia sin Internet</label>
+          </div>
+          <div class="field full"><label>Mensaje global</label><textarea id="globalMessage"></textarea></div>
+        </div>
+        <div class="actions"><button class="success" onclick="saveGlobalConfig()">Guardar configuración</button></div>
+      </section>
+
+      <section class="panel half">
+        <h2>Publicación y actualización</h2>
+        <div class="row">
+          <div class="field"><label>Versión publicada</label><input id="publishedVersion"></div>
+          <div class="field wide"><label>URL de descarga</label><input id="updateUrl" placeholder="https://..."></div>
+          <div class="field wide"><label>Archivo</label><input id="updateFile" placeholder="CoordiNextPROAA.exe"></div>
+          <div class="field"><label>Fecha</label><input id="versionDate" type="date"></div>
+          <div class="field full"><label>Cambios de la versión (uno por línea)</label><textarea id="versionChanges"></textarea></div>
+        </div>
+        <div class="actions"><button class="success" onclick="saveGlobalConfig()">Guardar publicación</button></div>
+      </section>
+
+      <section class="panel">
+        <h2>4. Usuarios — crear y administrar aquí</h2>
+        <input id="editingLegacyId" type="hidden"><input id="editingProfileId" type="hidden">
+        <div class="row">
+          <div class="field"><label>Usuario</label><input id="userName" placeholder="operador01"></div>
+          <div class="field"><label>Nombre completo</label><input id="userFullName" placeholder="Nombre y apellido"></div>
+          <div class="field"><label>Correo</label><input id="userEmail" type="email" placeholder="operador01@correo.com"></div>
+          <div class="field"><label>Rol</label><select id="userRole"><option value="operador">Operador</option><option value="supervisor">Supervisor</option><option value="admin">Administrador</option></select></div>
+          <div class="field"><label>Contraseña temporal</label><input id="userPassword" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres"></div>
+          <div class="field"><label>Vence (opcional)</label><input id="userExpiry" type="date"></div>
+          <div class="field wide"><label>PC permitidas CN/CU (separadas por coma)</label><input id="userEquipment" placeholder="CN-AAAA-BBBB-CCCC-DDDD, CU-1111-2222-3333-4444"></div>
+          <div class="field switchline"><input id="userActive" type="checkbox" checked><label for="userActive" style="margin:0">Activo</label></div>
+        </div>
+        <div class="actions">
+          <button class="purple" onclick="saveUser()" id="saveUserBtn">Crear usuario completo</button>
+          <button class="secondary" onclick="clearUserForm()">Limpiar</button>
+        </div>
+        <div class="notice secure-note">Al guardar se crea o actualiza automáticamente Authentication, perfiles, usuarios_control y usuario_equipos.</div>
+        <div id="userList" class="list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>5. Equipos / PCs</h2>
+        <div class="row">
+          <div class="field"><label>Código CN o CU</label><input id="equipmentId" placeholder="CN-1234-5678-ABCD-EF01"></div>
+          <div class="field"><label>Nombre</label><input id="equipmentName" placeholder="PC HUANCAYO 01"></div>
+          <div class="field"><label>Estado</label><select id="equipmentState"><option value="autorizado">Autorizado</option><option value="pendiente">Pendiente</option><option value="bloqueado">Bloqueado</option></select></div>
+          <div class="field"><label>Vence</label><input id="equipmentExpiry" type="date"></div>
+          <div class="field"><label>Versión instalada</label><input id="equipmentVersion"></div>
+          <div class="field wide"><label>Mensaje</label><input id="equipmentMessage" placeholder="Mensaje para esta PC"></div>
+        </div>
+        <div class="actions"><button class="success" onclick="saveEquipment()">Guardar equipo</button><button class="secondary" onclick="clearEquipmentForm()">Limpiar</button></div>
+        <div id="equipmentList" class="list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>6. Soporte remoto</h2>
+        <div class="row">
+          <div class="field"><label>PC objetivo (* = todas)</label><input id="supportTarget" value="*"></div>
+          <div class="field"><label>Acción</label><select id="supportAction"><option value="sincronizar_directorios">Sincronizar directorios</option><option value="reparar_configuracion">Reparar configuración</option><option value="limpiar_cache">Limpiar caché</option><option value="forzar_revision">Forzar revisión</option><option value="reiniciar_aplicacion">Reiniciar aplicación</option></select></div>
+          <div class="field wide"><label>Detalle / motivo</label><input id="supportMessage"></div>
+        </div>
+        <div class="actions"><button class="purple" onclick="createSupportAction()">Enviar acción</button></div>
+        <div id="supportList" class="list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>7. Versiones de la aplicación</h2>
+        <div class="row">
+          <div class="field"><label>Versión</label><input id="releaseVersion" placeholder="10.6.2"></div>
+          <div class="field"><label>Fecha</label><input id="releaseDate" type="date"></div>
+          <div class="field"><label>Archivo</label><input id="releaseFile"></div>
+          <div class="field wide"><label>URL de descarga</label><input id="releaseUrl"></div>
+          <div class="field full"><label>Cambios (uno por línea)</label><textarea id="releaseChanges"></textarea></div>
+          <div class="field switchline"><input id="releaseRequired" type="checkbox"><label for="releaseRequired" style="margin:0">Obligatoria</label></div>
+          <div class="field switchline"><input id="releasePublished" type="checkbox" checked><label for="releasePublished" style="margin:0">Publicada</label></div>
+        </div>
+        <div class="actions"><button class="success" onclick="saveRelease()">Guardar versión</button><button class="secondary" onclick="clearReleaseForm()">Limpiar</button></div>
+        <div id="versionList" class="list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>8. Directorios y correos</h2>
+        <div class="notice">Seleccione uno o varios JSON. El panel guarda el documento completo y reconstruye automáticamente los correos para búsqueda rápida.</div>
+        <div class="row" style="margin-top:12px">
+          <div class="field wide"><label>Archivos JSON</label><input id="directoryFiles" type="file" accept=".json,application/json" multiple></div>
+          <div class="field"><label>Tipo (opcional)</label><input id="directoryType" placeholder="incidencias / reclamos / solicitudes"></div>
+        </div>
+        <div class="actions"><button class="success" onclick="importDirectories()">Importar directorios</button></div>
+        <div id="directoryList" class="list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>9. Auditoría</h2>
+        <div class="actions"><button onclick="loadAudit()">Actualizar auditoría</button></div>
+        <div id="auditList" class="list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>10. Estado técnico</h2>
+        <details><summary>Ver último respaldo cargado</summary><pre id="technicalPreview">{}</pre></details>
+        <div class="notice danger-note">No publique una clave service_role. Este panel solo usa la clave pública y una sesión de administrador.</div>
+      </section>
+    </div>
   </div>
 </div>
-
-<dialog id="passwordDialog">
-  <form method="dialog" onsubmit="return false">
-    <h3>Cambiar contraseña</h3>
-    <p class="note" id="passwordDialogUser"></p>
-    <label>Nueva contraseña</label>
-    <input id="resetPassword" type="password" autocomplete="new-password" placeholder="Mínimo 4 caracteres">
-    <div class="actions">
-      <button type="button" class="success" onclick="confirmPasswordReset()">Guardar contraseña</button>
-      <button type="button" class="secondary" onclick="closePasswordDialog()">Cancelar</button>
-    </div>
-  </form>
-</dialog>
-
 <div id="toast" class="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./panel-config.js"></script>
 <script>
 'use strict';
 
-const PBKDF2_ITERATIONS = 600000;
-let currentSha = '';
-let state = defaultState();
-let passwordResetIndex = -1;
+const CONFIG = window.COORDINEXT_PANEL_CONFIG || {};
+let client = null;
+let sessionUser = null;
+let refreshTimer = null;
+let busy = false;
+const state = { config:{}, users:[], links:[], equipment:[], support:[], versions:[], directories:[], audit:[] };
 
-function defaultState() {
-  return {
-    schema: 6,
-    sistema_activo: true,
-    modo_autorizacion: 'lista',
-    modo_acceso_usuario: 'lista',
-    mensaje_global: 'Sistema operativo.',
-    version_minima: '9.6.5',
-    intervalo_minutos: 1,
-    intervalo_segundos: 5,
-    tolerancia_sin_internet_horas: 2,
-    bloquear_sin_internet: true,
-    actualizado_en: new Date().toISOString().replace('T',' ').slice(0,19),
-    usuarios: [],
-    equipos_autorizados: [],
-    equipos_bloqueados: [],
-    accesos_usuario_autorizados: [],
-    accesos_usuario_bloqueados: [],
-    acciones_soporte: []
-  };
+const $ = id => document.getElementById(id);
+const clean = value => String(value ?? '').trim();
+const upper = value => clean(value).toUpperCase().replace(/\s+/g, '');
+const lower = value => clean(value).toLowerCase();
+const nowIso = () => new Date().toISOString();
+const dateOnly = value => value ? String(value).slice(0,10) : '';
+const lines = value => clean(value).split(/\r?\n/).map(v=>v.trim()).filter(Boolean);
+const splitEquipment = value => [...new Set(clean(value).split(/[,;\n]+/).map(upper).filter(Boolean))];
+const esc = value => String(value ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+function toast(message, error=false) {
+  const el = $('toast'); el.textContent = message; el.className = `toast show${error?' error':''}`;
+  clearTimeout(el._timer); el._timer = setTimeout(()=>el.className='toast', 5000);
+}
+function setStatus(text, kind='') { const el=$('status'); el.textContent=text; el.className=`status ${kind}`.trim(); }
+function setBusy(value, message='Procesando…') {
+  busy=value; document.body.classList.toggle('loading', value); if(value) setStatus(message,'busy');
+}
+function errorText(error) { return clean(error?.message || error?.error_description || error || 'Error desconocido.'); }
+function assertClient() { if(!client) throw new Error('Primero inicie sesión en el panel.'); }
+
+function restoreConnectionFields() {
+  const saved = JSON.parse(localStorage.getItem('coordinext_panel_connection') || '{}');
+  $('supabaseUrl').value = saved.url || CONFIG.supabaseUrl || '';
+  $('supabaseKey').value = saved.key || CONFIG.supabasePublishableKey || '';
+  $('adminEmail').value = saved.email || '';
+}
+function saveConnectionFields() {
+  if(!$('rememberConnection').checked) { localStorage.removeItem('coordinext_panel_connection'); return; }
+  localStorage.setItem('coordinext_panel_connection', JSON.stringify({
+    url:clean($('supabaseUrl').value), key:clean($('supabaseKey').value), email:lower($('adminEmail').value)
+  }));
+}
+function buildClient() {
+  const url=clean($('supabaseUrl').value), key=clean($('supabaseKey').value);
+  if(!url || !key) throw new Error('Faltan la URL o la clave pública de Supabase.');
+  client = window.supabase.createClient(url, key, {
+    auth:{persistSession:true, autoRefreshToken:true, detectSessionInUrl:false}
+  });
+  return client;
 }
 
-function normalizeId(value) {
-  return String(value || '').trim().toUpperCase().replace(/\s+/g, '');
-}
-
-function normalizeUsername(value) {
-  return String(value || '').trim().toLowerCase().replace(/\s+/g, '');
-}
-
-async function generateUserPcControlCode(username, pcId) {
-  const user = normalizeUsername(username);
-  const pc = normalizeId(pcId);
-  if (!user || !pc) throw new Error('Usuario o PC incompletos.');
-  const seed = `COORDINEXT-PRO-AA|USUARIO-PC|V1|${user}|${pc}`;
-  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(seed));
-  const hex = Array.from(new Uint8Array(digest))
-    .map(value => value.toString(16).padStart(2, '0'))
-    .join('').toUpperCase().slice(0, 16);
-  return `CU-${hex.slice(0,4)}-${hex.slice(4,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}`;
-}
-
-function isDirectCuCode(value) {
-  return normalizeId(value).startsWith('CU-');
-}
-
-function requiresExplicitUserPcApproval() {
-  const value = state.requerir_aprobacion_usuario_pc;
-  if (typeof value === 'boolean') return value;
-  return ['1','true','si','sí','yes','on','estricto','strict']
-    .includes(String(value || '').trim().toLowerCase());
-}
-
-async function resolveUserIdentifier(user, identifierIndex) {
-  const identifier = normalizeId(user?.equipos?.[identifierIndex]);
-  if (!user || !identifier) return null;
-  if (isDirectCuCode(identifier)) {
-    return {identifier, code:identifier, pcId:'', source:'CU'};
-  }
-  return {
-    identifier,
-    code:await generateUserPcControlCode(user.usuario, identifier),
-    pcId:identifier,
-    source:'CN'
-  };
-}
-
-function accessBlockByCode(code) {
-  const normalized = normalizeId(code);
-  return (state.accesos_usuario_bloqueados || []).find(item => normalizeId(item.codigo) === normalized) || null;
-}
-
-function accessAuthorizationByCode(code) {
-  const normalized = normalizeId(code);
-  return (state.accesos_usuario_autorizados || []).find(item => normalizeId(item.codigo) === normalized) || null;
-}
-
-async function migrateLegacyUserPcAuthorizations(rawValue) {
-  const raw = rawValue && typeof rawValue === 'object' ? rawValue : {};
-  if (Object.prototype.hasOwnProperty.call(raw, 'accesos_usuario_autorizados')) return false;
-  const migrated = [];
-  for (const user of state.usuarios || []) {
-    for (const pcId of user.equipos || []) {
-      if (isDirectCuCode(pcId)) continue;
-      const code = await generateUserPcControlCode(user.usuario, pcId);
-      if (migrated.some(item => normalizeId(item.codigo) === code)) continue;
-      migrated.push({
-        codigo:code, usuario:user.usuario, equipo_id:normalizeId(pcId),
-        nombre:user.nombre || '', activo:true, vence:'',
-        mensaje:'Migrado automáticamente desde una asignación existente.',
-        autorizado_en:new Date().toISOString().replace('T',' ').slice(0,19)
-      });
-    }
-  }
-  state.accesos_usuario_autorizados = migrated;
-  state.modo_acceso_usuario = 'lista';
-  return migrated.length > 0;
-}
-
-function escapeHtml(value) {
-  return String(value ?? '')
-    .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
-    .replaceAll('"','&quot;').replaceAll("'","&#039;");
-}
-
-function parsePcList(value) {
-  return [...new Set(
-    String(value || '').split(/[,;\n]+/).map(normalizeId).filter(Boolean)
-  )];
-}
-
-function normalizePasswordRecord(value) {
-  const v = value && typeof value === 'object' ? value : {};
-  return {
-    algoritmo: String(v.algoritmo || v.algorithm || ''),
-    iteraciones: Number(v.iteraciones || v.iterations || 0),
-    salt: String(v.salt || ''),
-    hash: String(v.hash || v.digest || '')
-  };
-}
-
-function normalizeState(value) {
-  const base = defaultState();
-  const data = value && typeof value === 'object' ? value : {};
-  const result = {...base, ...data};
-  result.schema = Math.max(6, Number(result.schema || 6));
-  result.sistema_activo = result.sistema_activo !== false;
-  result.modo_autorizacion =
-    String(result.modo_autorizacion || 'lista').toLowerCase() === 'abierto' ? 'abierto' : 'lista';
-  result.modo_acceso_usuario =
-    String(result.modo_acceso_usuario || 'lista').toLowerCase() === 'abierto' ? 'abierto' : 'lista';
-
-  // Compatibilidad: un JSON antiguo puede traer solo intervalo_minutos.
-  const secondsFromOldFile = Number(result.intervalo_minutos || 1) * 60;
-  result.intervalo_segundos = Math.min(
-    60,
-    Math.max(3, Number(result.intervalo_segundos || secondsFromOldFile || 5))
-  );
-
-  result.usuarios = Array.isArray(result.usuarios) ? result.usuarios.map((item, index) => ({
-    id: String(item?.id || `USR-${Date.now()}-${index}`),
-    usuario: normalizeUsername(item?.usuario),
-    nombre: String(item?.nombre || ''),
-    rol: String(item?.rol || 'operador').toLowerCase(),
-    activo: item?.activo !== false,
-    vence: String(item?.vence || ''),
-    equipos: Array.isArray(item?.equipos) ? item.equipos.map(normalizeId).filter(Boolean) : [],
-    password: normalizePasswordRecord(item?.password || item?.password_hash),
-    actualizado_en: String(item?.actualizado_en || '')
-  })).filter(item => item.usuario) : [];
-
-  result.equipos_autorizados = Array.isArray(result.equipos_autorizados)
-    ? result.equipos_autorizados.map(item => {
-        if (typeof item === 'string') return {id:normalizeId(item), nombre:item, activo:true, vence:'', mensaje:''};
-        return {
-          id:normalizeId(item?.id || item?.equipo_id), nombre:String(item?.nombre || ''),
-          activo:item?.activo !== false, vence:String(item?.vence || ''), mensaje:String(item?.mensaje || '')
-        };
-      }).filter(item => item.id)
-    : [];
-
-  result.equipos_bloqueados = Array.isArray(result.equipos_bloqueados)
-    ? result.equipos_bloqueados.map(item => {
-        if (typeof item === 'string') return {id:normalizeId(item), nombre:'', mensaje:''};
-        return {
-          id:normalizeId(item?.id || item?.equipo_id), nombre:String(item?.nombre || ''),
-          mensaje:String(item?.mensaje || '')
-        };
-      }).filter(item => item.id)
-    : [];
-
-  result.accesos_usuario_autorizados = Array.isArray(result.accesos_usuario_autorizados)
-    ? result.accesos_usuario_autorizados.map(item => {
-        if (typeof item === 'string') return {codigo:normalizeId(item), usuario:'', equipo_id:'', nombre:'', activo:true, vence:'', mensaje:''};
-        return {
-          codigo:normalizeId(item?.codigo || item?.id || item?.codigo_control),
-          usuario:normalizeUsername(item?.usuario),
-          equipo_id:normalizeId(item?.equipo_id || item?.pc),
-          nombre:String(item?.nombre || ''),
-          activo:item?.activo !== false,
-          vence:String(item?.vence || ''),
-          mensaje:String(item?.mensaje || ''),
-          autorizado_en:String(item?.autorizado_en || '')
-        };
-      }).filter(item => item.codigo)
-    : [];
-
-  result.accesos_usuario_bloqueados = Array.isArray(result.accesos_usuario_bloqueados)
-    ? result.accesos_usuario_bloqueados.map(item => {
-        if (typeof item === 'string') return {codigo:normalizeId(item), usuario:'', equipo_id:'', mensaje:''};
-        return {
-          codigo:normalizeId(item?.codigo || item?.id || item?.codigo_control),
-          usuario:normalizeUsername(item?.usuario),
-          equipo_id:normalizeId(item?.equipo_id || item?.pc),
-          nombre:String(item?.nombre || ''),
-          mensaje:String(item?.mensaje || ''),
-          bloqueado_en:String(item?.bloqueado_en || '')
-        };
-      }).filter(item => item.codigo)
-    : [];
-
-  result.acciones_soporte = Array.isArray(result.acciones_soporte)
-    ? result.acciones_soporte.map((item, index) => ({
-        id: String(item?.id || `SUP-${Date.now()}-${index}`),
-        equipo_id: normalizeId(item?.equipo_id || item?.objetivo || item?.pc || '*') || '*',
-        equipo_nombre: String(item?.equipo_nombre || item?.nombre || 'Todas las PC'),
-        accion: String(item?.accion || 'forzar_revision').trim().toLowerCase(),
-        mensaje: String(item?.mensaje || item?.detalle || ''),
-        creada_en: String(item?.creada_en || item?.fecha || ''),
-        creada_por: String(item?.creada_por || item?.usuario || 'administracion'),
-        activa: item?.activa !== false
-      }))
-    : [];
-
-  return result;
-}
-
-function connection() {
-  return {
-    owner: document.getElementById('owner').value.trim(),
-    repo: document.getElementById('repo').value.trim(),
-    branch: document.getElementById('branch').value.trim() || 'main',
-    path: document.getElementById('path').value.trim().replace(/^\/+|\/+$/g,''),
-    token: document.getElementById('token').value.trim()
-  };
-}
-
-function saveConnection() {
-  const c = connection();
-  localStorage.setItem('coordi_connection', JSON.stringify({...c, token:undefined}));
-  if (document.getElementById('rememberToken').checked) {
-    localStorage.setItem('coordi_token', c.token);
-  } else {
-    localStorage.removeItem('coordi_token');
-  }
-  toast('Datos guardados en este navegador.');
-}
-
-function restoreConnection() {
+async function loginAdmin() {
   try {
-    const c = JSON.parse(localStorage.getItem('coordi_connection') || '{}');
-    if (c.owner) document.getElementById('owner').value = c.owner;
-    if (c.repo) document.getElementById('repo').value = c.repo;
-    if (c.branch) document.getElementById('branch').value = c.branch;
-    if (c.path) document.getElementById('path').value = c.path;
-    const token = localStorage.getItem('coordi_token') || '';
-    if (token) {
-      document.getElementById('token').value = token;
-      document.getElementById('rememberToken').checked = true;
-    }
-  } catch (_) {}
+    setBusy(true,'Ingresando…');
+    buildClient(); saveConnectionFields();
+    const email=lower($('adminEmail').value), password=$('adminPassword').value;
+    if(!email || !password) throw new Error('Ingrese correo y contraseña.');
+    const {data,error}=await client.auth.signInWithPassword({email,password});
+    if(error) throw error;
+    sessionUser=data.user; $('adminPassword').value='';
+    await verifyAdminRole();
+    showAdmin(true); await loadAll(true); startAutoRefresh();
+    toast('Panel conectado correctamente.');
+  } catch(error) { await safeSignOut(); showAdmin(false); setStatus('Acceso rechazado','error'); toast(errorText(error),true); }
+  finally { setBusy(false); if(sessionUser) setStatus('Conectado','ok'); }
 }
-
-function apiPath(path) {
-  return path.split('/').filter(Boolean).map(encodeURIComponent).join('/');
+async function verifyAdminRole() {
+  const {data:{user},error:userError}=await client.auth.getUser();
+  if(userError || !user) throw userError || new Error('La sesión no es válida.');
+  const {data,error}=await client.from('perfiles').select('id,nombre,rol,activo').eq('id',user.id).maybeSingle();
+  if(error) throw error;
+  if(!data || data.activo!==true || data.rol!=='admin') throw new Error('Esta cuenta no es un administrador activo.');
+  sessionUser=user;
 }
-function apiUrl(c) {
-  return `https://api.github.com/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/contents/${apiPath(c.path)}`;
-}
-function headers(token) {
-  const h = {'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
-  if (token) h.Authorization = `Bearer ${token}`;
-  return h;
-}
-function decodeUtf8Base64(value) {
-  const binary = atob(String(value || '').replace(/\n/g,''));
-  const bytes = Uint8Array.from(binary, ch => ch.charCodeAt(0));
-  return new TextDecoder('utf-8').decode(bytes);
-}
-function encodeUtf8Base64(value) {
-  const bytes = new TextEncoder().encode(value);
-  let binary = '';
-  const chunk = 0x8000;
-  for (let i=0; i<bytes.length; i+=chunk) binary += String.fromCharCode(...bytes.subarray(i,i+chunk));
-  return btoa(binary);
-}
-function bytesToBase64(bytes) {
-  let binary = '';
-  for (let i=0; i<bytes.length; i+=0x8000) {
-    binary += String.fromCharCode(...bytes.subarray(i,i+0x8000));
-  }
-  return btoa(binary);
-}
-async function readError(response) {
-  try { const body = await response.json(); return body.message || JSON.stringify(body); }
-  catch (_) { return `${response.status} ${response.statusText}`; }
-}
-function setStatus(text, type='') {
-  const el = document.getElementById('status');
-  el.textContent = text; el.className = `status ${type}`.trim();
-}
-function setBusy(busy) {
-  document.getElementById('loadBtn').disabled = busy;
-  document.getElementById('saveBtn').disabled = busy;
-  if (busy) setStatus('Procesando…','busy');
-}
-
-async function loadRemote() {
-  const c = connection();
-  if (!c.owner || !c.repo || !c.path) return toast('Complete propietario, repositorio y ruta.', true);
-  setBusy(true);
+async function restoreSession() {
   try {
-    const url = `${apiUrl(c)}?ref=${encodeURIComponent(c.branch)}&t=${Date.now()}`;
-    const response = await fetch(url,{headers:headers(c.token),cache:'no-store'});
-    if (!response.ok) throw new Error(await readError(response));
-    const payload = await response.json();
-    currentSha = payload.sha || '';
-    const rawControl = JSON.parse(decodeUtf8Base64(payload.content));
-    state = normalizeState(rawControl);
-    const migrated = await migrateLegacyUserPcAuthorizations(rawControl);
-    render();
-    if (migrated) toast('Control antiguo migrado al modo seguro. Pulse Guardar y publicar.');
-    saveConnection();
-    setStatus('Conectado','ok');
-    document.getElementById('lastUpdate').textContent =
-      `Archivo cargado. Última marca: ${state.actualizado_en || 'sin fecha'}. SHA: ${currentSha.slice(0,10)}…`;
-    toast('Control remoto cargado correctamente.');
-  } catch (error) {
-    setStatus('Error de conexión','error');
-    toast(`No se pudo cargar: ${error.message}`,true);
-  } finally { setBusy(false); }
+    restoreConnectionFields();
+    if(!$('supabaseUrl').value || !$('supabaseKey').value) return;
+    buildClient();
+    const {data,error}=await client.auth.getSession(); if(error) throw error;
+    if(!data.session) return;
+    sessionUser=data.session.user; await verifyAdminRole(); showAdmin(true); await loadAll(true); startAutoRefresh(); setStatus('Conectado','ok');
+  } catch(error) { await safeSignOut(); showAdmin(false); setStatus('Sin conectar'); }
 }
+async function safeSignOut(){ try{ if(client) await client.auth.signOut(); }catch(_){} sessionUser=null; }
+async function logoutAdmin(){ stopAutoRefresh(); await safeSignOut(); showAdmin(false); setStatus('Sesión cerrada'); toast('Sesión cerrada.'); }
+function showAdmin(show){ $('adminArea').classList.toggle('hidden',!show); $('logoutBtn').classList.toggle('hidden',!show); }
+function startAutoRefresh(){ stopAutoRefresh(); refreshTimer=setInterval(()=>{ if(!busy && sessionUser) loadAll(false); }, Math.max(10,Number(CONFIG.refreshSeconds||20))*1000); }
+function stopAutoRefresh(){ if(refreshTimer) clearInterval(refreshTimer); refreshTimer=null; }
 
-async function saveRemote(options = {}) {
-  syncFromForm();
-  const c = connection();
-  if (!c.owner || !c.repo || !c.path) {
-    toast('Complete los datos del repositorio.',true);
-    return false;
-  }
-  if (!c.token) {
-    toast('Ingrese el token GitHub del administrador para publicar el bloqueo.',true);
-    return false;
-  }
-  if (state.modo_autorizacion === 'lista' && state.equipos_autorizados.length === 0) {
-    if (!confirm('El modo LISTA no tiene equipos autorizados. Todas las PC quedarán bloqueadas. ¿Continuar?')) {
-      return false;
-    }
-  }
+async function invokeAdmin(payload) {
+  assertClient();
+  const {data,error}=await client.functions.invoke(CONFIG.adminFunctionName||'admin-users',{body:payload});
+  if(error) throw error;
+  if(!data?.ok) throw new Error(data?.error || 'El módulo administrativo rechazó la operación.');
+  return data;
+}
+async function verifyAdminModule(){ try{setBusy(true,'Verificando módulo…');await invokeAdmin({action:'health'});toast('Módulo admin-users operativo.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');} }
 
-  setBusy(true);
+async function loadAll(showMessage=false) {
+  if(!client || !sessionUser || busy) return;
   try {
-    // Si el panel se abrió sin pulsar "Cargar control", obtiene el SHA actual
-    // antes de publicar. Esto evita el error 422 de GitHub.
-    if (!currentSha) {
-      const checkUrl = `${apiUrl(c)}?ref=${encodeURIComponent(c.branch)}&t=${Date.now()}`;
-      const checkResponse = await fetch(checkUrl,{
-        headers:headers(c.token),
-        cache:'no-store'
-      });
-      if (checkResponse.ok) {
-        const remotePayload = await checkResponse.json();
-        currentSha = remotePayload.sha || '';
-      } else if (checkResponse.status !== 404) {
-        throw new Error(await readError(checkResponse));
-      }
+    setBusy(true,'Sincronizando…');
+    await Promise.all([loadConfig(),loadUsers(),loadEquipment(),loadSupport(),loadVersions(),loadDirectories(),loadAudit()]);
+    renderAll();
+    $('lastUpdate').textContent=`Sincronizado: ${new Date().toLocaleString()} · Origen: Supabase`;
+    $('technicalPreview').textContent=JSON.stringify(state,null,2);
+    if(showMessage) toast('Datos actualizados desde Supabase.');
+  } catch(error) { toast(`No se pudo actualizar: ${errorText(error)}`,true); }
+  finally { setBusy(false); if(sessionUser) setStatus('Conectado','ok'); }
+}
+async function loadConfig(){ const {data,error}=await client.from('configuracion_global').select('*').eq('id',1).maybeSingle(); if(error)throw error; state.config=data||{}; }
+async function loadUsers(){
+  const [u,l]=await Promise.all([
+    client.from('usuarios_control').select('*').order('creado_en',{ascending:false}),
+    client.from('usuario_equipos').select('*')
+  ]);
+  if(u.error)throw u.error;if(l.error)throw l.error;state.users=u.data||[];state.links=l.data||[];
+}
+async function loadEquipment(){const {data,error}=await client.from('equipos_control').select('*').order('creado_en',{ascending:false});if(error)throw error;state.equipment=data||[];}
+async function loadSupport(){const {data,error}=await client.from('acciones_soporte').select('*').order('creado_en',{ascending:false}).limit(100);if(error)throw error;state.support=data||[];}
+async function loadVersions(){const {data,error}=await client.from('versiones_app').select('*').order('creado_en',{ascending:false});if(error)throw error;state.versions=data||[];}
+async function loadDirectories(){const {data,error}=await client.from('directorios_documentos').select('slug,tipo,version,fuente,sha256,actualizado_en').order('slug');if(error)throw error;state.directories=data||[];}
+async function loadAudit(){if(!client||!sessionUser)return;const {data,error}=await client.from('auditoria').select('*').order('creado_en',{ascending:false}).limit(150);if(error)throw error;state.audit=data||[];renderAudit();}
+
+function renderAll(){ renderConfig();renderMetrics();renderUsers();renderEquipment();renderSupport();renderVersions();renderDirectories();renderAudit(); }
+function renderConfig(){
+  const c=state.config||{};
+  $('systemActive').checked=c.sistema_activo!==false;$('accessMode').value=c.modo_acceso||'lista';$('minVersion').value=c.version_minima||'1.0.0';
+  $('intervalSeconds').value=Number(c.intervalo_consulta_segundos||60);$('offlineMinutes').value=Number(c.tolerancia_sin_internet_minutos||30);
+  $('blockOffline').checked=c.bloquear_sin_internet===true;$('globalMessage').value=c.mensaje_global||'';
+  $('publishedVersion').value=c.version_publicada||'';$('updateUrl').value=c.url_actualizacion||'';$('updateFile').value=c.archivo_actualizacion||'';
+  $('versionDate').value=dateOnly(c.fecha_version);$('versionChanges').value=Array.isArray(c.cambios_version)?c.cambios_version.join('\n'):'';
+}
+function renderMetrics(){
+  $('mSystem').textContent=state.config?.sistema_activo===false?'Bloqueado':'Activo';$('mUsers').textContent=state.users.length;
+  $('mActiveUsers').textContent=state.users.filter(x=>x.activo).length;$('mAllowed').textContent=state.equipment.filter(x=>x.estado==='autorizado').length;
+  $('mBlocked').textContent=state.equipment.filter(x=>x.estado==='bloqueado').length;$('mSupport').textContent=state.support.filter(x=>x.activa).length;
+  $('mVersions').textContent=state.versions.length;$('mDirectories').textContent=state.directories.length;
+}
+
+async function saveGlobalConfig(){
+  try{setBusy(true,'Guardando configuración…');
+    const payload={id:1,sistema_activo:$('systemActive').checked,modo_acceso:$('accessMode').value,version_minima:clean($('minVersion').value)||'1.0.0',
+      intervalo_consulta_segundos:Math.max(3,Number($('intervalSeconds').value||60)),tolerancia_sin_internet_minutos:Math.max(0,Number($('offlineMinutes').value||30)),
+      bloquear_sin_internet:$('blockOffline').checked,mensaje_global:clean($('globalMessage').value),version_publicada:clean($('publishedVersion').value)||null,
+      url_actualizacion:clean($('updateUrl').value)||null,archivo_actualizacion:clean($('updateFile').value)||null,fecha_version:$('versionDate').value||null,
+      cambios_version:lines($('versionChanges').value),actualizado_en:nowIso(),actualizado_por:sessionUser.id};
+    const {error}=await client.from('configuracion_global').upsert(payload,{onConflict:'id'});if(error)throw error;
+    await addAudit('configuracion_actualizada',payload);await loadAll(false);toast('Configuración guardada.');
+  }catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}
+}
+
+function userEquipment(legacyId){return state.links.filter(x=>x.usuario_legacy_id===legacyId&&x.activo!==false).map(x=>x.equipo_id);}
+function clearUserForm(){['editingLegacyId','editingProfileId','userName','userFullName','userEmail','userPassword','userExpiry','userEquipment'].forEach(id=>$(id).value='');$('userRole').value='operador';$('userActive').checked=true;$('saveUserBtn').textContent='Crear usuario completo';}
+function editUser(legacyId){const u=state.users.find(x=>x.legacy_id===legacyId);if(!u)return;$('editingLegacyId').value=u.legacy_id||'';$('editingProfileId').value=u.profile_id||'';$('userName').value=u.usuario||'';$('userFullName').value=u.nombre||'';$('userEmail').value=u.correo||'';$('userRole').value=u.rol||'operador';$('userExpiry').value=dateOnly(u.vence);$('userEquipment').value=userEquipment(legacyId).join(', ');$('userActive').checked=u.activo!==false;$('userPassword').value='';$('saveUserBtn').textContent='Guardar cambios';window.scrollTo({top:$('userName').getBoundingClientRect().top+scrollY-120,behavior:'smooth'});}
+async function saveUser(){
+  try{setBusy(true,'Guardando usuario…');const editing=clean($('editingLegacyId').value);
+    const payload={action:'save_user',legacy_id:editing||null,profile_id:clean($('editingProfileId').value)||null,usuario:lower($('userName').value),
+      nombre:clean($('userFullName').value),correo:lower($('userEmail').value),rol:$('userRole').value,activo:$('userActive').checked,
+      vence:$('userExpiry').value||null,equipos:splitEquipment($('userEquipment').value),password:$('userPassword').value||null};
+    if(!payload.usuario||!payload.correo)throw new Error('Complete usuario y correo.');if(!editing && String(payload.password||'').length<8)throw new Error('La contraseña inicial debe tener al menos 8 caracteres.');
+    await invokeAdmin(payload);clearUserForm();await loadAll(false);toast(editing?'Usuario actualizado.':'Usuario creado completamente.');
+  }catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}
+}
+async function setUserActive(legacyId,active){if(!confirm(`${active?'Activar':'Bloquear'} este usuario?`))return;try{setBusy(true);await invokeAdmin({action:'set_active',legacy_id:legacyId,activo:active});await loadAll(false);toast(active?'Usuario activado.':'Usuario bloqueado.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+async function closeUserSessions(legacyId){if(!confirm('¿Cerrar todas las sesiones de este usuario?'))return;try{setBusy(true);await invokeAdmin({action:'close_sessions',legacy_id:legacyId});await loadAll(false);toast('Sesiones cerradas.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+async function deleteUser(legacyId){if(!confirm('¿Eliminar por completo este usuario, su perfil y su acceso?'))return;try{setBusy(true);await invokeAdmin({action:'delete_user',legacy_id:legacyId});await loadAll(false);toast('Usuario eliminado.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+function renderUsers(){const el=$('userList');if(!state.users.length){el.innerHTML='<div class="empty">No hay usuarios.</div>';return;}el.innerHTML=state.users.map(u=>{
+  const pcs=userEquipment(u.legacy_id);return `<div class="item user"><div class="mini"><label>Usuario</label><b>${esc(u.usuario)}</b><br><small>${esc(u.correo||'Sin correo')}</small></div><div class="mini"><label>Nombre</label>${esc(u.nombre||'—')}</div><div class="mini"><label>Rol</label>${esc(u.rol)}</div><div class="mini"><label>Estado</label><span class="badge ${u.activo?'on':'off'}">${u.activo?'ACTIVO':'BLOQUEADO'}</span></div><div class="mini"><label>PC permitidas</label>${pcs.length?pcs.map(esc).join('<br>'):'Sin restricción asignada'}</div><div class="btns"><button onclick="editUser('${esc(u.legacy_id)}')">Editar</button><button class="${u.activo?'danger':'success'}" onclick="setUserActive('${esc(u.legacy_id)}',${!u.activo})">${u.activo?'Bloquear':'Activar'}</button><button class="warning" onclick="closeUserSessions('${esc(u.legacy_id)}')">Cerrar sesiones</button><button class="danger" onclick="deleteUser('${esc(u.legacy_id)}')">Eliminar</button></div></div>`}).join('');}
+
+function clearEquipmentForm(){['equipmentId','equipmentName','equipmentExpiry','equipmentVersion','equipmentMessage'].forEach(id=>$(id).value='');$('equipmentState').value='autorizado';}
+function editEquipment(id){const e=state.equipment.find(x=>x.id===id);if(!e)return;$('equipmentId').value=e.id;$('equipmentName').value=e.nombre||'';$('equipmentState').value=e.estado||'pendiente';$('equipmentExpiry').value=dateOnly(e.vence);$('equipmentVersion').value=e.version_app||'';$('equipmentMessage').value=e.mensaje||'';}
+async function saveEquipment(){try{setBusy(true,'Guardando equipo…');const id=upper($('equipmentId').value);if(!id)throw new Error('Ingrese el código de la PC.');const row={id,nombre:clean($('equipmentName').value)||id,estado:$('equipmentState').value,vence:$('equipmentExpiry').value||null,version_app:clean($('equipmentVersion').value)||null,mensaje:clean($('equipmentMessage').value)||null,origen:'panel_web',actualizado_en:nowIso()};const {error}=await client.from('equipos_control').upsert(row,{onConflict:'id'});if(error)throw error;await addAudit('equipo_guardado',row);clearEquipmentForm();await loadAll(false);toast('Equipo guardado.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+async function setEquipmentState(id,stateValue){try{setBusy(true);const {error}=await client.from('equipos_control').update({estado:stateValue,actualizado_en:nowIso()}).eq('id',id);if(error)throw error;await addAudit('estado_equipo_cambiado',{id,estado:stateValue});await loadAll(false);toast(`Equipo ${stateValue}.`);}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+async function deleteEquipment(id){if(!confirm('¿Eliminar este equipo y sus asignaciones?'))return;try{setBusy(true);const {error}=await client.from('equipos_control').delete().eq('id',id);if(error)throw error;await addAudit('equipo_eliminado',{id});await loadAll(false);toast('Equipo eliminado.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+function renderEquipment(){const el=$('equipmentList');if(!state.equipment.length){el.innerHTML='<div class="empty">No hay equipos registrados.</div>';return;}el.innerHTML=state.equipment.map(e=>`<div class="item device"><div class="mini"><label>Código</label><b>${esc(e.id)}</b></div><div class="mini"><label>Nombre</label>${esc(e.nombre||'—')}</div><div class="mini"><label>Estado</label><span class="badge ${e.estado==='autorizado'?'on':e.estado==='bloqueado'?'off':'pending'}">${esc((e.estado||'pendiente').toUpperCase())}</span></div><div class="mini"><label>Última conexión</label>${esc(e.ultima_conexion?new Date(e.ultima_conexion).toLocaleString():'—')}</div><div class="mini"><label>Mensaje</label>${esc(e.mensaje||'—')}</div><div class="btns"><button onclick="editEquipment('${esc(e.id)}')">Editar</button><button class="success" onclick="setEquipmentState('${esc(e.id)}','autorizado')">Autorizar</button><button class="danger" onclick="setEquipmentState('${esc(e.id)}','bloqueado')">Bloquear</button><button class="warning" onclick="setEquipmentState('${esc(e.id)}','pendiente')">Pendiente</button><button class="danger" onclick="deleteEquipment('${esc(e.id)}')">Eliminar</button></div></div>`).join('');}
+
+async function createSupportAction(){try{setBusy(true,'Enviando acción…');const row={legacy_id:`ACT-${crypto.randomUUID()}`,equipo_id:upper($('supportTarget').value)||'*',accion:$('supportAction').value,mensaje:clean($('supportMessage').value)||null,creada_en:nowIso(),creada_por:sessionUser.email||sessionUser.id,activa:true};const {error}=await client.from('acciones_soporte').insert(row);if(error)throw error;await addAudit('accion_soporte_creada',row);$('supportMessage').value='';await loadAll(false);toast('Acción enviada.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+async function completeSupportAction(id){try{setBusy(true);const {error}=await client.from('acciones_soporte').update({activa:false,ejecutada_en:nowIso(),resultado:{cerrada_desde:'panel_web'}}).eq('legacy_id',id);if(error)throw error;await addAudit('accion_soporte_cerrada',{legacy_id:id});await loadAll(false);toast('Acción cerrada.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+async function deleteSupportAction(id){if(!confirm('¿Eliminar esta acción?'))return;try{setBusy(true);const {error}=await client.from('acciones_soporte').delete().eq('legacy_id',id);if(error)throw error;await loadAll(false);toast('Acción eliminada.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+function renderSupport(){const el=$('supportList');if(!state.support.length){el.innerHTML='<div class="empty">No hay acciones de soporte.</div>';return;}el.innerHTML=state.support.map(a=>`<div class="item support"><div class="mini"><label>PC</label><b>${esc(a.equipo_id)}</b></div><div class="mini"><label>Acción</label>${esc(a.accion)}</div><div class="mini"><label>Detalle</label>${esc(a.mensaje||'—')}</div><div class="mini"><label>Estado</label><span class="badge ${a.activa?'pending':'on'}">${a.activa?'PENDIENTE':'CERRADA'}</span></div><div class="btns">${a.activa?`<button class="success" onclick="completeSupportAction('${esc(a.legacy_id)}')">Cerrar</button>`:''}<button class="danger" onclick="deleteSupportAction('${esc(a.legacy_id)}')">Eliminar</button></div></div>`).join('');}
+
+function clearReleaseForm(){['releaseVersion','releaseDate','releaseFile','releaseUrl','releaseChanges'].forEach(id=>$(id).value='');$('releaseRequired').checked=false;$('releasePublished').checked=true;}
+function editRelease(version){const v=state.versions.find(x=>x.version===version);if(!v)return;$('releaseVersion').value=v.version;$('releaseDate').value=dateOnly(v.fecha);$('releaseFile').value=v.archivo||'';$('releaseUrl').value=v.url_descarga||'';$('releaseChanges').value=Array.isArray(v.cambios)?v.cambios.join('\n'):'';$('releaseRequired').checked=v.obligatoria===true;$('releasePublished').checked=v.publicada!==false;}
+async function saveRelease(){try{setBusy(true,'Guardando versión…');const version=clean($('releaseVersion').value);if(!version)throw new Error('Ingrese la versión.');const row={version,fecha:$('releaseDate').value||null,archivo:clean($('releaseFile').value)||null,url_descarga:clean($('releaseUrl').value)||null,cambios:lines($('releaseChanges').value),obligatoria:$('releaseRequired').checked,publicada:$('releasePublished').checked,origen:'panel_web'};const {error}=await client.from('versiones_app').upsert(row,{onConflict:'version'});if(error)throw error;await addAudit('version_guardada',row);clearReleaseForm();await loadAll(false);toast('Versión guardada.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+async function deleteRelease(version){if(!confirm('¿Eliminar esta versión?'))return;try{setBusy(true);const {error}=await client.from('versiones_app').delete().eq('version',version);if(error)throw error;await loadAll(false);toast('Versión eliminada.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+function renderVersions(){const el=$('versionList');if(!state.versions.length){el.innerHTML='<div class="empty">No hay versiones.</div>';return;}el.innerHTML=state.versions.map(v=>`<div class="item version"><div class="mini"><label>Versión</label><b>${esc(v.version)}</b></div><div class="mini"><label>Fecha</label>${esc(dateOnly(v.fecha)||'—')}</div><div class="mini"><label>URL / archivo</label>${esc(v.archivo||'—')}<br><small>${esc(v.url_descarga||'')}</small></div><div class="mini"><label>Estado</label><span class="badge ${v.publicada?'on':'off'}">${v.publicada?'PUBLICADA':'OCULTA'}</span>${v.obligatoria?' · Obligatoria':''}</div><div class="btns"><button onclick="editRelease('${esc(v.version)}')">Editar</button><button class="danger" onclick="deleteRelease('${esc(v.version)}')">Eliminar</button></div></div>`).join('');}
+
+function filenameSlug(name){return String(name||'directorio').replace(/\.json$/i,'').toLowerCase().replace(/[^a-z0-9_-]+/g,'_').replace(/^_+|_+$/g,'')||'directorio';}
+async function sha256Text(text){const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text));return [...new Uint8Array(digest)].map(v=>v.toString(16).padStart(2,'0')).join('');}
+function collectEmails(value,path=[],rows=[]){
+  if(Array.isArray(value)){value.forEach((item,index)=>collectEmails(item,[...path,String(index)],rows));return rows;}
+  if(value&&typeof value==='object'){Object.entries(value).forEach(([k,v])=>collectEmails(v,[...path,k],rows));return rows;}
+  if(typeof value==='string'){
+    const matches=value.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi)||[];
+    matches.forEach(email=>rows.push({path:[...path],email:email.toLowerCase()}));
+  }
+  return rows;
+}
+async function importDirectories(){
+  const files=[...$('directoryFiles').files];if(!files.length){toast('Seleccione al menos un JSON.',true);return;}
+  try{setBusy(true,'Importando directorios…');
+    for(const file of files){const text=await file.text();let content;try{content=JSON.parse(text);}catch{throw new Error(`${file.name}: JSON inválido.`);}const slug=filenameSlug(file.name);const version=clean(content?.version||content?.meta?.version||content?.metadata?.version)||null;const source=clean(content?.fuente||content?.source||file.name);const hash=await sha256Text(text);const type=clean($('directoryType').value)||slug.split('_')[0];
+      const {error:docError}=await client.from('directorios_documentos').upsert({slug,tipo:type,version,fecha_fuente:content?.fecha||content?.updated_at||null,fuente:source,sha256:hash,contenido:content,origen:'panel_web',actualizado_en:nowIso()},{onConflict:'slug'});if(docError)throw docError;
+      const {error:deleteError}=await client.from('directorio_correos').delete().eq('conjunto',slug);if(deleteError)throw deleteError;
+      const emails=collectEmails(content);const unique=[];const seen=new Set();for(const item of emails){const key=`${item.email}|${item.path.join('>')}`;if(seen.has(key))continue;seen.add(key);const p=item.path.filter(x=>!/^\d+$/.test(x));unique.push({conjunto:slug,version,fuente:source,nivel_1:p[0]||null,nivel_2:p[1]||null,nivel_3:p[2]||null,nivel_4:p[3]||null,nivel_5:p[4]||null,ruta:item.path,ruta_texto:item.path.join(' > '),correo:item.email,activo:true});}
+      for(let i=0;i<unique.length;i+=400){const {error}=await client.from('directorio_correos').insert(unique.slice(i,i+400));if(error)throw error;}
+      await addAudit('directorio_importado',{slug,archivo:file.name,correos:unique.length,sha256:hash});
     }
-
-    state.actualizado_en = new Date().toISOString().replace('T',' ').slice(0,19);
-    const content = JSON.stringify(state,null,2) + '\n';
-    const body = {
-      message: options.commitMessage || `Actualiza control CoordiNext ${state.actualizado_en}`,
-      content:encodeUtf8Base64(content),
-      branch:c.branch
-    };
-    if (currentSha) body.sha = currentSha;
-
-    const response = await fetch(apiUrl(c),{
-      method:'PUT',
-      headers:{...headers(c.token),'Content-Type':'application/json'},
-      body:JSON.stringify(body)
-    });
-    if (!response.ok) throw new Error(await readError(response));
-
-    const payload = await response.json();
-    currentSha = payload.content?.sha || payload.commit?.sha || currentSha;
-    render();
-    saveConnection();
-    setStatus('Publicado','ok');
-    document.getElementById('lastUpdate').textContent =
-      `Publicado: ${state.actualizado_en}. SHA: ${String(currentSha).slice(0,10)}…`;
-    toast(options.successMessage || 'Cambios publicados correctamente.');
-    return true;
-  } catch (error) {
-    setStatus('Error al publicar','error');
-    toast(`No se pudo guardar: ${error.message}`,true);
-    return false;
-  } finally {
-    setBusy(false);
-  }
+    $('directoryFiles').value='';await loadAll(false);toast('Directorios importados correctamente.');
+  }catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}
 }
+async function deleteDirectory(slug){if(!confirm(`¿Eliminar el directorio ${slug} y sus correos?`))return;try{setBusy(true);let r=await client.from('directorio_correos').delete().eq('conjunto',slug);if(r.error)throw r.error;r=await client.from('directorios_documentos').delete().eq('slug',slug);if(r.error)throw r.error;await addAudit('directorio_eliminado',{slug});await loadAll(false);toast('Directorio eliminado.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+function renderDirectories(){const el=$('directoryList');if(!state.directories.length){el.innerHTML='<div class="empty">No hay directorios importados.</div>';return;}el.innerHTML=state.directories.map(d=>`<div class="item directory"><div class="mini"><label>Directorio</label><b>${esc(d.slug)}</b></div><div class="mini"><label>Versión</label>${esc(d.version||'—')}</div><div class="mini"><label>Fuente</label>${esc(d.fuente||'—')}</div><div class="mini"><label>Actualizado</label>${esc(d.actualizado_en?new Date(d.actualizado_en).toLocaleString():'—')}</div><div class="btns"><button class="danger" onclick="deleteDirectory('${esc(d.slug)}')">Eliminar</button></div></div>`).join('');}
 
-function syncFromForm() {
-  state.sistema_activo = document.getElementById('systemActive').checked;
-  state.modo_autorizacion = document.getElementById('mode').value;
-  state.version_minima = document.getElementById('minVersion').value.trim();
-  state.intervalo_segundos = Math.min(60,Math.max(3,Number(document.getElementById('interval').value || 5)));
-  // Se conserva este campo para clientes antiguos; los clientes nuevos usan segundos.
-  state.intervalo_minutos = Math.max(1,Math.ceil(state.intervalo_segundos / 60));
-  state.tolerancia_sin_internet_horas = Math.min(720,Math.max(0,Number(document.getElementById('offlineHours').value || 24)));
-  state.bloquear_sin_internet = document.getElementById('blockOffline').checked;
-  state.mensaje_global = document.getElementById('globalMessage').value.trim();
-  updateSummary();
-  updatePreview();
-}
+async function addAudit(action,detail){try{await client.from('auditoria').insert({usuario_id:sessionUser.id,accion:action,detalle:detail});}catch(_){} }
+function renderAudit(){const el=$('auditList');if(!el)return;if(!state.audit.length){el.innerHTML='<div class="empty">No hay movimientos registrados.</div>';return;}el.innerHTML=state.audit.map(a=>`<div class="item audit"><div class="mini"><label>Fecha</label>${esc(a.creado_en?new Date(a.creado_en).toLocaleString():'—')}</div><div class="mini"><label>Acción</label><b>${esc(a.accion)}</b></div><div class="mini"><label>Detalle</label><code>${esc(JSON.stringify(a.detalle||{}))}</code></div></div>`).join('');}
 
-function quickEnable() {
-  state.sistema_activo = true;
-  document.getElementById('systemActive').checked = true;
-  syncFromForm(); toast('Sistema marcado como activo. Publique para aplicar.');
-}
-function quickDisable() {
-  if (!confirm('Esto bloqueará todas las PC cuando publique. ¿Continuar?')) return;
-  state.sistema_activo = false;
-  document.getElementById('systemActive').checked = false;
-  syncFromForm(); toast('Sistema marcado como bloqueado. Publique para aplicar.');
-}
-function switchToList() {
-  state.modo_autorizacion = 'lista';
-  document.getElementById('mode').value = 'lista';
-  syncFromForm(); toast('Modo Lista seleccionado. Publique para aplicar.');
-}
+function exportBackup(){const payload={exportado_en:nowIso(),origen:'CoordiNext Panel Web Supabase',...state};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`coordinext_respaldo_${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(a.href);}
 
-function passwordIsValid(value) {
-  const p = String(value || '');
-  return p.length >= 8 && p === p.trim();
-}
-
-async function createPasswordRecord(password) {
-  if (!window.crypto?.subtle) throw new Error('Este navegador no permite criptografía segura. Abra el panel mediante HTTPS.');
-  const salt = crypto.getRandomValues(new Uint8Array(16));
-  const keyMaterial = await crypto.subtle.importKey(
-    'raw', new TextEncoder().encode(password), {name:'PBKDF2'}, false, ['deriveBits']
-  );
-  const bits = await crypto.subtle.deriveBits(
-    {name:'PBKDF2',hash:'SHA-256',salt,iterations:PBKDF2_ITERATIONS},
-    keyMaterial, 256
-  );
-  return {
-    algoritmo:'pbkdf2_sha256',
-    iteraciones:PBKDF2_ITERATIONS,
-    salt:bytesToBase64(salt),
-    hash:bytesToBase64(new Uint8Array(bits))
-  };
-}
-
-async function addUser() {
-  const usuario = normalizeUsername(document.getElementById('newUser').value);
-  const nombre = document.getElementById('newFullName').value.trim();
-  const rol = document.getElementById('newRole').value;
-  const password = document.getElementById('newPassword').value;
-  const vence = document.getElementById('newUserExpiry').value;
-  const equipos = parsePcList(document.getElementById('newUserPcs').value);
-
-  if (!/^[a-z0-9._-]{3,40}$/.test(usuario)) {
-    return toast('El usuario debe tener 3 a 40 caracteres: letras, números, punto, guion o guion bajo.',true);
-  }
-  if (state.usuarios.some(item => item.usuario === usuario)) return toast('Ese usuario ya existe.',true);
-  if (!passwordIsValid(password)) {
-    return toast('La contraseña debe tener mínimo 8 caracteres y no puede comenzar ni terminar con espacios.',true);
-  }
-
-  try {
-    setStatus('Protegiendo clave…','busy');
-    const passwordRecord = await createPasswordRecord(password);
-    state.usuarios.push({
-      id:`USR-${crypto.randomUUID ? crypto.randomUUID() : Date.now()}`,
-      usuario,nombre,rol,activo:true,vence,equipos,password:passwordRecord,
-      actualizado_en:new Date().toISOString().replace('T',' ').slice(0,19)
-    });
-    ['newUser','newFullName','newPassword','newUserExpiry','newUserPcs'].forEach(id => document.getElementById(id).value='');
-    render();
-    setStatus('Cambios locales','ok');
-    toast('Usuario creado. Pulse Guardar y publicar para habilitarlo.');
-  } catch (error) {
-    setStatus('Error','error'); toast(error.message,true);
-  }
-}
-
-function updateUser(index) {
-  const user = state.usuarios[index];
-  if (!user) return;
-  const usuario = normalizeUsername(document.getElementById(`u-user-${index}`).value);
-  if (!/^[a-z0-9._-]{3,40}$/.test(usuario)) return toast('Nombre de usuario inválido.',true);
-  if (state.usuarios.some((item,i) => i !== index && item.usuario === usuario)) return toast('Ese usuario ya existe.',true);
-  user.usuario = usuario;
-  user.nombre = document.getElementById(`u-name-${index}`).value.trim();
-  user.rol = document.getElementById(`u-role-${index}`).value;
-  user.vence = document.getElementById(`u-exp-${index}`).value;
-  user.equipos = parsePcList(document.getElementById(`u-pcs-${index}`).value);
-  user.actualizado_en = new Date().toISOString().replace('T',' ').slice(0,19);
-  render(); toast('Usuario actualizado. Publique para aplicar.');
-}
-
-function toggleUser(index) {
-  const user = state.usuarios[index];
-  if (!user) return;
-  user.activo = !user.activo;
-  user.actualizado_en = new Date().toISOString().replace('T',' ').slice(0,19);
-  render(); toast(user.activo ? 'Usuario activado.' : 'Usuario desactivado. Su sesión se cerrará en la siguiente revisión.');
-}
-
-function deleteUser(index) {
-  const user = state.usuarios[index];
-  if (!user || !confirm(`¿Eliminar al usuario ${user.usuario}?`)) return;
-  state.accesos_usuario_autorizados = (state.accesos_usuario_autorizados || [])
-    .filter(item => normalizeUsername(item.usuario) !== normalizeUsername(user.usuario));
-  state.accesos_usuario_bloqueados = (state.accesos_usuario_bloqueados || [])
-    .filter(item => normalizeUsername(item.usuario) !== normalizeUsername(user.usuario));
-  state.usuarios.splice(index,1); render(); toast('Usuario y permisos usuario-PC eliminados. Publique para aplicar.');
-}
-
-function openPasswordDialog(index) {
-  passwordResetIndex = index;
-  const user = state.usuarios[index];
-  document.getElementById('passwordDialogUser').textContent = user ? `Usuario: ${user.usuario}` : '';
-  document.getElementById('resetPassword').value = '';
-  document.getElementById('passwordDialog').showModal();
-}
-function closePasswordDialog() {
-  passwordResetIndex = -1;
-  document.getElementById('passwordDialog').close();
-}
-async function confirmPasswordReset() {
-  const password = document.getElementById('resetPassword').value;
-  if (!passwordIsValid(password)) return toast('La contraseña debe tener mínimo 8 caracteres y no puede comenzar ni terminar con espacios.',true);
-  const user = state.usuarios[passwordResetIndex];
-  if (!user) return closePasswordDialog();
-  try {
-    user.password = await createPasswordRecord(password);
-    user.actualizado_en = new Date().toISOString().replace('T',' ').slice(0,19);
-    closePasswordDialog(); render();
-    toast('Contraseña cambiada. Publique para aplicar.');
-  } catch (error) { toast(error.message,true); }
-}
-
-function addAuthorized() {
-  const id = normalizeId(document.getElementById('newId').value);
-  if (!id) return toast('Ingrese el ID de la PC.',true);
-  if (state.equipos_autorizados.some(item => item.id === id)) return toast('La PC ya está autorizada.',true);
-  state.equipos_bloqueados = state.equipos_bloqueados.filter(item => item.id !== id);
-  state.equipos_autorizados.push({
-    id, nombre:document.getElementById('newName').value.trim(),
-    activo:true, vence:document.getElementById('newExpiry').value,
-    mensaje:document.getElementById('newMessage').value.trim()
-  });
-  ['newId','newName','newExpiry','newMessage'].forEach(x => document.getElementById(x).value='');
-  render(); toast('Equipo autorizado. Publique para aplicar.');
-}
-function updateAuthorized(index) {
-  const item = state.equipos_autorizados[index]; if (!item) return;
-  const id = normalizeId(document.getElementById(`a-id-${index}`).value);
-  if (!id) return toast('ID inválido.',true);
-  item.id=id; item.nombre=document.getElementById(`a-name-${index}`).value.trim();
-  item.vence=document.getElementById(`a-exp-${index}`).value;
-  item.mensaje=document.getElementById(`a-msg-${index}`).value.trim();
-  render(); toast('Equipo actualizado.');
-}
-function toggleAuthorized(index) {
-  const item=state.equipos_autorizados[index]; if (!item) return;
-  item.activo=!item.activo; render(); toast(item.activo?'Autorización activada.':'Autorización desactivada.');
-}
-function removeAuthorized(index) {
-  if (!confirm('¿Quitar este equipo de autorizados?')) return;
-  state.equipos_autorizados.splice(index,1); render(); toast('Equipo retirado.');
-}
-async function blockAuthorized(index) {
-  const item=state.equipos_autorizados[index];
-  if (!item) return;
-
-  const reason=prompt(
-    'Motivo del bloqueo:',
-    'Actividad sospechosa detectada por administración.'
-  );
-  if (reason===null) return;
-  if (!confirm(`¿Bloquear y publicar inmediatamente la PC ${item.id}?`)) return;
-
-  state.equipos_autorizados.splice(index,1);
-  state.equipos_bloqueados=state.equipos_bloqueados.filter(x=>x.id!==item.id);
-  state.equipos_bloqueados.push({
-    id:item.id,
-    nombre:item.nombre,
-    mensaje:reason.trim() || 'Acceso bloqueado por administración.'
-  });
-  render();
-  setStatus('Publicando bloqueo…','busy');
-
-  await saveRemote({
-    commitMessage:`BLOQUEO INMEDIATO ${item.id}`,
-    successMessage:`PC ${item.id} bloqueada y publicada. La aplicación la detectará en pocos segundos.`
-  });
-}
-
-async function addBlocked() {
-  const id=normalizeId(document.getElementById('blockId').value);
-  if (!id) return toast('Ingrese el ID de la PC.',true);
-
-  const message=document.getElementById('blockMessage').value.trim()
-    || 'Acceso bloqueado por administración.';
-  if (!confirm(`¿Bloquear y publicar inmediatamente la PC ${id}?`)) return;
-
-  state.equipos_autorizados=state.equipos_autorizados.filter(item=>item.id!==id);
-  state.equipos_bloqueados=state.equipos_bloqueados.filter(item=>item.id!==id);
-  state.equipos_bloqueados.push({id,nombre:'',mensaje:message});
-  document.getElementById('blockId').value='';
-  document.getElementById('blockMessage').value='';
-  render();
-  setStatus('Publicando bloqueo…','busy');
-
-  await saveRemote({
-    commitMessage:`BLOQUEO INMEDIATO ${id}`,
-    successMessage:`PC ${id} bloqueada y publicada. La aplicación la detectará en pocos segundos.`
-  });
-}
-function updateBlocked(index) {
-  const item=state.equipos_bloqueados[index]; if (!item) return;
-  item.id=normalizeId(document.getElementById(`b-id-${index}`).value);
-  item.nombre=document.getElementById(`b-name-${index}`).value.trim();
-  item.mensaje=document.getElementById(`b-msg-${index}`).value.trim();
-  render(); toast('Bloqueo actualizado.');
-}
-function unblock(index) {
-  const item=state.equipos_bloqueados[index]; if (!item) return;
-  state.equipos_bloqueados.splice(index,1);
-  state.equipos_autorizados=state.equipos_autorizados.filter(x=>x.id!==item.id);
-  state.equipos_autorizados.push({id:item.id,nombre:item.nombre,activo:true,vence:'',mensaje:'Desbloqueado por administración'});
-  render(); toast('Equipo desbloqueado y autorizado.');
-}
-function removeBlocked(index) {
-  if (!confirm('¿Quitar este registro de bloqueados?')) return;
-  state.equipos_bloqueados.splice(index,1); render(); toast('Registro eliminado.');
-}
-
-
-
-const SUPPORT_ACTION_LABELS = {
-  sincronizar_directorios:'Sincronizar directorios',
-  reparar_configuracion:'Reparar configuración',
-  limpiar_cache:'Limpiar caché local',
-  forzar_revision:'Forzar revisión remota',
-  reiniciar_aplicacion:'Reiniciar aplicación'
-};
-
-function supportTargetOptions() {
-  const opts = [{id:'*', nombre:'Todas las PC autorizadas'}];
-  for (const item of state.equipos_autorizados || []) {
-    if (!item?.id) continue;
-    opts.push({id:item.id, nombre:item.nombre || item.id});
-  }
-  return opts;
-}
-
-function refreshSupportTargets() {
-  const select = document.getElementById('supportTarget');
-  if (!select) return;
-  const previous = select.value || '*';
-  const options = supportTargetOptions();
-  select.innerHTML = options.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.nombre)} · ${escapeHtml(item.id)}</option>`).join('');
-  select.value = options.some(item => item.id === previous) ? previous : '*';
-}
-
-function queueSupportAction() {
-  const manualId = normalizeId(document.getElementById('supportManualId').value);
-  const selectedId = normalizeId(document.getElementById('supportTarget').value) || '*';
-  const equipo_id = manualId || selectedId || '*';
-  const action = String(document.getElementById('supportAction').value || '').trim().toLowerCase();
-  const message = document.getElementById('supportMessage').value.trim();
-  const match = (state.equipos_autorizados || []).find(item => item.id === equipo_id);
-  const equipo_nombre = equipo_id === '*' ? 'Todas las PC autorizadas' : (match?.nombre || equipo_id);
-  if (!action) return toast('Seleccione una acción de soporte.', true);
-  const record = {
-    id: `SUP-${crypto.randomUUID ? crypto.randomUUID() : Date.now()}`,
-    equipo_id,
-    equipo_nombre,
-    accion: action,
-    mensaje: message,
-    creada_en: new Date().toISOString().replace('T',' ').slice(0,19),
-    creada_por: 'administracion',
-    activa: true
-  };
-  state.acciones_soporte = [record, ...(state.acciones_soporte || [])].slice(0, 60);
-  document.getElementById('supportManualId').value = '';
-  document.getElementById('supportMessage').value = '';
-  render();
-  toast('Acción de soporte agregada. Pulse Guardar y publicar para enviarla.');
-}
-
-function removeSupportAction(index) {
-  const item = state.acciones_soporte[index];
-  if (!item) return;
-  if (!confirm(`¿Quitar la acción ${SUPPORT_ACTION_LABELS[item.accion] || item.accion} para ${item.equipo_id}?`)) return;
-  state.acciones_soporte.splice(index,1);
-  render();
-  toast('Acción de soporte eliminada.');
-}
-
-function renderSupport() {
-  refreshSupportTargets();
-  const box = document.getElementById('supportList');
-  if (!box) return;
-  if (!state.acciones_soporte?.length) {
-    box.innerHTML = '<div class="empty">No hay acciones de soporte pendientes. Puede reparar una sola PC desde aquí sin afectar a las demás.</div>';
-    return;
-  }
-  box.innerHTML = state.acciones_soporte.map((item, index) => `
-    <div class="item device">
-      <div class="mini"><label>PC objetivo</label><input value="${escapeHtml(item.equipo_id)} · ${escapeHtml(item.equipo_nombre || '')}" disabled></div>
-      <div class="mini"><label>Acción</label><input value="${escapeHtml(SUPPORT_ACTION_LABELS[item.accion] || item.accion)}" disabled></div>
-      <div class="mini"><label>Creada</label><input value="${escapeHtml(item.creada_en || '')}" disabled></div>
-      <div class="mini"><label>Detalle</label><input value="${escapeHtml(item.mensaje || '')}" disabled></div>
-      <div class="btns">
-        <button class="danger" onclick="removeSupportAction(${index})">Quitar</button>
-      </div>
-    </div>`).join('');
-}
-
-async function renderUserPcCodes() {
-  for (let userIndex = 0; userIndex < state.usuarios.length; userIndex += 1) {
-    const user = state.usuarios[userIndex];
-    const target = document.getElementById(`u-codes-${userIndex}`);
-    if (!target) continue;
-
-    const identifiers = Array.isArray(user.equipos) ? user.equipos : [];
-    if (!identifiers.length) {
-      target.innerHTML = '<span class="note">Sin códigos permitidos: agregue el CN de la PC o el CU individual.</span>';
-      continue;
-    }
-
-    const strict = requiresExplicitUserPcApproval();
-    const lines = [];
-    for (let identifierIndex = 0; identifierIndex < identifiers.length; identifierIndex += 1) {
-      const access = await resolveUserIdentifier(user, identifierIndex);
-      if (!access) continue;
-      const {identifier, code, source} = access;
-      const block = accessBlockByCode(code);
-      const authorization = accessAuthorizationByCode(code);
-      const authorizedExplicitly = Boolean(authorization) && !block;
-      const allowedByList = !strict && !block;
-      const status = block
-        ? 'BLOQUEADO'
-        : (authorizedExplicitly ? 'AUTORIZADO' : (allowedByList ? `PERMITIDO POR ${source}` : 'PENDIENTE'));
-      const icon = block ? '⛔' : ((authorizedExplicitly || allowedByList) ? '🟢' : '🟡');
-      const detail = block
-        ? (block.mensaje || 'Bloqueado por el propietario.')
-        : (authorizedExplicitly
-          ? (authorization.mensaje || 'Aprobado por el propietario.')
-          : (allowedByList
-            ? 'Acceso permitido directamente por el código escrito en este mismo campo.'
-            : 'Modo estricto: pulse Autorizar para permitir el acceso.'));
-
-      let mainAction = '';
-      if (block) {
-        mainAction = `<button class="success" onclick="unblockUserPc(${userIndex},${identifierIndex})">Quitar bloqueo</button>`;
-      } else if (strict && authorizedExplicitly) {
-        mainAction = `<button class="warning" onclick="revokeUserPc(${userIndex},${identifierIndex})">Revocar</button>`;
-      } else if (strict) {
-        mainAction = `<button class="success" onclick="authorizeUserPc(${userIndex},${identifierIndex})">Autorizar</button>`;
-      }
-      const blockAction = block
-        ? ''
-        : `<button class="danger" onclick="blockUserPc(${userIndex},${identifierIndex})">Bloquear</button>`;
-
-      lines.push(`
-        <div class="notice" style="margin-top:6px;padding:9px 10px">
-          <b>${icon} ${status}</b> · ${escapeHtml(identifier)}<br>
-          <code>${escapeHtml(code)}</code><br>
-          <small>${escapeHtml(detail)}</small>
-          <div class="btns" style="margin-top:7px">
-            <button class="secondary" onclick="copyUserPcCode(${userIndex},${identifierIndex})">Copiar CU</button>
-            ${mainAction}
-            ${blockAction}
-          </div>
-        </div>`);
-    }
-    target.innerHTML = lines.join('');
-  }
-}
-
-async function copyUserPcCode(userIndex, identifierIndex) {
-  const user = state.usuarios[userIndex];
-  const access = await resolveUserIdentifier(user, identifierIndex);
-  if (!access) return;
-  await navigator.clipboard.writeText(access.code);
-  toast(`Código copiado: ${access.code}`);
-}
-
-function removeAccessByCode(list, code) {
-  return (list || []).filter(item => normalizeId(item.codigo || item.id || item.codigo_control) !== normalizeId(code));
-}
-
-async function authorizeUserPc(userIndex, identifierIndex) {
-  const user = state.usuarios[userIndex];
-  const access = await resolveUserIdentifier(user, identifierIndex);
-  if (!user || !access) return;
-  const {identifier, code, pcId} = access;
-  if (!confirm(`¿Autorizar a ${user.usuario}?\n\nReferencia: ${identifier}\nCódigo: ${code}`)) return;
-
-  state.modo_acceso_usuario = 'lista';
-  state.accesos_usuario_bloqueados = removeAccessByCode(state.accesos_usuario_bloqueados, code);
-  state.accesos_usuario_autorizados = removeAccessByCode(state.accesos_usuario_autorizados, code);
-  state.accesos_usuario_autorizados.push({
-    codigo:code,
-    usuario:user.usuario,
-    equipo_id:pcId,
-    nombre:user.nombre || '',
-    activo:true,
-    vence:'',
-    mensaje:'Aprobado por el propietario.',
-    autorizado_en:new Date().toISOString().replace('T',' ').slice(0,19)
-  });
-  render();
-  setStatus('Publicando autorización individual…','busy');
-  await saveRemote({
-    commitMessage:`AUTORIZA USUARIO-PC ${code}`,
-    successMessage:`Acceso ${code} autorizado por el propietario.`
-  });
-}
-
-async function revokeUserPc(userIndex, identifierIndex) {
-  const user = state.usuarios[userIndex];
-  const access = await resolveUserIdentifier(user, identifierIndex);
-  if (!user || !access) return;
-  const {code} = access;
-  if (!confirm(`¿Revocar el permiso ${code}?\n\nEl acceso quedará pendiente en modo estricto.`)) return;
-  state.accesos_usuario_autorizados = removeAccessByCode(state.accesos_usuario_autorizados, code);
-  render();
-  setStatus('Publicando revocación individual…','busy');
-  await saveRemote({
-    commitMessage:`REVOCA USUARIO-PC ${code}`,
-    successMessage:`Permiso ${code} revocado.`
-  });
-}
-
-async function blockUserPc(userIndex, identifierIndex) {
-  const user = state.usuarios[userIndex];
-  const access = await resolveUserIdentifier(user, identifierIndex);
-  if (!user || !access) return;
-  const {identifier, code, pcId} = access;
-  const reason = prompt(
-    `Motivo para bloquear únicamente a ${user.usuario} (${identifier}):`,
-    'Acceso de usuario bloqueado por el propietario.'
-  );
-  if (reason === null) return;
-  if (!confirm(`¿Bloquear y publicar el acceso ${code}?\n\nLos demás usuarios de la PC continuarán funcionando.`)) return;
-
-  state.accesos_usuario_autorizados = removeAccessByCode(state.accesos_usuario_autorizados, code);
-  state.accesos_usuario_bloqueados = removeAccessByCode(state.accesos_usuario_bloqueados, code);
-  state.accesos_usuario_bloqueados.push({
-    codigo:code,
-    usuario:user.usuario,
-    equipo_id:pcId,
-    nombre:user.nombre || '',
-    mensaje:reason.trim() || 'Acceso de usuario bloqueado por el propietario.',
-    bloqueado_en:new Date().toISOString().replace('T',' ').slice(0,19)
-  });
-  render();
-  setStatus('Publicando bloqueo individual…','busy');
-  await saveRemote({
-    commitMessage:`BLOQUEO USUARIO-PC ${code}`,
-    successMessage:`Acceso ${code} bloqueado. Solo ${user.usuario} cerrará sesión.`
-  });
-}
-
-async function unblockUserPc(userIndex, identifierIndex) {
-  const user = state.usuarios[userIndex];
-  const access = await resolveUserIdentifier(user, identifierIndex);
-  if (!user || !access) return;
-  const {code} = access;
-  if (!confirm(`¿Quitar el bloqueo ${code}?`)) return;
-  state.accesos_usuario_bloqueados = removeAccessByCode(state.accesos_usuario_bloqueados, code);
-  render();
-  setStatus('Publicando retiro del bloqueo…','busy');
-  await saveRemote({
-    commitMessage:`QUITA BLOQUEO USUARIO-PC ${code}`,
-    successMessage:`Bloqueo ${code} retirado.`
-  });
-}
-
-function renderUsers() {
-  const box=document.getElementById('userList');
-  if (!state.usuarios.length) {
-    box.innerHTML='<div class="empty">No hay usuarios remotos. El administrador local de la aplicación seguirá disponible.</div>';
-    return;
-  }
-  box.innerHTML=state.usuarios.map((u,i)=>`
-    <div class="item user">
-      <div class="mini"><label>Usuario ${u.activo?'<span class="badge on">ACTIVO</span>':'<span class="badge off">DESACTIVADO</span>'}</label>
-        <input id="u-user-${i}" value="${escapeHtml(u.usuario)}"></div>
-      <div class="mini"><label>Nombre</label><input id="u-name-${i}" value="${escapeHtml(u.nombre)}"></div>
-      <div class="mini"><label>Rol</label><select id="u-role-${i}">
-        ${['operador','supervisor','consulta','administrador'].map(r=>`<option value="${r}" ${u.rol===r?'selected':''}>${r}</option>`).join('')}
-      </select></div>
-      <div class="mini"><label>Vence</label><input id="u-exp-${i}" type="date" value="${escapeHtml(u.vence)}"></div>
-      <div class="mini"><label>Códigos permitidos CN o CU; vacío = acceso denegado</label><input id="u-pcs-${i}" value="${escapeHtml((u.equipos||[]).join(', '))}"></div>
-      <div class="mini wide"><label>Control individual CN/CU</label><div id="u-codes-${i}"><span class="note">Calculando códigos…</span></div></div>
-      <div class="btns">
-        <button class="secondary" onclick="updateUser(${i})">Guardar</button>
-        <button class="${u.activo?'warning':'success'}" onclick="toggleUser(${i})">${u.activo?'Desactivar':'Activar'}</button>
-        <button class="purple" onclick="openPasswordDialog(${i})">Contraseña</button>
-        <button class="danger" onclick="deleteUser(${i})">Eliminar</button>
-      </div>
-    </div>`).join('');
-  renderUserPcCodes().catch(error => console.error('No se pudieron renderizar códigos usuario-PC', error));
-}
-
-function renderAuthorized() {
-  const box=document.getElementById('authorizedList');
-  if (!state.equipos_autorizados.length) { box.innerHTML='<div class="empty">No hay equipos autorizados registrados.</div>'; return; }
-  box.innerHTML=state.equipos_autorizados.map((d,i)=>`
-    <div class="item device">
-      <div class="mini"><label>ID ${d.activo?'<span class="badge on">ACTIVO</span>':'<span class="badge off">INACTIVO</span>'}</label><input id="a-id-${i}" value="${escapeHtml(d.id)}"></div>
-      <div class="mini"><label>Nombre</label><input id="a-name-${i}" value="${escapeHtml(d.nombre)}"></div>
-      <div class="mini"><label>Vence</label><input id="a-exp-${i}" type="date" value="${escapeHtml(d.vence)}"></div>
-      <div class="mini"><label>Mensaje</label><input id="a-msg-${i}" value="${escapeHtml(d.mensaje)}"></div>
-      <div class="btns">
-        <button class="secondary" onclick="updateAuthorized(${i})">Guardar</button>
-        <button class="${d.activo?'warning':'success'}" onclick="toggleAuthorized(${i})">${d.activo?'Desactivar':'Activar'}</button>
-        <button class="danger" onclick="blockAuthorized(${i})">Bloquear ahora</button>
-        <button class="ghost" onclick="removeAuthorized(${i})">Quitar</button>
-      </div>
-    </div>`).join('');
-}
-
-function renderBlocked() {
-  const box=document.getElementById('blockedList');
-  if (!state.equipos_bloqueados.length) { box.innerHTML='<div class="empty">No hay equipos bloqueados.</div>'; return; }
-  box.innerHTML=state.equipos_bloqueados.map((d,i)=>`
-    <div class="item device">
-      <div class="mini"><label>ID <span class="badge off">BLOQUEADO</span></label><input id="b-id-${i}" value="${escapeHtml(d.id)}"></div>
-      <div class="mini"><label>Nombre</label><input id="b-name-${i}" value="${escapeHtml(d.nombre)}"></div>
-      <div class="mini" style="grid-column:span 2"><label>Motivo o mensaje</label><input id="b-msg-${i}" value="${escapeHtml(d.mensaje)}"></div>
-      <div class="btns">
-        <button class="secondary" onclick="updateBlocked(${i})">Guardar</button>
-        <button class="success" onclick="unblock(${i})">Desbloquear</button>
-        <button class="ghost" onclick="removeBlocked(${i})">Quitar</button>
-      </div>
-    </div>`).join('');
-}
-
-function updateSummary() {
-  document.getElementById('mSystem').textContent=state.sistema_activo?'Activo':'Bloqueado';
-  document.getElementById('mMode').textContent=state.modo_autorizacion==='lista'?'Lista':'Abierto';
-  document.getElementById('mUsers').textContent=state.usuarios.filter(u=>u.activo).length;
-  document.getElementById('mAllowed').textContent=state.equipos_autorizados.filter(x=>x.activo).length;
-  document.getElementById('mBlocked').textContent=state.equipos_bloqueados.length + state.accesos_usuario_bloqueados.length;
-  document.getElementById('mSupport').textContent=(state.acciones_soporte || []).length;
-}
-function updatePreview() {
-  document.getElementById('jsonPreview').textContent=JSON.stringify(state,null,2);
-}
-function render() {
-  document.getElementById('systemActive').checked=state.sistema_activo;
-  document.getElementById('mode').value=state.modo_autorizacion;
-  document.getElementById('minVersion').value=state.version_minima;
-  document.getElementById('interval').value=state.intervalo_segundos;
-  document.getElementById('offlineHours').value=state.tolerancia_sin_internet_horas;
-  document.getElementById('blockOffline').checked=state.bloquear_sin_internet;
-  document.getElementById('globalMessage').value=state.mensaje_global;
-  renderUsers(); renderAuthorized(); renderBlocked(); renderSupport(); updateSummary(); updatePreview();
-}
-
-function exportJson() {
-  syncFromForm();
-  const blob=new Blob([JSON.stringify(state,null,2)+'\n'],{type:'application/json;charset=utf-8'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a'); a.href=url; a.download='control_github.json'; a.click();
-  URL.revokeObjectURL(url); toast('JSON exportado.');
-}
-async function importJson(event) {
-  const file=event.target.files?.[0]; event.target.value='';
-  if (!file) return;
-  try {
-    const rawControl = JSON.parse(await file.text());
-    state=normalizeState(rawControl);
-    const migrated = await migrateLegacyUserPcAuthorizations(rawControl);
-    currentSha=''; render();
-    toast(migrated ? 'JSON importado y migrado al modo seguro. Revise y publique.' : 'JSON importado. Revise y publique.');
-  } catch (error) { toast(`Archivo inválido: ${error.message}`,true); }
-}
-function toast(message,error=false) {
-  const el=document.getElementById('toast');
-  el.textContent=message; el.className=`toast show${error?' error':''}`;
-  clearTimeout(toast.timer); toast.timer=setTimeout(()=>el.className='toast',4800);
-}
-
-restoreConnection();
-render();
+window.addEventListener('DOMContentLoaded',restoreSession);
 </script>
 </body>
 </html>
