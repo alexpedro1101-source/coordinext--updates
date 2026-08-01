@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#061221">
-  <title>CoordiNext PRO AA v10.6.1 Enterprise · Panel de Control</title>
+  <title>CoordiNext PRO AA v11.0.1 Enterprise · Control Center</title>
   <style>
     :root {
       color-scheme: dark;
@@ -126,11 +126,41 @@
     .hidden { display:none !important; }
     .loading { opacity:.6; pointer-events:none; }
     code { color:#67e8f9; }
+
+    .nav-tabs {
+      display:flex; gap:8px; overflow-x:auto; padding:10px 2px 2px; scrollbar-width:thin;
+      position:sticky; top:104px; z-index:15; background:linear-gradient(180deg,var(--bg) 72%,transparent);
+    }
+    .nav-tabs button { white-space:nowrap; padding:9px 12px; background:#0c2239; border:1px solid #24557d; }
+    .nav-tabs button:hover { border-color:var(--cyan); }
+    .live-layout { display:grid; grid-template-columns:repeat(12,1fr); gap:10px; }
+    .live-item { grid-column:span 6; display:grid; grid-template-columns:auto 1.1fr .8fr 1fr auto; gap:10px; align-items:center; background:var(--card); border:1px solid var(--line); border-radius:15px; padding:12px; }
+    .dot { width:12px; height:12px; border-radius:50%; display:inline-block; box-shadow:0 0 12px currentColor; }
+    .dot.online { color:#34d399; background:#34d399; }
+    .dot.ocupado { color:#22d3ee; background:#22d3ee; }
+    .dot.inactivo { color:#f59e0b; background:#f59e0b; }
+    .dot.offline,.dot.error { color:#f87171; background:#f87171; }
+    .timeline { position:relative; padding-left:20px; display:grid; gap:9px; }
+    .timeline::before { content:''; position:absolute; left:6px; top:3px; bottom:3px; width:2px; background:#235277; }
+    .timeline-entry { position:relative; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:10px 12px; }
+    .timeline-entry::before { content:''; position:absolute; left:-20px; top:15px; width:10px; height:10px; border-radius:50%; background:var(--cyan); }
+    .bar-row { display:grid; grid-template-columns:minmax(100px,1fr) 3fr auto; gap:10px; align-items:center; margin:8px 0; }
+    .bar { height:10px; border-radius:99px; background:#08172a; overflow:hidden; border:1px solid #204563; }
+    .bar > span { display:block; height:100%; background:linear-gradient(90deg,var(--blue),var(--cyan)); border-radius:99px; }
+    .task { grid-template-columns:1.3fr .7fr .8fr .7fr auto; }
+    .alert { grid-template-columns:.55fr 1fr 1.7fr .7fr auto; }
+    .quality { grid-template-columns:1fr .7fr .7fr .7fr .7fr; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:8px; align-items:end; margin:10px 0; }
+    .toolbar > * { flex:1 1 160px; }
+    .kpi-highlight { background:linear-gradient(145deg,#122d4d,#0c1e34); border-color:#2a78a9; }
+    .migration-warning { display:none; border-color:#b45309; background:#39200b; }
+    .migration-warning.show { display:block; }
     @media (max-width:1080px) {
       .half,.third { grid-column:span 12; }
       .field,.field.wide,.field.half { grid-column:span 6; }
       .cards { grid-template-columns:repeat(4,1fr); }
-      .user,.device,.support,.version,.directory { grid-template-columns:1fr 1fr; }
+      .user,.device,.support,.version,.directory,.task,.alert,.quality { grid-template-columns:1fr 1fr; }
+      .live-item { grid-column:span 12; }
       .btns { grid-column:span 2; }
     }
     @media (max-width:620px) {
@@ -140,7 +170,8 @@
       .panel { padding:14px; border-radius:16px; }
       .field,.field.wide,.field.half,.field.full { grid-column:span 12; }
       .cards { grid-template-columns:1fr 1fr; }
-      .user,.device,.support,.version,.directory,.audit { grid-template-columns:1fr; }
+      .user,.device,.support,.version,.directory,.audit,.task,.alert,.quality { grid-template-columns:1fr; }
+      .live-item { grid-template-columns:auto 1fr; }
       .btns { grid-column:span 1; }
       .actions button { flex:1 1 145px; }
     }
@@ -150,8 +181,8 @@
 <div class="shell">
   <header>
     <div>
-      <h1>CoordiNext PRO AA v10.6.1 Enterprise · Panel de Control</h1>
-      <p class="sub">Administración completa desde este panel. Supabase trabaja detrás; no se usa token de GitHub.</p>
+      <h1>CoordiNext PRO AA v11.0.1 Enterprise · Control Center</h1>
+      <p class="sub">SUPABASE ENTERPRISE CLOUD · Administración completa desde este panel. Supabase trabaja detrás; el panel GitHub histórico queda solo como respaldo y publicación.</p>
     </div>
     <div id="status" class="status">Sin conectar</div>
   </header>
@@ -181,8 +212,20 @@
     </section>
 
     <div id="adminArea" class="grid hidden" style="grid-column:span 12;margin-top:0">
-      <section class="panel">
-        <h2>2. Resumen en línea</h2>
+      <nav class="nav-tabs" style="grid-column:span 12">
+        <button onclick="goTo('resumen')">📊 Resumen</button>
+        <button onclick="goTo('monitoreo')">📡 En línea</button>
+        <button onclick="goTo('actividad')">🕒 Actividad</button>
+        <button onclick="goTo('tareas')">📌 Tareas</button>
+        <button onclick="goTo('alertas')">🔔 Alertas</button>
+        <button onclick="goTo('productividad')">📈 Productividad</button>
+        <button onclick="goTo('inteligencia')">🧠 Análisis</button>
+        <button onclick="goTo('usuarios')">👥 Usuarios</button>
+        <button onclick="goTo('equipos')">💻 Equipos</button>
+        <button onclick="goTo('configuracion')">⚙️ Configuración</button>
+      </nav>
+      <section class="panel" id="resumen">
+        <h2>2. Resumen ejecutivo en línea</h2>
         <div class="cards">
           <div class="metric"><small>Sistema</small><strong id="mSystem">—</strong></div>
           <div class="metric"><small>Usuarios</small><strong id="mUsers">0</strong></div>
@@ -192,6 +235,12 @@
           <div class="metric"><small>Soporte pendiente</small><strong id="mSupport">0</strong></div>
           <div class="metric"><small>Versiones</small><strong id="mVersions">0</strong></div>
           <div class="metric"><small>Directorios</small><strong id="mDirectories">0</strong></div>
+          <div class="metric kpi-highlight"><small>En línea ahora</small><strong id="mOnline">0</strong></div>
+          <div class="metric"><small>Inactivos</small><strong id="mIdle">0</strong></div>
+          <div class="metric"><small>Registros hoy</small><strong id="mRecordsToday">0</strong></div>
+          <div class="metric"><small>Alertas abiertas</small><strong id="mOpenAlerts">0</strong></div>
+          <div class="metric"><small>Tareas pendientes</small><strong id="mPendingTasks">0</strong></div>
+          <div class="metric"><small>Calidad promedio</small><strong id="mQuality">—</strong></div>
         </div>
         <div class="actions">
           <button onclick="loadAll(true)">Actualizar ahora</button>
@@ -201,7 +250,87 @@
         <div class="notice" id="lastUpdate">Esperando la primera sincronización.</div>
       </section>
 
+      <div id="migrationWarning" class="panel migration-warning">
+        <b>Falta activar Control Center v11.</b> Ejecute una sola vez <code>supabase/V11_ENTERPRISE_CONTROL_CENTER.sql</code>. El panel administrativo básico continúa funcionando.
+      </div>
+
+      <section class="panel" id="monitoreo">
+        <h2>📡 Monitoreo en tiempo real</h2>
+        <div class="toolbar">
+          <input id="liveSearch" placeholder="Buscar usuario, PC o actividad" oninput="renderMonitoring()">
+          <select id="liveFilter" onchange="renderMonitoring()"><option value="all">Todos los estados</option><option value="online">En línea</option><option value="ocupado">Ocupado</option><option value="inactivo">Inactivo</option><option value="offline">Desconectado</option><option value="error">Error</option></select>
+          <button onclick="loadOperational(true)">Actualizar monitoreo</button>
+        </div>
+        <div id="liveList" class="live-layout"></div>
+      </section>
+
+      <section class="panel half" id="actividad">
+        <h2>🕒 Actividad reciente</h2>
+        <div id="activityTimeline" class="timeline"></div>
+      </section>
+
+      <section class="panel half" id="productividad">
+        <h2>📈 Productividad de hoy</h2>
+        <div id="productivityBars"></div>
+        <div class="actions"><button class="ghost" onclick="exportOperationsCsv()">Exportar CSV de hoy</button></div>
+      </section>
+
+      <section class="panel half" id="inteligencia">
+        <h2>🧠 Análisis inteligente de la operación</h2>
+        <div id="insightsList" class="list"></div>
+      </section>
+
+      <section class="panel half" id="tareas">
+        <h2>📌 Tareas operativas</h2>
+        <div class="row">
+          <div class="field wide"><label>Título</label><input id="taskTitle" placeholder="Tarea para el operador"></div>
+          <div class="field"><label>Prioridad</label><select id="taskPriority"><option value="baja">Baja</option><option value="media" selected>Media</option><option value="alta">Alta</option><option value="critica">Crítica</option></select></div>
+          <div class="field wide"><label>Asignar a</label><select id="taskAssignee"></select></div>
+          <div class="field"><label>Fecha límite</label><input id="taskDeadline" type="datetime-local"></div>
+          <div class="field full"><label>Descripción</label><textarea id="taskDescription"></textarea></div>
+        </div>
+        <div class="actions"><button class="success" onclick="createTask()">Crear tarea</button></div>
+        <div id="taskList" class="list"></div>
+      </section>
+
+      <section class="panel half" id="alertas">
+        <h2>🔔 Alertas y notificaciones</h2>
+        <div class="row">
+          <div class="field"><label>Severidad</label><select id="alertSeverity"><option value="info">Información</option><option value="advertencia">Advertencia</option><option value="critica">Crítica</option></select></div>
+          <div class="field wide"><label>Usuario afectado (opcional)</label><select id="alertUser"></select></div>
+          <div class="field full"><label>Título</label><input id="alertTitle"></div>
+          <div class="field full"><label>Mensaje</label><textarea id="alertMessage"></textarea></div>
+        </div>
+        <div class="actions"><button class="warning" onclick="createAlert()">Publicar alerta</button></div>
+        <div id="alertList" class="list"></div>
+      </section>
+
       <section class="panel half">
+        <h2>✅ Gestión de calidad</h2>
+        <div class="row">
+          <div class="field wide"><label>Operador</label><select id="qualityOperator"></select></div>
+          <div class="field"><label>Total revisados</label><input id="qualityTotal" type="number" min="0" value="0"></div>
+          <div class="field"><label>Correctos</label><input id="qualityCorrect" type="number" min="0" value="0"></div>
+          <div class="field"><label>Errores</label><input id="qualityErrors" type="number" min="0" value="0"></div>
+          <div class="field"><label>Puntaje</label><input id="qualityScore" type="number" min="0" max="100" step="0.01" value="100"></div>
+          <div class="field full"><label>Observaciones</label><textarea id="qualityNotes"></textarea></div>
+        </div>
+        <div class="actions"><button class="success" onclick="saveQualityReview()">Guardar evaluación</button></div>
+        <div id="qualitySummary"></div>
+      </section>
+
+      <section class="panel half">
+        <h2>🧰 Mantenimiento y recuperación</h2>
+        <p class="note">Exporta datos, limpia telemetría antigua y conserva la base operativa ligera.</p>
+        <div class="actions">
+          <button class="ghost" onclick="exportBackup()">Respaldo JSON completo</button>
+          <button class="ghost" onclick="exportOperationsCsv()">Reporte CSV diario</button>
+          <button class="danger" onclick="cleanupOperationalData()">Limpiar datos antiguos</button>
+        </div>
+        <div class="notice">La limpieza conserva como mínimo 7 días y solo elimina telemetría histórica; no elimina usuarios, equipos, procesos ni directorios.</div>
+      </section>
+
+      <section class="panel half" id="configuracion">
         <h2>3. Estado general</h2>
         <div class="row">
           <div class="field full switchline">
@@ -235,7 +364,7 @@
         <div class="actions"><button class="success" onclick="saveGlobalConfig()">Guardar publicación</button></div>
       </section>
 
-      <section class="panel">
+      <section class="panel" id="usuarios">
         <h2>4. Usuarios — crear y administrar aquí</h2>
         <input id="editingLegacyId" type="hidden"><input id="editingProfileId" type="hidden">
         <div class="row">
@@ -256,7 +385,7 @@
         <div id="userList" class="list"></div>
       </section>
 
-      <section class="panel">
+      <section class="panel" id="equipos">
         <h2>5. Equipos / PCs</h2>
         <div class="row">
           <div class="field"><label>Código CN o CU</label><input id="equipmentId" placeholder="CN-1234-5678-ABCD-EF01"></div>
@@ -284,7 +413,7 @@
       <section class="panel">
         <h2>7. Versiones de la aplicación</h2>
         <div class="row">
-          <div class="field"><label>Versión</label><input id="releaseVersion" placeholder="10.6.2"></div>
+          <div class="field"><label>Versión</label><input id="releaseVersion" placeholder="11.0.1"></div>
           <div class="field"><label>Fecha</label><input id="releaseDate" type="date"></div>
           <div class="field"><label>Archivo</label><input id="releaseFile"></div>
           <div class="field wide"><label>URL de descarga</label><input id="releaseUrl"></div>
@@ -332,8 +461,11 @@ const CONFIG = window.COORDINEXT_PANEL_CONFIG || {};
 let client = null;
 let sessionUser = null;
 let refreshTimer = null;
+let realtimeChannel = null;
+let operationalRefreshTimer = null;
 let busy = false;
-const state = { config:{}, users:[], links:[], equipment:[], support:[], versions:[], directories:[], audit:[] };
+let controlCenterAvailable = true;
+const state = { config:{}, users:[], links:[], equipment:[], support:[], versions:[], directories:[], audit:[], sessions:[], activity:[], tasks:[], alerts:[], processings:[], quality:[] };
 
 const $ = id => document.getElementById(id);
 const clean = value => String(value ?? '').trim();
@@ -356,6 +488,7 @@ function setBusy(value, message='Procesando…') {
 }
 function errorText(error) { return clean(error?.message || error?.error_description || error || 'Error desconocido.'); }
 function assertClient() { if(!client) throw new Error('Primero inicie sesión en el panel.'); }
+function goTo(id){ const el=$(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
 
 function restoreConnectionFields() {
   const saved = JSON.parse(localStorage.getItem('coordinext_panel_connection') || '{}');
@@ -388,7 +521,7 @@ async function loginAdmin() {
     if(error) throw error;
     sessionUser=data.user; $('adminPassword').value='';
     await verifyAdminRole();
-    showAdmin(true); await loadAll(true); startAutoRefresh();
+    showAdmin(true); await loadAll(true); startAutoRefresh(); startRealtime();
     toast('Panel conectado correctamente.');
   } catch(error) { await safeSignOut(); showAdmin(false); setStatus('Acceso rechazado','error'); toast(errorText(error),true); }
   finally { setBusy(false); if(sessionUser) setStatus('Conectado','ok'); }
@@ -408,29 +541,53 @@ async function restoreSession() {
     buildClient();
     const {data,error}=await client.auth.getSession(); if(error) throw error;
     if(!data.session) return;
-    sessionUser=data.session.user; await verifyAdminRole(); showAdmin(true); await loadAll(true); startAutoRefresh(); setStatus('Conectado','ok');
+    sessionUser=data.session.user; await verifyAdminRole(); showAdmin(true); await loadAll(true); startAutoRefresh(); startRealtime(); setStatus('Conectado','ok');
   } catch(error) { await safeSignOut(); showAdmin(false); setStatus('Sin conectar'); }
 }
 async function safeSignOut(){ try{ if(client) await client.auth.signOut(); }catch(_){} sessionUser=null; }
-async function logoutAdmin(){ stopAutoRefresh(); await safeSignOut(); showAdmin(false); setStatus('Sesión cerrada'); toast('Sesión cerrada.'); }
+async function logoutAdmin(){ stopAutoRefresh(); stopRealtime(); await safeSignOut(); showAdmin(false); setStatus('Sesión cerrada'); toast('Sesión cerrada.'); }
 function showAdmin(show){ $('adminArea').classList.toggle('hidden',!show); $('logoutBtn').classList.toggle('hidden',!show); }
 function startAutoRefresh(){ stopAutoRefresh(); refreshTimer=setInterval(()=>{ if(!busy && sessionUser) loadAll(false); }, Math.max(10,Number(CONFIG.refreshSeconds||20))*1000); }
 function stopAutoRefresh(){ if(refreshTimer) clearInterval(refreshTimer); refreshTimer=null; }
 
+async function functionErrorText(error) {
+  let message=errorText(error);
+  const response=error?.context;
+  if(response && typeof response.clone==='function'){
+    try{
+      const clone=response.clone();
+      const body=await clone.json();
+      const detail=clean(body?.error||body?.message);
+      const extras=[];
+      if(body?.stage) extras.push(`etapa: ${body.stage}`);
+      if(body?.request_id) extras.push(`solicitud: ${body.request_id}`);
+      if(detail) message=detail;
+      if(extras.length) message+=` (${extras.join(' · ')})`;
+    }catch(_){
+      try{const text=await response.clone().text();if(clean(text))message=clean(text);}catch(__){}
+    }
+    if(response.status===404) message="El módulo admin-users no está desplegado. Ejecute REPARAR_ADMIN_USERS_V11_0_1.bat.";
+    if(response.status===401 && /jwt/i.test(message)) message="Supabase rechazó el JWT antes de ejecutar la función. Vuelva a desplegar admin-users con REPARAR_ADMIN_USERS_V11_0_1.bat.";
+  }
+  return message||'Error desconocido al invocar admin-users.';
+}
 async function invokeAdmin(payload) {
   assertClient();
   const {data,error}=await client.functions.invoke(CONFIG.adminFunctionName||'admin-users',{body:payload});
-  if(error) throw error;
-  if(!data?.ok) throw new Error(data?.error || 'El módulo administrativo rechazó la operación.');
+  if(error) throw new Error(await functionErrorText(error));
+  if(!data?.ok){
+    const extras=[];if(data?.stage)extras.push(`etapa: ${data.stage}`);if(data?.request_id)extras.push(`solicitud: ${data.request_id}`);
+    throw new Error(`${data?.error||'El módulo administrativo rechazó la operación.'}${extras.length?` (${extras.join(' · ')})`:''}`);
+  }
   return data;
 }
 async function verifyAdminModule(){ try{setBusy(true,'Verificando módulo…');await invokeAdmin({action:'health'});toast('Módulo admin-users operativo.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');} }
 
 async function loadAll(showMessage=false) {
-  if(!client || !sessionUser || busy) return;
+  if(!client || !sessionUser) return;
   try {
     setBusy(true,'Sincronizando…');
-    await Promise.all([loadConfig(),loadUsers(),loadEquipment(),loadSupport(),loadVersions(),loadDirectories(),loadAudit()]);
+    await Promise.all([loadConfig(),loadUsers(),loadEquipment(),loadSupport(),loadVersions(),loadDirectories(),loadAudit(),loadOperational(false)]);
     renderAll();
     $('lastUpdate').textContent=`Sincronizado: ${new Date().toLocaleString()} · Origen: Supabase`;
     $('technicalPreview').textContent=JSON.stringify(state,null,2);
@@ -452,7 +609,70 @@ async function loadVersions(){const {data,error}=await client.from('versiones_ap
 async function loadDirectories(){const {data,error}=await client.from('directorios_documentos').select('slug,tipo,version,fuente,sha256,actualizado_en').order('slug');if(error)throw error;state.directories=data||[];}
 async function loadAudit(){if(!client||!sessionUser)return;const {data,error}=await client.from('auditoria').select('*').order('creado_en',{ascending:false}).limit(150);if(error)throw error;state.audit=data||[];renderAudit();}
 
-function renderAll(){ renderConfig();renderMetrics();renderUsers();renderEquipment();renderSupport();renderVersions();renderDirectories();renderAudit(); }
+
+function isMissingRelation(error){ const text=errorText(error).toLowerCase(); return text.includes('does not exist')||text.includes('could not find')||text.includes('42p01')||text.includes('pgrst205'); }
+async function optionalSelect(query,label){ try{const {data,error}=await query;if(error)throw error;return data||[];}catch(error){if(isMissingRelation(error)&&['sesiones','actividad','tareas','alertas','calidad'].includes(label))controlCenterAvailable=false;else console.warn(label,error);return [];}}
+async function loadOperational(showMessage=false){
+  if(!client||!sessionUser)return;
+  controlCenterAvailable=true;
+  const today=new Date();today.setHours(0,0,0,0);const todayIso=today.toISOString();
+  const [sessions,activity,tasks,alerts,processings,quality]=await Promise.all([
+    optionalSelect(client.from('v_monitoreo_en_linea').select('*').order('ultimo_latido',{ascending:false}).limit(300),'sesiones'),
+    optionalSelect(client.from('actividad_operativa').select('*').order('creado_en',{ascending:false}).limit(250),'actividad'),
+    optionalSelect(client.from('tareas_operativas').select('*').order('actualizado_en',{ascending:false}).limit(300),'tareas'),
+    optionalSelect(client.from('alertas_sistema').select('*').order('creada_en',{ascending:false}).limit(250),'alertas'),
+    optionalSelect(client.from('procesamientos').select('id,usuario_id,total_registros,estado,archivo_nombre,turno,creado_en,periodo_desde,periodo_hasta').gte('creado_en',todayIso).order('creado_en',{ascending:false}).limit(5000),'procesamientos'),
+    optionalSelect(client.from('evaluaciones_calidad').select('*').order('creado_en',{ascending:false}).limit(500),'calidad')
+  ]);
+  state.sessions=sessions;state.activity=activity;state.tasks=tasks;state.alerts=alerts;state.processings=processings;state.quality=quality;
+  $('migrationWarning').classList.toggle('show',!controlCenterAvailable);
+  renderOperational();renderMetrics();
+  if(showMessage)toast('Monitoreo actualizado.');
+}
+function startRealtime(){
+  stopRealtime();if(!client||!sessionUser)return;
+  realtimeChannel=client.channel('coordinext-control-center-v11');
+  for(const table of ['sesiones_online','actividad_operativa','tareas_operativas','alertas_sistema'])realtimeChannel.on('postgres_changes',{event:'*',schema:'public',table},scheduleOperationalRefresh);
+  realtimeChannel.subscribe();
+}
+function stopRealtime(){if(realtimeChannel&&client){try{client.removeChannel(realtimeChannel);}catch(_){}}realtimeChannel=null;if(operationalRefreshTimer)clearTimeout(operationalRefreshTimer);operationalRefreshTimer=null;}
+function scheduleOperationalRefresh(){clearTimeout(operationalRefreshTimer);operationalRefreshTimer=setTimeout(()=>{if(sessionUser&&!busy)loadOperational(false);},500);}
+function computedStatus(session){if(session.estado_calculado)return session.estado_calculado;const age=(Date.now()-new Date(session.ultimo_latido||0).getTime())/1000;if(session.estado==='offline'||age>120)return'offline';if(session.estado==='error')return'error';const idle=(Date.now()-new Date(session.ultima_actividad||0).getTime())/1000;return idle>300?'inactivo':(session.estado||'online');}
+function userLabelById(id){const u=state.users.find(x=>x.profile_id===id);return u?.nombre||u?.usuario||u?.correo||String(id||'Sin asignar');}
+function renderOperational(){renderMonitoring();renderActivity();renderTasks();renderAlerts();renderProductivity();renderQuality();renderInsights();populateOperationalSelects();}
+function renderMonitoring(){const el=$('liveList');if(!el)return;const q=lower($('liveSearch')?.value||''),filter=$('liveFilter')?.value||'all';const rows=state.sessions.filter(s=>{const st=computedStatus(s);const hay=`${s.usuario||''} ${s.nombre_usuario||''} ${s.correo||''} ${s.equipo_id||''} ${s.modulo_actual||''} ${s.actividad_actual||''}`.toLowerCase();return(filter==='all'||st===filter)&&(!q||hay.includes(q));});if(!rows.length){el.innerHTML='<div class="empty" style="grid-column:span 12">No hay sesiones que coincidan. Los equipos aparecerán cuando usen la aplicación v11.</div>';return;}el.innerHTML=rows.map(s=>{const st=computedStatus(s);const seconds=Number(s.segundos_sin_latido||Math.max(0,(Date.now()-new Date(s.ultimo_latido).getTime())/1000));return`<div class="live-item"><span class="dot ${esc(st)}"></span><div><b>${esc(s.nombre_usuario||s.usuario||s.correo||'Usuario')}</b><br><small>${esc(s.equipo_id||'Sin PC')} · ${esc(s.app_version||'—')}</small></div><div><small>Estado</small><br><span class="badge ${st==='online'||st==='ocupado'?'on':st==='inactivo'?'pending':'off'}">${esc(st.toUpperCase())}</span></div><div><small>${esc(s.modulo_actual||'inicio')}</small><br>${esc(s.actividad_actual||'Sin actividad')}</div><div><small>Latido</small><br>${Math.round(seconds)} s</div></div>`;}).join('');}
+function renderActivity(){const el=$('activityTimeline');if(!el)return;const rows=state.activity.slice(0,40);if(!rows.length){el.innerHTML='<div class="empty">Sin actividad registrada todavía.</div>';return;}el.innerHTML=rows.map(a=>`<div class="timeline-entry"><b>${esc(userLabelById(a.user_id))}</b> · ${esc(a.accion)}<br><small>${esc(a.modulo||a.tipo||'sistema')} · ${esc(a.equipo_id||'—')} · ${esc(new Date(a.creado_en).toLocaleString())}</small></div>`).join('');}
+function renderInsights(){
+  const el=$('insightsList');if(!el)return;const insights=[];
+  const statuses=state.sessions.map(computedStatus);const online=statuses.filter(s=>s==='online'||s==='ocupado').length;const offline=statuses.filter(s=>s==='offline'||s==='error').length;
+  insights.push({level:online?'ok':'warn',title:'Disponibilidad actual',text:online?`${online} usuario(s) conectado(s) en este momento.`:'No hay usuarios conectados. Revise horario, Internet o versión instalada.'});
+  if(offline)insights.push({level:'warn',title:'Equipos sin comunicación',text:`${offline} sesión(es) aparecen desconectadas o con error. Revise el último latido antes de intervenir.`});
+  const ranking=productivityRows();if(ranking.length)insights.push({level:'ok',title:'Mayor productividad del día',text:`${ranking[0].name}: ${ranking[0].records} registros en ${ranking[0].processes} procesamiento(s).`});
+  const critical=state.alerts.filter(a=>a.estado==='abierta'&&a.severidad==='critica').length;if(critical)insights.push({level:'danger',title:'Atención inmediata',text:`Hay ${critical} alerta(s) crítica(s) sin atender.`});
+  const now=Date.now();const overdue=state.tasks.filter(t=>!['completada','cancelada'].includes(t.estado)&&t.fecha_limite&&new Date(t.fecha_limite).getTime()<now).length;if(overdue)insights.push({level:'danger',title:'Tareas vencidas',text:`${overdue} tarea(s) superaron su fecha límite.`});
+  if(state.quality.length){const avg=state.quality.reduce((n,q)=>n+Number(q.puntaje||0),0)/state.quality.length;insights.push({level:avg>=90?'ok':'warn',title:'Calidad operativa',text:`Puntaje promedio registrado: ${avg.toFixed(1)}%. ${avg<90?'Se recomienda revisar errores recurrentes y reforzar el procedimiento.':'Nivel dentro del objetivo.'}`});}
+  if(!insights.length)insights.push({level:'ok',title:'Operación estable',text:'No se detectaron observaciones relevantes con los datos disponibles.'});
+  el.innerHTML=insights.map(i=>`<div class="notice ${i.level==='danger'?'danger-note':''}"><b>${esc(i.title)}</b><br>${esc(i.text)}</div>`).join('');
+}
+
+function populateOperationalSelects(){const options=['<option value="">Sin asignar / general</option>',...state.users.filter(u=>u.profile_id).map(u=>`<option value="${esc(u.profile_id)}" data-legacy="${esc(u.legacy_id)}">${esc(u.nombre||u.usuario||u.correo)}</option>`)].join('');for(const id of ['taskAssignee','alertUser','qualityOperator']){const el=$(id);if(el){const current=el.value;el.innerHTML=options;el.value=current;}}}
+async function createTask(){try{setBusy(true,'Creando tarea…');const title=clean($('taskTitle').value);if(!title)throw new Error('Ingrese el título de la tarea.');const select=$('taskAssignee');const profile=select.value||null;const legacy=profile?(select.selectedOptions[0]?.dataset.legacy||null):null;const row={titulo:title,descripcion:clean($('taskDescription').value)||null,prioridad:$('taskPriority').value,asignado_a:profile,asignado_legacy_id:legacy,creada_por:sessionUser.id,fecha_limite:$('taskDeadline').value?new Date($('taskDeadline').value).toISOString():null,estado:'pendiente',progreso:0,actualizado_en:nowIso()};const{error}=await client.from('tareas_operativas').insert(row);if(error)throw error;await addAudit('tarea_creada',row);['taskTitle','taskDescription','taskDeadline'].forEach(id=>$(id).value='');await loadOperational(false);toast('Tarea creada.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+async function setTaskState(id,status){try{setBusy(true);const payload={estado:status,actualizado_en:nowIso()};if(status==='completada'){payload.progreso=100;payload.completada_en=nowIso();}const{error}=await client.from('tareas_operativas').update(payload).eq('id',id);if(error)throw error;await addAudit('tarea_estado',{id,estado:status});await loadOperational(false);toast('Tarea actualizada.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+async function deleteTask(id){if(!confirm('¿Eliminar esta tarea?'))return;try{setBusy(true);const{error}=await client.from('tareas_operativas').delete().eq('id',id);if(error)throw error;await loadOperational(false);toast('Tarea eliminada.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+function renderTasks(){const el=$('taskList');if(!el)return;const rows=state.tasks.slice(0,80);if(!rows.length){el.innerHTML='<div class="empty">No hay tareas operativas.</div>';return;}el.innerHTML=rows.map(t=>`<div class="item task"><div><label>Tarea</label><b>${esc(t.titulo)}</b><br><small>${esc(t.descripcion||'')}</small></div><div><label>Asignado</label>${esc(userLabelById(t.asignado_a))}</div><div><label>Prioridad</label><span class="badge ${t.prioridad==='critica'?'off':t.prioridad==='alta'?'pending':'on'}">${esc(String(t.prioridad).toUpperCase())}</span></div><div><label>Estado</label>${esc(t.estado)} · ${Number(t.progreso||0)}%</div><div class="btns"><button onclick="setTaskState('${t.id}','en_progreso')">Iniciar</button><button class="success" onclick="setTaskState('${t.id}','completada')">Completar</button><button class="danger" onclick="deleteTask('${t.id}')">Eliminar</button></div></div>`).join('');}
+async function createAlert(){try{setBusy(true,'Publicando alerta…');const title=clean($('alertTitle').value),message=clean($('alertMessage').value);if(!title||!message)throw new Error('Ingrese título y mensaje.');const row={severidad:$('alertSeverity').value,categoria:'panel',titulo:title,mensaje:message,user_id:$('alertUser').value||null,estado:'abierta',metadata:{creada_desde:'panel_web'}};const{error}=await client.from('alertas_sistema').insert(row);if(error)throw error;await addAudit('alerta_creada',row);$('alertTitle').value='';$('alertMessage').value='';await loadOperational(false);toast('Alerta publicada.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+async function attendAlert(id){try{setBusy(true);const{error}=await client.from('alertas_sistema').update({estado:'atendida',atendida_en:nowIso(),atendida_por:sessionUser.id}).eq('id',id);if(error)throw error;await loadOperational(false);toast('Alerta atendida.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+async function deleteAlert(id){if(!confirm('¿Eliminar esta alerta?'))return;try{setBusy(true);const{error}=await client.from('alertas_sistema').delete().eq('id',id);if(error)throw error;await loadOperational(false);toast('Alerta eliminada.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+function renderAlerts(){const el=$('alertList');if(!el)return;const rows=state.alerts.slice(0,80);if(!rows.length){el.innerHTML='<div class="empty">No hay alertas.</div>';return;}el.innerHTML=rows.map(a=>`<div class="item alert"><div><span class="badge ${a.severidad==='critica'?'off':a.severidad==='advertencia'?'pending':'on'}">${esc(String(a.severidad).toUpperCase())}</span></div><div><b>${esc(a.titulo)}</b><br><small>${esc(userLabelById(a.user_id))}</small></div><div>${esc(a.mensaje)}</div><div>${esc(a.estado)}<br><small>${esc(new Date(a.creada_en).toLocaleString())}</small></div><div class="btns">${a.estado==='abierta'?`<button class="success" onclick="attendAlert('${a.id}')">Atender</button>`:''}<button class="danger" onclick="deleteAlert('${a.id}')">Eliminar</button></div></div>`).join('');}
+function productivityRows(){const map=new Map();for(const p of state.processings){const id=p.usuario_id||'sin_usuario';const row=map.get(id)||{id,name:userLabelById(id),records:0,processes:0};row.records+=Number(p.total_registros||0);row.processes++;map.set(id,row);}return[...map.values()].sort((a,b)=>b.records-a.records);}
+function renderProductivity(){const el=$('productivityBars');if(!el)return;const rows=productivityRows();if(!rows.length){el.innerHTML='<div class="empty">Sin procesamientos registrados hoy.</div>';return;}const max=Math.max(...rows.map(r=>r.records),1);el.innerHTML=rows.slice(0,15).map(r=>`<div class="bar-row"><b>${esc(r.name)}</b><div class="bar"><span style="width:${Math.max(3,r.records/max*100)}%"></span></div><span>${r.records} reg. / ${r.processes} proc.</span></div>`).join('');}
+async function saveQualityReview(){try{setBusy(true,'Guardando calidad…');const select=$('qualityOperator'),operator=select.value;if(!operator)throw new Error('Seleccione un operador.');const total=Number($('qualityTotal').value||0),correct=Number($('qualityCorrect').value||0),errors=Number($('qualityErrors').value||0),score=Number($('qualityScore').value||0);const row={operador_id:operator,operador_legacy_id:select.selectedOptions[0]?.dataset.legacy||null,evaluador_id:sessionUser.id,periodo:new Date().toISOString().slice(0,10),total_revisados:total,correctos:correct,errores:errors,puntaje:score,observaciones:clean($('qualityNotes').value)||null};const{error}=await client.from('evaluaciones_calidad').insert(row);if(error)throw error;await addAudit('evaluacion_calidad',row);await loadOperational(false);toast('Evaluación guardada.');}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+function renderQuality(){const el=$('qualitySummary');if(!el)return;if(!state.quality.length){el.innerHTML='<div class="empty" style="margin-top:12px">Sin evaluaciones de calidad.</div>';return;}const rows=state.quality.slice(0,20);el.innerHTML='<div class="list">'+rows.map(q=>`<div class="item quality"><div><b>${esc(userLabelById(q.operador_id))}</b></div><div>Revisados: ${q.total_revisados}</div><div>Correctos: ${q.correctos}</div><div>Errores: ${q.errores}</div><div><b>${Number(q.puntaje).toFixed(1)}%</b></div></div>`).join('')+'</div>';}
+function csvCell(value){const s=String(value??'');return`"${s.replaceAll('"','""')}"`;}
+function exportOperationsCsv(){const rows=[['fecha','usuario','archivo','turno','registros','estado'],...state.processings.map(p=>[p.creado_en,userLabelById(p.usuario_id),p.archivo_nombre,p.turno,p.total_registros,p.estado])];const text='\ufeff'+rows.map(r=>r.map(csvCell).join(';')).join('\r\n');const blob=new Blob([text],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`coordinext_operacion_${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(a.href);}
+async function cleanupOperationalData(){if(!confirm('¿Limpiar actividad mayor de 90 días y sesiones mayores de 30 días?'))return;try{setBusy(true,'Limpiando telemetría…');const{data,error}=await client.rpc('limpiar_datos_operativos',{p_dias_actividad:90,p_dias_sesiones:30});if(error)throw error;toast(`Limpieza completada: ${JSON.stringify(data)}`);await loadOperational(false);}catch(e){toast(errorText(e),true);}finally{setBusy(false);if(sessionUser)setStatus('Conectado','ok');}}
+
+function renderAll(){ renderConfig();renderMetrics();renderUsers();renderEquipment();renderSupport();renderVersions();renderDirectories();renderAudit();renderOperational(); }
 function renderConfig(){
   const c=state.config||{};
   $('systemActive').checked=c.sistema_activo!==false;$('accessMode').value=c.modo_acceso||'lista';$('minVersion').value=c.version_minima||'1.0.0';
@@ -466,6 +686,9 @@ function renderMetrics(){
   $('mActiveUsers').textContent=state.users.filter(x=>x.activo).length;$('mAllowed').textContent=state.equipment.filter(x=>x.estado==='autorizado').length;
   $('mBlocked').textContent=state.equipment.filter(x=>x.estado==='bloqueado').length;$('mSupport').textContent=state.support.filter(x=>x.activa).length;
   $('mVersions').textContent=state.versions.length;$('mDirectories').textContent=state.directories.length;
+  const statuses=state.sessions.map(computedStatus);$('mOnline').textContent=statuses.filter(x=>x==='online'||x==='ocupado').length;$('mIdle').textContent=statuses.filter(x=>x==='inactivo').length;
+  $('mRecordsToday').textContent=state.processings.reduce((n,p)=>n+Number(p.total_registros||0),0).toLocaleString();$('mOpenAlerts').textContent=state.alerts.filter(a=>a.estado==='abierta').length;
+  $('mPendingTasks').textContent=state.tasks.filter(t=>!['completada','cancelada'].includes(t.estado)).length;const avg=state.quality.length?state.quality.reduce((n,q)=>n+Number(q.puntaje||0),0)/state.quality.length:null;$('mQuality').textContent=avg===null?'—':`${avg.toFixed(1)}%`;
 }
 
 async function saveGlobalConfig(){
